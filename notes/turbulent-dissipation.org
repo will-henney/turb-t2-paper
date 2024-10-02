@@ -1,0 +1,181 @@
+Notes on dissipation of energy in turbulent flows
+
+* Summary of important points
+- Turbulent energy dissipation, \varepsilon, is intermittent with extreme events dominating the dissipation
+- The variance of \varepsilon increases markedly with Reynolds number, being of order \langle \epsilon^2 \rangle \approx 50 \langle\epsilon\rangle^2 for Re_\lambda = 1e4
+  - Laboratory experiments suggest scaling as \langle\epsilon^{2}\rangle/\langle\epsilon\rangle^2 \sim Re_\lambda^{0.39} for Re_\lambda < 1e3
+    - This is estimated from the kurtosis of the velocity gradients: K_(∂u/∂x) ≡ ⟨(∂u/∂x)^4⟩/⟨(∂u/∂x)^2⟩^2 = 15 \langle \epsilon^2 \rangle / 7 \langle \epsilon \rangle^2 (note K = 3 for a Gaussian distribution)
+  - But there are arguments that the scaling should get steeper at higher Re_\lambda due to nested substructures in the flow
+    - for sufficiently high Re_\lambda the "significant shear layers" themselves have a high Reynolds number and their own nested sub-layers
+- For an H II region in thermal equilibrium, a small extra heating rate \epsilon in addition to the photoionization heating E will lead to a fractional temperature increase of t \equiv \delta T / T_0 = 0.36 \epsilon / E
+  - The factor 0.36 is really 1/(a+b), where a = d ln \Lambda / d ln T and b = -d ln E / d ln T
+  - This is assuming a = 2.3, and b = 0.5
+  - This assumes that the turbulent heating timescale is long compared with the radiative cooling timescale
+    - [ ] *need to check this* and think about what would happen in the opposite limit
+- Therefore, there is a linear relation between \langle \epsilon^2 \rangle and t^2 as it is classically defined.
+  - t^2 = 0.13 \langle \epsilon^2 \rangle / E^2 = 0.13 \langle\epsilon^{2}\rangle/\langle\epsilon\rangle^2  (\langle\epsilon\rangle/E)^2
+  - The first term comes from the kurtosis,
+    - Assume \langle\epsilon^{2}\rangle/\langle\epsilon\rangle^2 = 50 (Re_\lambda / 1e4)^\beta, where \beta = 0.39 for Gylfason or \approx 1 for Elsinga
+  - While the second term comes from
+    - background turbulent dissipation rate \langle \epsilon \rangle = 0.5 \rho v^3 / L, where L is the integral scale
+    - photoelectric heating rate E = k T_* \alpha_B n^2
+    - so that \langle\epsilon\rangle/E \approx 0.5 (R_S/L) (T_0/T_*) (c_s/c) Ma^3 f / U
+      - where R_S is the Stromgren radius, c_s is the sound speed, Ma is the Mach number, f is the filling factor, and U is the ionization parameter
+    - From the Javier paper we find L = 1.44 r_0 and r_0 \approx 0.02 D = 0.04 R_S, so R_S/L \approx 17.4
+    - For regions ionized by O stars, typically T_0/T_* = 0.25
+    - With c_s = 10 km/s, c_s/c = 3.34e-5
+    - So \langle\epsilon\rangle/E \approx 7.3e-5 Ma^3 f / U
+    - Ionization parameter is typically 0.02 and f \approx 0.5 for low to moderate luminosity regions
+    - So \langle\epsilon\rangle/E \approx 1.825e-3 Ma^3
+  - So, t^2 = 0.13 50 (Re_\lambda / 1e4)^\beta (1.825e-3 Ma^3)^2 = 2.16e-5 (Re_\lambda / 1e4)^\beta Ma^6
+    - We really want this to get up to about 0.003 or higher for the low Mach number regions, so we really need Re_\lambda to be high
+* Definitions
+** Ionization parameter
+- Defined as U = F / c n, where F is the flux of ionizing photons and n is the number density of protons
+- We are interested in this here because we can calculate the Knudsen number and therefore the Reynolds number in terms of it
+- Global value for an H II region
+  - Although the density and (especially) flux will vary in the region, we can calculate a characteristic value using
+    - F = Q / 4 \pi R_S^2
+    - U = Q / 4 \pi R_S^2 c n
+  - Then we use global ionization balance to eliminate one variable out of the set {Q, R_S, n}
+    - Q = \alpha_B n_1^2 V
+    - \alpha_B = 2.6e-13 cm^3/s
+    - V = 4/3 \pi R_S^3 f
+    - f is filling factor: fraction of volume occupied by dense gas (n = n_1), assuming the rest is effectively empty (n \ll n_1)
+  - This gives alternative forms for U
+    - U = (\alpha_B / 3 c) f n R
+    - U = (1/c) (\alpha_B^2 / 4\pi)^(1/3) (f^2 Q n)^{1/3}
+    - U = (1/c) (\alpha_B / 12\pi)^(1/2) (f Q / R)^{1/2}
+    - [ ] There must be another one that eliminates f
+  - Putting in numbers (assuming \alpha_B = 2.6e-13 cm^3/s)
+    - U = 8.92e-4 f n_100 R_pc
+    - U = 2.71e-2 (f^2 Q_51 n_100)^{1/3}
+    - U = 4.99e-2 (f Q_51 / R_pc)^{1/2}
+    - This is slightly different from what I derived last time
+- It does depend on the filling factor of the ionized gas, but values of 0.02 are typical
+** Filling factor
+- Relation to coefficient of variation of density s_n = \sigma_n / \langle n \rangle
+  - f = 1 / (1 + s_n^2)
+- Relation to shell thickness for spherical shell model
+  - For a shell of relative thickness h = \Delta R / R, the filling factor is f = 1 - (1 - h)^3 = 3h - 3h^2 + h^3 \approx 3h for small h
+- Observationally derived values for Orion
+  - Peak density n_0 = 1e4 cm^-3
+  - Flux of ionizing photons: F = Q / 4 \pi R^2 = 1e49 / (4 \pi (0.1 pc)^2) \approx 1e13 cm^-2 s^-1
+  - Thickness H = F / \alpha_B n_0^2 = 1e13 / (2.6e-13 1e4**2) = 3.84615384615e17 cm =
+  - Baldwin et al. (1991) find peak EM = 2.7e25 cm^-5 for the Orion nebula
+    - EM = n^2 H f, so with n=1e4 and f=1, we have H = 2.7e17 cm, very similar
+  - So, we have H \approx R, so filling factor is not very different from unity
+    - The model has R_in = 0.1 pc = 3.086e17 (they rely just fix the ionizing flux, so this depends on an assumption about the ionizing luminosity of 1e49) and thickness of 2.5e17 cm
+    - Do the relative thickness is h = 2.5 / (3.086 + 2.5) = 0.448, so f = 0.83
+  - Alternatively, we can derive it from the coefficient of variation of density
+    - s_n = 0.66, so f = 1 / (1 + 0.66^2) = 0.7 - not very different
+  - Baldwin also find an ionization parameter for the illuminated face of U = 10**-1.48 = 0.033
+** Reynolds number, Re
+:PROPERTIES:
+:ID:       ED1F0BA1-549F-4117-92EA-9CCEF82DBBB5
+:END:
+- Ratio of inertial to viscous forces
+- From the calculation in [[id:FDD9A1A6-53E0-4220-AF9E-3EBB899CEF95][Knudsen number, Kn]] we find typically Re = 1e14 for H II regions
+  - Very big!
+  - Although, in my notes from 2021 [[id:F94CE6C5-5508-4F5D-BC24-482A5636C168][Reynolds number in H II regions]] I get a much smaller number - need to reconcile these
+  - One of the differences is that I used the electron velocity to derive the kinematic viscosity
+- Although that is for the scale of the Stromgren Radius. The outer scale of the turbulence may be 50 times smaller, which would give a Re of 2e12, but that is still big
+** Knudsen number, Kn
+:PROPERTIES:
+:ID:       FDD9A1A6-53E0-4220-AF9E-3EBB899CEF95
+:END:
+- Ratio of mean free path to characteristic length
+- In my will-ckk draft from 2015, I estimate Kn for H II regions and find it proportional to 1/U where U is the ionization parameter. 
+  - Kn = 3.76e-12 U^-1
+  - Where U = 0.001 to 0.01 typically for H II regions
+    - [ ] Note that this needs to be modified by the effect of filling factor
+  - So Kn = 1e-14 +/- 0.5 dex
+- From the Wikipedia page, there is a relation between Kn, Ma, and Re
+  - But this assumes that the particle mass is the same in the viscosity and the sound speed, which is not correct for us since it is electrons that dominate the viscosity, but ions that give the sound speed
+  - For isothermal Mach number, it is Kn = sqrt(pi/2) Ma/Re = 1.253 Ma/Re
+  - 
+- So for transonic turbulence (Ma = 1), we have Re = 1.253/Kn
+** Magnetized or not?
+- Although the low Kn means we are collisionally on the large scales, we still need to check whether the small scales are magnetic or non-magnetic
+- In the first case, we will have important non-collisional gyro-viscosity effects that isotropise the velocity distribution without really thermalising it
+- Non-magnetic requires \Omega_i \tau_i, \Omega_e \tau_e \ll 1 where \Omega is the gyrofrequency and \tau is the collision time
+  - See https://farside.ph.utexas.edu/teaching/plasma/Plasma/node53.html
+- So this is really important. I think the condition will be easily satisfied in H II regions
+** Taylor microscale, \lambda
+- Supposedly the scale below which viscosity starts to have an effect
+- \lambda / L = sqrt(10) Re^(-1/2)
+- For Re = 2e12, \lambda = 2.2e-6 L
+  - This means that the Reynolds number at the Taylor scale is 2e12 2.2e-6 = 4,400,000
+  - Still very big!!
+- This is still much smaller than we could ever see in an H II region
+  - In Orion, L = 2 r_0 = 0.14 pc, so \lambda = 3e-7 pc = 6e13 cm = 0.06 AU
+  - In 30 Dor, L = 8 pc, so \lambda = 3.6 AU
+- Mean velocities at the Taylor scale, assuming M = 1 @ L and V ~ r^{m/2}
+  - m = 1 : V = 0.015 km/s
+  - m = 2/3 : V = 0.13 km/s
+
+    
+** Kolmogorov scale, \eta
+- The scale below which viscosity dominates
+- \eta / L = Re^(-3/4) = 2e12^(-3/4) = 6e-10
+  - Orion: \eta = 2600 km
+  - 30 Dor: \eta = 0.001 au = 0.2 Rsun
+
+
+
+* Turbulent dissipation rate
+
+** Relevant papers
+
+*** Elsinga et al 2020
+Title: /Extreme dissipation and intermittency in turbulence at very high Reynolds numbers/
+
+: For homogeneous isotropic turbulence, the dissipation variance is directly related to the flatness factor of the longitudinal velocity gradient [19,20], which increases with Reynolds number [15,17,20].
+
+Also
+
+: Presently, there is no suitable theory to explain the observed Reynolds number dependence of the dissipation PDF, its variance and also its extremes.
+
+Should note that they are only doing incompressible turbulence
+
+They find that the mean-square dissipation divided by square of the mean dissipation increases significantly with Reynolds number. This is what should create the temperature fluctuations.
+
+They calculate this from a quantity called F
+: the flatness, F, of the longitudinal velocity gradient
+which is defined as the ratio of the fourth moment to the square of the second moment of the longitudinal velocity gradient.
+
+This is related to the dissipation rate by
+: F = 15 \langle \epsilon^2 \rangle / 7 \langle \epsilon \rangle^2
+and they say that
+: the normalized dissipation variance is given by ((7/15) 𝐹 − 1)
+although I am not sure where the -1 comes from.
+
+This does not matter since F \approx 100 for Re_\lambda = 1e4, which is the sort of regime we are interested in. Note that Re_\lambda is the Taylor scale Reynolds number, which is of order the square-root of the integral-scale Reynolds number.
+
+They show their own model prediction and a single power-law from Gylfason et al 2004 ([[id:05430AD7-562A-4CD8-AFBB-A6FB1F603454][see below]]). These both fit the observational data equally well, but they diverge significantly at high Re_\lambda, with the current paper predicting much higher values from the increasing power more slope as the nested sub-structures ans sub-sub-structures are added. 
+
+*** Gylfason et al 2004
+:PROPERTIES:
+:ID:       05430AD7-562A-4CD8-AFBB-A6FB1F603454
+:END:
+Title: /Intermittency, pressure and acceleration statistics from hot-wire measurements in wind-tunnel turbulence/
+
+An empirical study, aimed at measuring
+- mean-squared pressure gradient, χ
+- normalized acceleration variance, a_0
+  
+They calculate the flatness, which they call the
+: derivative kurtosis, K_(∂u/∂x) ≡ ⟨(∂u/∂x)^4⟩/⟨(∂u/∂x)^2⟩^2
+(the definition is exactly the same as F in Elsinga).
+
+They find that a single power law fits their observational data adequately well on the range 100 \le R_λ \le 900:
+: K_∂u/∂x ∼ R_\lambda^0.39
+
+They have an alternative way of specifying the Taylor microscale:
+: \lambda =[ U^2 ⟨u^2⟩ / ⟨(∂u/∂t)^2⟩ ]^(1/2)
+
+  
+
+* See also
+- [[file:../../mariano-velocity-statistics/mariano-velocity-statistics.org][Notes from Javier project from 2021]]
+- 
