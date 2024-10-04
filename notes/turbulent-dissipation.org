@@ -10,24 +10,31 @@ Notes on dissipation of energy in turbulent flows
 - For an H II region in thermal equilibrium, a small extra heating rate \epsilon in addition to the photoionization heating E will lead to a fractional temperature increase of t \equiv \delta T / T_0 = 0.36 \epsilon / E
   - The factor 0.36 is really 1/(a+b), where a = d ln \Lambda / d ln T and b = -d ln E / d ln T
   - This is assuming a = 2.3, and b = 0.5
-  - This assumes that the turbulent heating timescale is long compared with the radiative cooling timescale
+  - This assumes that the turbulent heating timescale is short compared with the radiative cooling timescale
     - [ ] *need to check this* and think about what would happen in the opposite limit
+    - On reflection, I think what we really need is that the interval between heating events is *short* compared with the cooling timescale
 - Therefore, there is a linear relation between \langle \epsilon^2 \rangle and t^2 as it is classically defined.
+  - t^2 \equiv \langle (\delta T)^2 \rangle / T_0^2 =
   - t^2 = 0.13 \langle \epsilon^2 \rangle / E^2 = 0.13 \langle\epsilon^{2}\rangle/\langle\epsilon\rangle^2  (\langle\epsilon\rangle/E)^2
-  - The first term comes from the kurtosis,
-    - Assume \langle\epsilon^{2}\rangle/\langle\epsilon\rangle^2 = 50 (Re_\lambda / 1e4)^\beta, where \beta = 0.39 for Gylfason or \approx 1 for Elsinga
+  - The first term comes from the kurtosis
+    - We will normalize at Re_\lambda = 1e3, since that is where the lab measurements seem to be reliable, K = 15 and beyond which there is some doubt about the power law index
+    - So put K = 15 (Re_\lambda / 1e3)^\beta, where \beta = 0.39 for Gylfason or \approx 1 for Elsinga
+    - So \langle\epsilon^{2}\rangle/\langle\epsilon\rangle^2 = 7 K / 15 = 7 (Re_\lambda / 1e3)^\beta
   - While the second term comes from
-    - background turbulent dissipation rate \langle \epsilon \rangle = 0.5 \rho v^3 / L, where L is the integral scale
+    - background turbulent dissipation rate \langle \epsilon \rangle = \rho v^3 / L, where L is the integral scale
     - photoelectric heating rate E = k T_* \alpha_B n^2
-    - so that \langle\epsilon\rangle/E \approx 0.5 (R_S/L) (T_0/T_*) (c_s/c) Ma^3 f / U
+    - so that \langle\epsilon\rangle/E \approx (R_S/L) (T_0/T_*) (c_s/c) Ma^3 f / U
       - where R_S is the Stromgren radius, c_s is the sound speed, Ma is the Mach number, f is the filling factor, and U is the ionization parameter
-    - From the Javier paper we find L = 1.44 r_0 and r_0 \approx 0.02 D = 0.04 R_S, so R_S/L \approx 17.4
+      - [ ] /check over the above equation, which comes from the Apple Note/
+    - From the Javier paper we find L = 1.44 r_0 (assuming m = 1) and r_0 \approx 0.02 D = 0.04 R_S, so R_S/L \approx 17.4
+      - [X] /Modification to the Javier result?/ -- the above assumes that D = 2 R_S, but D is measured from a low isophote and includes a faint halo around the H II region. It might be better to use the fwhm of the brightness profile. But this would mean decreasing R_S/L, which we do not want to do. *Resolution: no change for now*
     - For regions ionized by O stars, typically T_0/T_* = 0.25
-    - With c_s = 10 km/s, c_s/c = 3.34e-5
-    - So \langle\epsilon\rangle/E \approx 7.3e-5 Ma^3 f / U
-    - Ionization parameter is typically 0.02 and f \approx 0.5 for low to moderate luminosity regions
-    - So \langle\epsilon\rangle/E \approx 1.825e-3 Ma^3
-  - So, t^2 = 0.13 50 (Re_\lambda / 1e4)^\beta (1.825e-3 Ma^3)^2 = 2.16e-5 (Re_\lambda / 1e4)^\beta Ma^6
+      - I should calculate the photoelectric heating rate explicitly from integrating the spectra in frequency
+    - With c_s = 13 km/s, c_s/c = 4.34e-5
+    - So \langle\epsilon\rangle/E \approx 1.89e-4 Ma^3 f / U
+    - Ionization parameter is typically 0.02 and f \approx 1 for low to moderate luminosity regions
+    - So \langle\epsilon\rangle/E \approx 9.45e-3 Ma^3
+  - So, t^2 = 0.13 7 (Re_\lambda / 1e3)^\beta (9.45e-3 Ma^3)^2 = 8.13e-5 (Re_\lambda / 1e3)^\beta Ma^6
     - We really want this to get up to about 0.003 or higher for the low Mach number regions, so we really need Re_\lambda to be high
 * Definitions
 ** Ionization parameter
@@ -75,6 +82,18 @@ Notes on dissipation of energy in turbulent flows
 :ID:       ED1F0BA1-549F-4117-92EA-9CCEF82DBBB5
 :END:
 - Ratio of inertial to viscous forces
+- Re = u L / \nu
+  - u is the characteristic velocity
+    - In our case, we will write it as Ma c_s, where c_s is the isothermal sound speed and Ma is the rms Mach number of turbulent velocity fluctuations (we could maybe include the ordered bulk motions too, which would put a floor of Ma \approx 1, even for the low luminosity regions)
+  - L is the characteristic length scale (e.g. the size of the region, or the integral scale of the velocity fluctuations)
+  - \nu is the kinematic viscosity
+    - \nu = \lambda_mfp u_therm
+    - for electrons u_therm \approx 550 T_4^{1/2} km/s \approx (m_p/m_e)^{1/2} c_s
+    - \lambda_mfp \approx 2.625e5 T_e^2 n_e^-1 (ln \Lambda)^-1 cm
+      - ln \Lambda = 9.452 + 1.5 ln T_e - 0.5 ln n_e \approx 19
+      - \lambda_mfp \approx 1.38e12 T_4^2 n_e^-1 cm
+   
+*** Earlier incorrect calculation
 - From the calculation in [[id:FDD9A1A6-53E0-4220-AF9E-3EBB899CEF95][Knudsen number, Kn]] we find typically Re = 1e14 for H II regions
   - Very big!
   - Although, in my notes from 2021 [[id:F94CE6C5-5508-4F5D-BC24-482A5636C168][Reynolds number in H II regions]] I get a much smaller number - need to reconcile these
@@ -89,7 +108,7 @@ Notes on dissipation of energy in turbulent flows
   - Kn = 3.76e-12 U^-1
   - Where U = 0.001 to 0.01 typically for H II regions
     - [ ] Note that this needs to be modified by the effect of filling factor
-  - So Kn = 1e-14 +/- 0.5 dex
+  - So Kn = 1e-10 +/- 0.5 dex
 - From the Wikipedia page, there is a relation between Kn, Ma, and Re
   - But this assumes that the particle mass is the same in the viscosity and the sound speed, which is not correct for us since it is electrons that dominate the viscosity, but ions that give the sound speed
   - For isothermal Mach number, it is Kn = sqrt(pi/2) Ma/Re = 1.253 Ma/Re
@@ -102,7 +121,10 @@ Notes on dissipation of energy in turbulent flows
   - See https://farside.ph.utexas.edu/teaching/plasma/Plasma/node53.html
 - So this is really important. I think the condition will be easily satisfied in H II regions
 ** Taylor microscale, \lambda
-- Supposedly the scale below which viscosity starts to have an effect
+- Supposedly the scale below which viscosity starts to have an effect - *not true* for very high Reynolds numbers
+- From Pope, eq. 6.64, Taylor-scale Reynolds number is
+  - R_\lambda = ((20/3) Re_L)^{1/2}
+  - Re_L = 1e8 => R_\lambda = 2.6e4
 - \lambda / L = sqrt(10) Re^(-1/2)
 - For Re = 2e12, \lambda = 2.2e-6 L
   - This means that the Reynolds number at the Taylor scale is 2e12 2.2e-6 = 4,400,000
@@ -122,6 +144,10 @@ Notes on dissipation of energy in turbulent flows
   - 30 Dor: \eta = 0.001 au = 0.2 Rsun
 
 
+
+** Neutral damping scale
+
+** Magnetic effects
 
 * Turbulent dissipation rate
 
@@ -175,6 +201,71 @@ They have an alternative way of specifying the Taylor microscale:
 : \lambda =[ U^2 ⟨u^2⟩ / ⟨(∂u/∂t)^2⟩ ]^(1/2)
 
   
+
+*** Cho & Lazarian 2003
+Title: /Compressible Magnetohydrodynamic Turbulence: Mode Coupling, Scaling Relations, Anisotropy, Eddy Energetics, and Intermittency/
+
+Has direct simulations of compressible MHD turbulence in a box, with a variety of sonic and Alfvenic Mach numbers. They include low-beta and high-beta cases (the latter are more relevant to us, since we expect the magnetic pressure to be sub-dominant in H II regions).
+
+
+
+*** Lithwick & Goldreich 2001
+Title: /COMPRESSIBLE MAGNETOHYDRODYNAMIC TURBULENCE IN INTERSTELLAR PLASMAS/
+
+*** Goldreich & Sridhar 2006
+Title: /FOLDED FIELDS AS THE SOURCE OF EXTREME RADIO-WAVE SCATTERING IN THE GALACTIC CENTER/
+
+This paper is the first to walk back the idea that pulsar scintillation requires large-amplitude density fluctuations at very small scales in the ISM. Instead the propose folded magnetic sheets, an idea that is developed much more fully by Ue-Li Pen.
+
+They talk of turbulent heating rates in terms of timescales. And compare them with the radiative cooling timescale
+
+*** Ocker et al 2024a
+Title: /Implications for Galactic Electron Density Structure from Pulsar Sightlines Intersecting HII Regions/
+
+Has a bizarre complicated cloudlet mode for H II regions that has 3 different density variation parameters. 
+
+*** Ocker et al 2024b
+Title: /Pulsar scintillation through thick and thin: bow shocks, bubbles, and the broader interstellar medium/ 
+
+
+
+* Other factors
+In case the intermittent turbulent dissipation is not enough to reproduce the observed t^2, here are some additional factors that might help:
+
+** Compressibility
+- Nearly all of the theoretical and experimental work is done on incompressible turbulence, but we have RMS Mach numbers from 0.5 to 1.5, and even higher for the most luminous regions. How this affects the Reynolds number scaling of the dissipation rate is unknown. 
+
+** Isothermality and the Bernoulli entropy ratchet
+- The fact that we have an efficient photo-electric heating mechanism means that we can maintain an isothermal equation of state in the compressible turbulent cascade, so long as the dynamic time remains longer than the heating time.
+- I think this means that we extract energy from the radiation field, via repeated isothermal expansions (entropy conserving) and shock compressions (entropy increasing), which increase the Bernoulli constant of the gas.
+  - Expansion satisfy 0.5 v^2 + c_s^2 ln  \rho = b_0
+  - Shocks satisfy \rho_2 = M^2 \rho_1; v_2 = v_1 / M^2
+  - So we can imagine a cycle
+    - Start with \rho_0, v_0 = 0
+    - Accelerate to v_1 = M c_s
+      - c_s^2 ln \rho_0 = b_0 = c_s^2 ln \rho_1 + 0.5 M^2 c_s^2
+      - => \rho_1 = \rho_0 exp(-0.5 M^2)
+    - Now have a perpendicular shock of strength M
+      - \rho_2 = \rho_1 M^2 = \rho_0 exp(-0.5 M^2) M^2
+      - v_2 = v_1 / M^2 = c_s / M
+      - b_2 = 0.5 v_2^2 + c_s^2 ln \rho_2
+        = 0.5 c_s^2 / M^2 + c_s^2 ln [\rho_0 exp(-0.5 M^2) M^2]
+        = c_s^2 { 0.5/M^2 + ln \rho_0 - 0.5 M^2 + ln M^2 }
+    - Put M = 1 + m with m \ll 1
+      - 1/M^2 = 1 - 2m + 3m^2 - 4m^3 + 5m^4 + ...
+      - M^2 = 1 + 2m + m^2
+      - ln M^2 = 2m - m^2 + (2/3) m^3 - (1/2) m^4 + ...
+    - b_2/c_s^2 = ln \rho_0 + 0.5 (1 - 2m + 3m^2 - 4m^3 + 5m^4) - 0.5 (1 + 2m + m^2) + 2m - m^2 + (2/3) m^3 - (1/2) m^4
+      - constant term: ln \rho_0 + 0.5 - 0.5 = ln \rho_0
+      - m term: -1 - 1 + 2 = 0
+      - m^2 term: 1.5 - 0.5 - 1 = 0
+      - m^3 term: -2 + 0 + 2/3 = -4/3
+      - m^4 term: 2.5 - 0 - 0.5 = 2a
+  - So this actually decreases the Bernoulli constant, which is not what I wanted
+    - To leading order, b_2 = b_0 - (4/3) m^3 for M = 1 + m
+- The whole idea is misconceived because the Bernoulli law only applies to steady-state flow, which makes absolutely no sense in a turbulent cascade.
+
+** Direct heating through shocks
 
 * See also
 - [[file:../../mariano-velocity-statistics/mariano-velocity-statistics.org][Notes from Javier project from 2021]]
