@@ -39,6 +39,19 @@ Notes on dissipation of energy in turbulent flows
 * Definitions
 ** Ionization parameter
 - Defined as U = F / c n, where F is the flux of ionizing photons and n is the number density of protons
+- Relationship to radiation parameter
+  - \Xi \equiv P_rad / P_gas = L / (4 \pi R^2 c (2 n k T))
+  - \Xi / U = L / Q 2 k T
+    - L / Q \equiv k T'
+      | Star |   L_4 |     Q_49 |    T' |
+      |------+------+---------+-------|
+      | MS10 | 0.63 | 0.00013 | 1.3e8 |
+      | MS20 | 5.45 |    0.16 | 9.4e5 |
+      | MS30 | 22.2 |    1.41 | 4.4e5 |
+      | BSG  | 30.2 |   0.016 | 5.2e7 |
+     #+TBLFM: $4=$2 1e4 $lsun / $3 1e49 $k;s2
+      It is weird that these values are so high
+  - For a typical H II region, U \approx 0.02
 - We are interested in this here because we can calculate the Knudsen number and therefore the Reynolds number in terms of it
 - Global value for an H II region
   - Although the density and (especially) flux will vary in the region, we can calculate a characteristic value using
@@ -120,6 +133,11 @@ Notes on dissipation of energy in turbulent flows
 - Non-magnetic requires \Omega_i \tau_i, \Omega_e \tau_e \ll 1 where \Omega is the gyrofrequency and \tau is the collision time
   - See https://farside.ph.utexas.edu/teaching/plasma/Plasma/node53.html
 - So this is really important. I think the condition will be easily satisfied in H II regions
+  - 
+- But one thing I am still not clear on is what the importance of magnetic field is in H II regions if we assume that
+  1. They are not very important on the large scales, assuming the v_A is roughly constant in the ISM (as suggested from David and Sundar's work for instance), since \beta = 2 c_s^2 / v_A^2. So if v_A = 3 km/s and c_s = 10 km/s, then \beta \approx 20
+  2. They are not important on small scales because
+     - electron Larmor radius is 10^5 cm for B = 10^-4 G
 ** Taylor microscale, \lambda
 - Supposedly the scale below which viscosity starts to have an effect - *not true* for very high Reynolds numbers
 - From Pope, eq. 6.64, Taylor-scale Reynolds number is
@@ -207,11 +225,24 @@ Title: /Compressible Magnetohydrodynamic Turbulence: Mode Coupling, Scaling Rela
 
 Has direct simulations of compressible MHD turbulence in a box, with a variety of sonic and Alfvenic Mach numbers. They include low-beta and high-beta cases (the latter are more relevant to us, since we expect the magnetic pressure to be sub-dominant in H II regions).
 
+They mention that even in high-beta plasmas (magnetic pressure unimportant at the large scales), that because the turbulent velocity fluctuations decrease with scale, then at small enough scales the magnetic pressure will become important.
+- /My comments on this:/ this is all very well, but
+  1. [ ] The magnetic pressure is still smaller than the thermal pressure. I guess that the thermal pressure /fluctuations/ are smaller though, so they will be affected by the anisotropy of the magnetic field.
+  2. [ ] Also, how to reconcile with the claims of the Elsinga 2020 paper that for high Reynolds numbers the velocity differences across the "significant shear layers" are of order the mean velocity?
 
+
+
+*** Goldreich & Sridhar 1995
+Title: /Toward a theory of interstellar turbulence. 2: Strong Alfvenic turbulence/
+
+This is still in the incompressible regime, but builds on a previous paper, which treated weak Alfven turbulence.
+
+They find that "eddies" (scare quotes are theirs) are elongated along the magnetic fields lines, increasingly so at smaller scales:
+- k_z / k_\perp = (L k_\perp)^{-1/3}
 
 *** Lithwick & Goldreich 2001
 Title: /COMPRESSIBLE MAGNETOHYDRODYNAMIC TURBULENCE IN INTERSTELLAR PLASMAS/
-
+This paper is referred to a lot in the Cho & Lazarian paper. 
 *** Goldreich & Sridhar 2006
 Title: /FOLDED FIELDS AS THE SOURCE OF EXTREME RADIO-WAVE SCATTERING IN THE GALACTIC CENTER/
 
@@ -222,11 +253,13 @@ They talk of turbulent heating rates in terms of timescales. And compare them wi
 *** Ocker et al 2024a
 Title: /Implications for Galactic Electron Density Structure from Pulsar Sightlines Intersecting HII Regions/
 
-Has a bizarre complicated cloudlet mode for H II regions that has 3 different density variation parameters. 
+Has a bizarre complicated cloudlet mode for H II regions that has 3 different density variation parameters.
+- [ ] Refers to some earlier papers, which I should check out
+- They do seem to have anticipated my f = 1 / (1 + s^2) result, where s is the coefficient of variation, stddev / mean. 
 
 *** Ocker et al 2024b
 Title: /Pulsar scintillation through thick and thin: bow shocks, bubbles, and the broader interstellar medium/ 
-
+- By bow shocks, they mean pulsar bow shocks, so it is not of such interest as I had first thought.
 
 
 * Other factors
