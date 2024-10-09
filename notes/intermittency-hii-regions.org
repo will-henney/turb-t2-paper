@@ -1,0 +1,47 @@
+Observations and modelling of non-gaussian distribution functions in H II regions
+* Tarantula tendrils
+- First look at this I did in 2021/2022
+  - There is draft of a paper (just a figure so far)
+    - [[file:../../tarantula-tendril-paper/]]
+    - [[https://github.com/will-henney/tarantula-tendril-paper][github repo of tarantula tendrils paper]]
+  - And there is a jupyter notebook where I did the pilot study
+    - [[file:../../mariano-velocity-statistics/tarantula-turbustat.ipynb]]
+    - [[https://github.com/will-henney/mariano-velocity-statistics/blob/master/tarantula-turbustat.ipynb][github link to notebook file]]
+** Methodology
+:PROPERTIES:
+:ATTACH_DIR: /Users/will/Dropbox/turb-t2-paper/notes/intermittency-hii-regions_att
+:END:
+1. I wrote a function to find all 2d vector pixel lags of a certain scale size
+   - That is, all the pixel shifts ~(i, j)~ such that the distance ~s = sqrt(i^2 + j^2)~ is within a certain logarithmic interval around a given value ~s0~ (default is d log s = 0.1, so from s0/1.19 to s0*1.19)
+   - For example
+     : find_all_lags(3)
+     : [(-3, 0), (-3, 1), (-2, 2), (-1, 3), (0, 3), (1, 3), (2, 2), (3, 0), (3, 1)]
+   - By default, it only returns lags with j >= 0, which was in order to avoid double-counting
+     - [ ] But that does not actually work. For instance (-3, 0) and (3, 0) in the previous example are the same pair. So we need to rethink this
+     - And really, for purposes of making the maps, we do want all the vector lags in whatever quadrant. 
+   - The number of lags increases roughly as s0**2 for large s0
+2. Then I calculate maps of the median absolute velocity difference for a given lag size s0.
+   - This is an average over all the vector lags, with option to take a random sample if there are too many of them
+   - To help eliminate noise and small-scale artefacts, I subtract 0.8 times the lag-1 map from the others
+   - The best map is lag-4 (top right in below figure), which shows complex branching tendrils with amplitudes of 5-10 km/s
+   - I then normalize each map by the stddev of the entire set of difference images at each lag
+     - stddev(1, 4, 16, 64) = (2.74, 4.16, 8.78, 15.75) km/s    
+   - [[file:intermittency-hii-regions_att/tendrils2.jpg]]
+*** Future extensions to the method
+**** Correlations between surface brightness and velocity variations
+**** Stokes parameters of the velocity differences
+- To calculate the anisotropy of the velocity differences, we can calculate Stokes-like averages over all the vector lags with angular weights:
+  - I with uniform weight, as previously
+  - Q weighted by sin 2 theta
+  - U weighted by cos 2 theta
+  - where tan theta = j/i
+- Then we can calculate a degree of polarization and an angle of polarization as
+  - p = sqrt(Q^2 + U^2) / I
+  - theta_P = 0.5 atan2(U, Q)
+- So p will be high when the velocity differences are much larger in one direction
+  - The angle theta_P will be the direction of the largest velocity differences, so should be perpendicular to the tendrils
+  - I think, this has to be generally true, so it is not necessarily giving any new information, but I need to think about this more
+- Note that the orientation of the tendrils is telling us about the direction of the spatial derivatives of the velocity differences
+  - But that is therefore the second spatial derivative of the velocities, so it is the curvature of the velocity field
+  - Whereas the polarization is telling us about the orientation of the first spatial derivative of the velocity field
+- Although in all cases, it is the cross terms: d v_z / d x and d v_z / d y 

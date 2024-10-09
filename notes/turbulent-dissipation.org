@@ -39,40 +39,65 @@ Notes on dissipation of energy in turbulent flows
 * Definitions
 ** Ionization parameter
 - Defined as U = F / c n, where F is the flux of ionizing photons and n is the number density of protons
-- Relationship to radiation parameter
-  - \Xi \equiv P_rad / P_gas = L / (4 \pi R^2 c (2 n k T))
-  - \Xi / U = L / Q 2 k T
-    - L / Q \equiv k T'
-      | Star |   L_4 |     Q_49 |    T' |
-      |------+------+---------+-------|
-      | MS10 | 0.63 | 0.00013 | 1.3e8 |
-      | MS20 | 5.45 |    0.16 | 9.4e5 |
-      | MS30 | 22.2 |    1.41 | 4.4e5 |
-      | BSG  | 30.2 |   0.016 | 5.2e7 |
-     #+TBLFM: $4=$2 1e4 $lsun / $3 1e49 $k;s2
-      It is weird that these values are so high
-  - For a typical H II region, U \approx 0.02
+- Relationship to radiation parameter, \Xi = P_rad/P_gas
+  - \Xi / U = 15.8 (e_\star / f_euv) T_4^-1 = global value of 20 to 30 typically for H II regions ionized by early O stars (higher for late O or B stars)
+  - See [[id:EE3830D5-75C8-41DE-AFA1-0B9130776009][Relationship between ionization parameter U and radiation parameter \Xi]]
+- For a typical bright H II region, U \approx 0.02 and \Xi \approx 1
+  - This is true for both the center of Orion Nebula and also for giant regions like 30 Dor
+  - The Luminosities are 100 times larger in the latter, but the densities are 100 times smaller, so the ionization parameters are similar
+  - For low-brightness regions, such as the EON, the densities are much lower (by a factor of about 100), so U is lower by factor of 5 or so
 - We are interested in this here because we can calculate the Knudsen number and therefore the Reynolds number in terms of it
 - Global value for an H II region
   - Although the density and (especially) flux will vary in the region, we can calculate a characteristic value using
     - F = Q / 4 \pi R_S^2
     - U = Q / 4 \pi R_S^2 c n
-  - Then we use global ionization balance to eliminate one variable out of the set {Q, R_S, n}
+  - Then we use global ionization balance to eliminate one variable out of the set {Q, R_S, n, f}
     - Q = \alpha_B n_1^2 V
     - \alpha_B = 2.6e-13 cm^3/s
     - V = 4/3 \pi R_S^3 f
     - f is filling factor: fraction of volume occupied by dense gas (n = n_1), assuming the rest is effectively empty (n \ll n_1)
+    - So Q = 4/3 \pi R_S^3 f \alpha_B n_1^2
+    - f = Q / 4/3 \pi R_S^3 \alpha_B n_1^2 = 3100 Q_51 / R_pc^3 n_100^2
   - This gives alternative forms for U
     - U = (\alpha_B / 3 c) f n R
-    - U = (1/c) (\alpha_B^2 / 4\pi)^(1/3) (f^2 Q n)^{1/3}
+    - U = (1/c) (\alpha_B^2 / 36\pi)^(1/3) (f^2 Q n)^{1/3}
     - U = (1/c) (\alpha_B / 12\pi)^(1/2) (f Q / R)^{1/2}
-    - [ ] There must be another one that eliminates f
-  - Putting in numbers (assuming \alpha_B = 2.6e-13 cm^3/s)
-    - U = 8.92e-4 f n_100 R_pc
-    - U = 2.71e-2 (f^2 Q_51 n_100)^{1/3}
-    - U = 4.99e-2 (f Q_51 / R_pc)^{1/2}
+    - U = (1/c) (1 / 4 \pi) (Q / R_S^2 n)
+  - Putting in numbers (assuming \alpha_B = 2.6e-13 T_4^-0.8 cm^3/s)
+    - U = 8.92e-4 f n_100 R_pc T_4^-0.8
+    - U = 0.0130 (f^2 Q_51 n_100)^{1/3} T_4^-0.3
+    - U = 0.0499 (f Q_51 / R_pc)^{1/2} T_4^-0.4
     - This is slightly different from what I derived last time
 - It does depend on the filling factor of the ionized gas, but values of 0.02 are typical
+*** Relationship between ionization parameter U and radiation parameter \Xi
+:PROPERTIES:
+:ID:       EE3830D5-75C8-41DE-AFA1-0B9130776009
+:END:
+- \Xi \equiv P_rad / P_gas = L / (4 \pi R^2 c (2 n k T))
+- \Xi / U = L / Q 2 k T
+  - L / Q \equiv k T'
+    | Star |   L_4 |     Q_49 |    T' | \Xi / U T_4 |
+    |------+------+---------+-------+-----------|
+    | MS10 | 0.63 | 0.00013 | 1.3e8 |     6.5e3 |
+    | MS20 | 5.45 |    0.16 | 9.4e5 |     4.7e1 |
+    | MS40 | 22.2 |    1.41 | 4.4e5 |     2.2e1 |
+    | BSG  | 30.2 |   0.016 | 5.2e7 |     2.6e3 |
+   #+TBLFM: $4=$2 1e4 $lsun / $3 1e49 $k;s2::$5=$4  / 2 1e4;s2
+    - At first it seemed weird that these values are so high (but this is now all resolved, see below)
+    - For the cooler stars, f_euv is very low, which gives large ratios
+  - For Orion, assuming Q=1e49, L=2e5 L_sun, we have T' = 5.5e5 K, \Xi / U = T' / 2 T = 32 (assuming T=8500 K)
+- Alternative way of putting it:
+  - Equivalent T of 1 Rydberg is 1.58e5 K
+  - We can write L = L_fuv + L_euv = L f_fuv + Q \langle{}E\rangle_euv
+    - where \langle{}E\rangle_euv is the average energy of an ionizing photon
+    - f_fuv is fraction of bolometric luminosity emitted in the FUV and longer wavelengths
+    - Probably clearer to write f_euv = 1 - f_fuv with f_euv the fraction of bolometric luminosity emitted in the EUV and shorter wavelengths
+    - => L = Q \langle{}E\rangle_euv / f_euv
+  - Also put \langle{}E\rangle_euv = e_\star k T_ryd where e_\star is the average ionizing photon energy in Rydbergs and T_ryd is the temperature equivalent to 1 Rydberg (1.58e5 K)
+- So, getting back to the relation between radiation parameter and ionization parameter:
+  - \Xi / U = L / Q 2 k T = (Q e_\star k T_ryd) / (f_euv Q 2 k T)
+  - \Xi / U = (e_\star T_ryd) / (f_euv 2 T)
+  - *\Xi / U = 15.8 (e_\star / f_euv) T_4^-1*
 ** Filling factor
 - Relation to coefficient of variation of density s_n = \sigma_n / \langle n \rangle
   - f = 1 / (1 + s_n^2)
