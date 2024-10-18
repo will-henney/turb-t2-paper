@@ -45,3 +45,4 @@ Observations and modelling of non-gaussian distribution functions in H II region
   - But that is therefore the second spatial derivative of the velocities, so it is the curvature of the velocity field
   - Whereas the polarization is telling us about the orientation of the first spatial derivative of the velocity field
 - Although in all cases, it is the cross terms: d v_z / d x and d v_z / d y 
+** Insights from fBM simulations

@@ -1,5 +1,12 @@
 Notes on dissipation of energy in turbulent flows
 
+* Points that still are not clear
+- [ ] Can the intermittency increase the variance of the temperature fluctuations enough to explain t2?
+- [ ] What is the role of shocks at macroscopic scales in the dissipation of kinetic energy?
+  - Are we double-counting if we add this into the budget for t2?
+- [ ] What is going on with the Taylor-scale Reynolds number Re_\lambda in the direct numerical simulations?
+  - How is it that they can work with Re_\lambda = 1000 (implying Re = 1e6) and be able to numerically resolve from the integral scale down to the Kolmogorov scale?
+
 * Summary of important points
 - Turbulent energy dissipation, \varepsilon, is intermittent with extreme events dominating the dissipation
 - The variance of \varepsilon increases markedly with Reynolds number, being of order \langle \epsilon^2 \rangle \approx 50 \langle\epsilon\rangle^2 for Re_\lambda = 1e4
@@ -189,6 +196,9 @@ Notes on dissipation of energy in turbulent flows
 
 
 ** Neutral damping scale
+:PROPERTIES:
+:ID:       A739C76C-F8E7-46C9-A04F-CB943B249FD5
+:END:
 
 ** Magnetic effects
 
@@ -267,13 +277,73 @@ They find that "eddies" (scare quotes are theirs) are elongated along the magnet
 
 *** Lithwick & Goldreich 2001
 Title: /COMPRESSIBLE MAGNETOHYDRODYNAMIC TURBULENCE IN INTERSTELLAR PLASMAS/
-This paper is referred to a lot in the Cho & Lazarian paper. 
+This paper is referred to a lot in the Cho & Lazarian paper.
+
+Mentions that [[id:A739C76C-F8E7-46C9-A04F-CB943B249FD5][neutral damping]] scale will give a lower limit to the scale of density fluctuations.
+
+From their abstract, their most important results:
+
+: 1. Density fluctuations are due to the slow mode and the entropy mode. Both modes are passively mixed by the cascade of shear Alfvén waves. Since the shear Alfvén waves have a Kolmogorov spectrum, so do the density fluctuations.
+
+: 2. Observed density fluctuation amplitudes constrain the nature of MHD turbulence in the interstellar medium. Slow mode density fluctuations are suppressed when the magnetic pressure is less than the gas pressure. Entropy mode density fluctuations are suppressed by cooling when the cascade timescale is longer than the cooling timescale. These constraints imply either that the magnetic and gas pressures are comparable or that the outer scale of the turbulence is very small.
+
+- [ ] I need to study this argument in more detail
+  - because at the moment, the cooling part does not make sense to me.
+    - I suppose that in the isothermal case there is no entropy-mode cascade?
+  - And the slow mode being suppressed at high beta is also something I need to understand better
+    - Which mode is it that devolves into sound waves in the non-magnetic case
+: 3. A high degree of ionization is required for the cascade to survive damping by neutrals and thereby to extend to small length scales. Regions that are insufficiently ionized produce density fluctuations only on length scales larger than the neutral damping scale. These regions may account for the excess of power that is found on large scales.
+
+: 4. Provided that the thermal pressure exceeds the magnetic pressure, both the entropy mode and the slow mode are damped on length scales below that at which protons can diffuse across an eddy during the eddyÏs turnover time. Consequently, eddies whose extents along the magnetic field are smaller than the proton collisional mean free path do not contribute to the density spectrum. However, in MHD turbulence eddies are highly elongated along the magnetic field. From an observational perspective, the relevant length scale is that transverse to the magnetic field. Thus, the cutoff length scale for density fluctuations is significantly smaller than the proton mean free path.
+
+: 5. The Alfvén mode is critically damped at the transverse length scale of the proton gyroradius and thus cascades to smaller length scales than either the slow mode or the entropy mode.
+
+**** More detail on the entropy mode and slow mode
+: Density fluctuations that obey the Kolmogorov scaling occur in homogeneous subsonic hydrodynamic turbulence. They are due to the entropy mode, a zero-frequency isobaric mode whose density fluctuations are offset by temperature fluctuations.
+
+So this cannot work in an isothermal medium, because the temperature fluctuations are not allowed. Does this really mean that we do not have the entropy mode? And what can replace it for causing density fluctuations in an isothermal medium?
+
+I think the answer might be given in the [[id:38E70922-87BD-4127-8A02-010B76484E30][next section]]
+
+**** Footnote on r^{2/3} scaling of density fluctuations
+:PROPERTIES:
+:ID:       38E70922-87BD-4127-8A02-010B76484E30
+:END:
+: 1 Density fluctuations due to the Reynolds stress scale as
+: \lambda^{2/3}. In addition, the dissipation of turbulent kinetic
+: energy yields entropy fluctuations. The ratio of the corresponding
+: density fluctuations to the mean density is comparable to the square
+: of the Mach number at the length scale of interest ; hence, these
+: density fluctuations are also proportional to \lambda^{2/3}.
+
+That is interesting that the density fluctuations are proportional to M^2, and so are steeper than the velocity fluctuations. Remember that this is in the incompressible regime.
+
+I think that these "entropy fluctuations" from the dissipation of turbulent kinetic energy are different from the entropy mode mentioned above, and these would still be present in the isothermal case. 
 *** Goldreich & Sridhar 2006
 Title: /FOLDED FIELDS AS THE SOURCE OF EXTREME RADIO-WAVE SCATTERING IN THE GALACTIC CENTER/
 
 This paper is the first to walk back the idea that pulsar scintillation requires large-amplitude density fluctuations at very small scales in the ISM. Instead the propose folded magnetic sheets, an idea that is developed much more fully by Ue-Li Pen.
 
 They talk of turbulent heating rates in terms of timescales. And compare them with the radiative cooling timescale
+*** Stanimirovic & Zweibel 2018
+Title: /Atomic and Ionized Microstructures in the Diffuse Interstellar Medium/
+
+Annual Reviews paper that gives a good overview of the observational evidence for microstructures and a bit on the theory of them.
+*** Coburn et al 2022
+Title: /A measurement of the effective mean free path of solar wind protons/
+
+Abstract
+: Weakly collisional plasmas are subject to nonlinear relaxation processes, which can operate at rates much faster than the particle collision frequencies. This causes the plasma to respond like a magnetised fluid despite having long particle mean free paths. In this Letter the effective collisional mechanisms are modelled in the plasma kinetic equation to produce density, pressure and magnetic-field responses to compare with spacecraft measurements of the solar wind compressive fluctuations at 1 AU. This enables a measurement of the effective mean free path of the solar wind protons, found to be ≈4 × 10^5 km, which is approximately 10^3 times shorter than the collisional mean free path. These measurements are shown to support the effective fluid behaviour of the solar wind at scales above the proton gyroradius and demonstrate that effective collision processes alter the thermodynamics and transport of weakly collisional plasmas.
+
+Contains a useful discussion of different regimes of collisional and non-collisional plasmas, with lots of references.
+*** Beattie et al. 2024
+Title: /Magnetized compressible turbulence with a fluctuation dynamo and Reynolds numbers over a million/
+
+Has a 10080^3 supersonic MHD simulation (M = 4).
+*** Ha et al 2024
+Title: /MACHINE-LEARNING CHARACTERIZATION OF INTERMITTENCY IN PLASMA TURBULENCE: SINGLE AND DOUBLE SHEET STRUCTURES/
+
+This uses PIC simulations, so probably on much smaller scale than what er are interested in. And non-collisional I imagine.
 
 *** Ocker et al 2024a
 Title: /Implications for Galactic Electron Density Structure from Pulsar Sightlines Intersecting HII Regions/
