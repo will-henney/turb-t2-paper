@@ -43,6 +43,15 @@ Notes on dissipation of energy in turbulent flows
     - So \langle\epsilon\rangle/E \approx 9.45e-3 Ma^3
   - So, t^2 = 0.13 7 (Re_\lambda / 1e3)^\beta (9.45e-3 Ma^3)^2 = 8.13e-5 (Re_\lambda / 1e3)^\beta Ma^6
     - We really want this to get up to about 0.003 or higher for the low Mach number regions, so we really need Re_\lambda to be high
+
+* Comparison of length and time scales
+This is just a summary of results that are derived in more detail elsewhere in the notes.
+
+- Proton gyroradius
+- Collisional mean free path
+- Ion-neutral collision scale
+- Taylor microscale
+
 * Definitions
 ** Ionization parameter
 - Defined as U = F / c n, where F is the flux of ionizing photons and n is the number density of protons
@@ -195,6 +204,25 @@ Notes on dissipation of energy in turbulent flows
 
 
 
+** Large-eddy simulations
+- In the (compressible) turbulence literature, what are called Direct Numerical Simulations (DNS) are simulations that resolve all scales of the turbulence down to the dissipation scale. This is only possible for relatively low Reynolds numbers, so is not at all possible for any astrophysical contexts.
+- Instead, Large-Eddy Simulations (LES) are used, where the large scales are resolved, but the small scales are modelled. This is done by filtering the Navier-Stokes equations to remove the small scales, and then adding a subgrid-scale model to account for the effects of the small scales on the large scales.
+- This is discussed in detail in Pope, Chapter 13, where he spends a lot of time discussing the traditional approach:
+  - in which the small scales are explicitly filtered out on a scale \Delta, which should be smaller than the smallest energy-containing scales.
+    - For homogeneous isotropic turbulence and for free-shear flows, this is about 10 times less than the integral scale, which is really large. They talk about doing simulations with 40^3 grid cells, which is wild!
+    - For wall-bounded flow, it seems the energy-containing scales are much smaller
+      : the size of the important near-wall motions scales with the viscous lengthscale δν (which decreases with the Reynolds number relative to the flow lengthscale δ).
+      As a result, people do LES with near-wall modelling (LES-NWM), but this would not seem to be a concern for astrophysical flows (except maybe over asteroids, etc ...)
+  - But then the numerical grid cells are chosen to be significantly smaller than \Delta so that the filtered equations can be solved to high accuracy on the grid without any influence of the effective grid viscosity.
+  - The residual motions on scales smaller than \Delta are then modelled using for example an eddy-viscosity model. The simplest of these is the Smagorinsky model, which is a mixing length that is a fixed fraction of the filter scale \Delta.
+- However, he also talks about a competing point of view, which I think is what is done nearly always in the astrophysical simulations. From p. 632:
+  : The opposite viewpoint, advocated by Boris et al. (1992), is that no explicit filtering should be performed and no explicit residual stress model should be used (τ^r_ij = 0). Instead, an appropriate numerical method is used to attempt to solve the Navier–Stokes equations for \overbar{U}. Because the grid is not fine enough to resolve the solution to the Navier–Stokes equations, significant numerical stresses τ^h_ij arise. Thus, filtering and residual-stress modelling are performed implicitly by the numerical method.
+  - Advantages of this approach:
+    : (for a given grid size) as much as possible of the turbulent motion is represented explicitly by the LES velocity field U(x,t), and that energy is removed from U only where and when it is necessary to do so. It is argued that the details of how energy is removed are unimportant, just so long as there is a mechanism to remove energy from the smallest resolved scales without contaminating the larger scales. (This is similar to the argument used to justify the use of residual-stress models that perform poorly in a priori tests.) A further advantage is that the time and effort required to develop and test a residual-stress model are eliminated.
+  - Primary disadvantage
+    : the modelling and the numerics are inseparably coupled. Sometimes the approach is referred to as ‘no model,’ but it should be appreciated that this is an inadequate description: for a given flow the simulation results depend both on the numerical method and on the grid used. It is not possible to refine the grid to obtain grid-independent solutions (short of performing DNS). Another disadvantage is that there is no representation or estimation of the subgrid-scale motions that can be used for defiltering or in models for other subgrid-scale processes.
+
+
 ** Neutral damping scale
 :PROPERTIES:
 :ID:       A739C76C-F8E7-46C9-A04F-CB943B249FD5
@@ -336,14 +364,22 @@ Abstract
 : Weakly collisional plasmas are subject to nonlinear relaxation processes, which can operate at rates much faster than the particle collision frequencies. This causes the plasma to respond like a magnetised fluid despite having long particle mean free paths. In this Letter the effective collisional mechanisms are modelled in the plasma kinetic equation to produce density, pressure and magnetic-field responses to compare with spacecraft measurements of the solar wind compressive fluctuations at 1 AU. This enables a measurement of the effective mean free path of the solar wind protons, found to be ≈4 × 10^5 km, which is approximately 10^3 times shorter than the collisional mean free path. These measurements are shown to support the effective fluid behaviour of the solar wind at scales above the proton gyroradius and demonstrate that effective collision processes alter the thermodynamics and transport of weakly collisional plasmas.
 
 Contains a useful discussion of different regimes of collisional and non-collisional plasmas, with lots of references.
+
+This is more relevant to the shocked stellar wind bubbles in H II regions, rather than the H II region itself (which is collisional). 
 *** Beattie et al. 2024
 Title: /Magnetized compressible turbulence with a fluctuation dynamo and Reynolds numbers over a million/
 
 Has a 10080^3 supersonic MHD simulation (M = 4).
+
+Very nice visualization in their Fig 1
+
+: 2.1 The world’s largest supersonic MHD turbulence simulation:
+:
+: We present the first results from an ensemble of driven, supersonic, δu/cs = 4.3 ± 0.2, magnetized turbulence simulations that have a magnetic field being self-consistently maintained by the turbulent dynamo in saturation, providing a volume integral energy ratio of Emag/Ekin = 0.242 ± 0.022. The grids vary from 2520^3 (Rm ∼ Re ∼ 105) up to 10080^3 (Rm ∼ Re ∼ 3 × 106), discretised on a triply-periodic domain with length L. Presently, these are the largest supersonic, magnetized simulations in the world, almost an order of magnitude larger in grid resolution (and Reynolds numbers) compared to previous simulations in this regime (Fielding et al., 2023; Grete et al., 2023) and are the first simulations to resolve both a supersonic and subsonic cascade with a self-consistently maintained magnetic field. The simulations utilised over 80 million CPU hours distributed across nearly 140,000 compute cores on the high-performance supercomputer, SuperMUC-NG, at the Leibniz Supercomputing Centre. We integrate the 10080^3 simulation for t ≈ 2t0, where t0 = l0/δu is the turnover time on the driving scale of the turbulence l0 = L/2 (or equivalently kL/2π = 2), allowing for time-averaging of all key statistics across ≈ 2t0, making for robust, statistically significant results. We provide details on the simulation methods in 4.
 *** Ha et al 2024
 Title: /MACHINE-LEARNING CHARACTERIZATION OF INTERMITTENCY IN PLASMA TURBULENCE: SINGLE AND DOUBLE SHEET STRUCTURES/
 
-This uses PIC simulations, so probably on much smaller scale than what er are interested in. And non-collisional I imagine.
+This uses PIC simulations, so probably on much smaller scale than what we are interested in. And non-collisional I imagine.
 
 *** Ocker et al 2024a
 Title: /Implications for Galactic Electron Density Structure from Pulsar Sightlines Intersecting HII Regions/
