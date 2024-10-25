@@ -255,11 +255,91 @@ This is related to the dissipation rate by
 : F = 15 \langle \epsilon^2 \rangle / 7 \langle \epsilon \rangle^2
 and they say that
 : the normalized dissipation variance is given by ((7/15) 𝐹 − 1)
-although I am not sure where the -1 comes from.
+where the "-1" comes from Var(\epsilon) \equiv \langle \epsilon^2 \rangle - \langle \epsilon \rangle^2, so normalized variance is  Var(\epsilon)/\langle \epsilon \rangle^2 = (\langle \epsilon^2 \rangle / \langle \epsilon \rangle) - 1
 
 This does not matter since F \approx 100 for Re_\lambda = 1e4, which is the sort of regime we are interested in. Note that Re_\lambda is the Taylor scale Reynolds number, which is of order the square-root of the integral-scale Reynolds number.
 
-They show their own model prediction and a single power-law from Gylfason et al 2004 ([[id:05430AD7-562A-4CD8-AFBB-A6FB1F603454][see below]]). These both fit the observational data equally well, but they diverge significantly at high Re_\lambda, with the current paper predicting much higher values from the increasing power more slope as the nested sub-structures ans sub-sub-structures are added. 
+They show their own model prediction and a single power-law from Gylfason et al 2004 ([[id:05430AD7-562A-4CD8-AFBB-A6FB1F603454][see below]]). These both fit the observational data equally well, but they diverge significantly at high Re_\lambda, with the current paper predicting much higher values from the increasing power more slope as the nested sub-structures ans sub-sub-structures are added.
+
+
+
+**** Citations of Elsinga et al 2020
+Some of these may warrant their own dedicated sections.
+
+- Elsinga et al. 2022. /Intermittency across Reynolds numbers – the influence of large-scale shear layers on the scaling of the enstrophy and dissipation in homogenous isotropic turbulence/ extends the previous paper to include enstrophy (whatever that is!) and refines their model for the energy dissipation
+- Chen 2023. /New features in turbulence dissipation/ mainly concerned with shock-turbulence interactions, so this would extend the Elsinga results to compressible turbulence - maybe. Mentions role of dilatational dissipation in compresible turbulence. 
+- D. A. Donzis and J. P. John, /Universality and scaling in homogeneous compressible turbulence/, Phys. Rev. Fluids 5, 084609 (2020). Cited by Chen
+- K. Yamamoto, T. Ishida, T. Watanabe, and K. Naga ta, /Experimental and numerical investigation of compressibility effects on velocity derivative flatness in turbulence/, Phys. Fluids 34, 055101 (2022). Cited by Chen. Finds that *flatness increases with Mach number*, which is just what we need to increase the temperature fluctuation. Now has its [[id:A8E809DE-57D1-4A22-ADD1-9A40A0CE25EB][own section]]
+
+*** Yamamoto et al. 2022
+:PROPERTIES:
+:ID:       A8E809DE-57D1-4A22-ADD1-9A40A0CE25EB
+:END:
+Title: /Experimental and numerical investigation of compressibility effects on velocity derivative flatness in turbulence/
+
+Abstract:
+: Compressibility effects on the velocity derivative flatness F_{\partial{}u\prime/\partial{}x} are investigated by experiments with opposing arrays of piston-driven synthetic jet actuators (PSJAs) and direct numerical simulations (DNS) of statistically steady compressible isotropic turbulence and temporally evolving turbulent planar jets with subsonic or supersonic jet velocities. Experiments using particle image velocimetry show that nearly homogeneous isotropic turbulence is generated at the center of a closed box from interactions between supersonic synthetic jets. The depen- dencies of F_{\partial{}u\prime/\partial{}x} on the turbulent Reynolds number Re_\lambda and the turbulent Mach number M_T are examined both experimentally and using DNS. Previous studies of incompressible turbulence indicate a universal relationship between F_{\partial{}u\prime/\partial{}x} and Re_\lambda. However, both experiments and DNS confirm that F_{\partial{}u\prime/\partial{}x} increases relative to the incompressible turbulence via compressibility effects. Although F_{\partial{}u\prime/\partial{}x} tends to be larger with M_T in each flow, the F_{\partial{}u\prime/\partial{}x} in the turbulent jets and the turbulence generated from PSJAs deviate from those in incompressible turbulence at lower M_T compared with isotropic turbulence sustained by a solenoidal forcing. The PSJAs and supersonic planar jets generate strong pressure waves, and the wave propagation can cause an increased F_{\partial{}u\prime/\partial{}x}, even at low M_T. These results suggest that the compressibility effects on F_{\partial{}u\prime/\partial{}x} are not solely determined from a local value of M_T and depend on the turbulence generation process.
+
+Introduction talks about "turbulence chambers", in which compressible turbulence can be studied. These work by having lots of piston-driven synthetic jet actuators (PSJAs) firing off into the chamber. It has the advantage that the mean velocity is low in the center of the chamber, unlike in wind tunnels (where the turbulent velocity is a small fraction of the bulk velocity).
+: Opposing arrays of PSJAs can generate statistically steady and nearly homogeneous isotropic turbulence with a small mean velocity at the chamber center. 
+/This is great, because it is the same with turbulence in H II regions, where the turbulent velocities and the bulk velocities are similar/
+: The employment of PSJAs extends the velocity range of turbulence chambers from subsonic to transonic and even super- sonic regimes. Furthermore, the ability of PSJAs to generate statisti- cally steady turbulence helps evaluate flow statistics and take measurements for a long time without limitations from the time dura- tion of the facility.
+They are mainly interested in investigating whether the universality hypothesis holds, or whether the large-scale flow has an influence on the small scale turbulent dissipation. 
+
+- They have an integral scale Reynolds number of 900
+- The chamber size is about 10 cm, with integral scale being about 5 times less than that
+- The jets are fired with a frequency of 150 Hz, maximum jet Mach number of about 1.2 in blowing phase and subsonic in sucking phase
+- Kolmogorov scale is about 0.06 mm
+- Dilatation \theta is defined as \theta = \nabla \cdot u and they define highly compressive regions as those with \theta < - 5 \theta_{rms}
+- They do DNS of both isotropic turbulence and planar jets, with Reynolds numbers from a few hundred to 14,000 and Mach numbers from 0.6 to 2.6. The grid sizes are about 1000 cubed, which they say is good enough to resolve the Kolmogorov scale.
+- For the experiment, their turbulent Mach numbers are only M_T \approx 0.02 with u_rms about 5 m/s and mean velocities about 1 m/s
+- Taylor microscale \lambda_x \equiv u_rms / (du/dx)_rms defines the Taylor-scale Reynolds number Re_\lambda = u_rms \lambda_x / \nu
+  - They estimate Re_\lambda = 383 and 932 for their two experiments
+- For two different scenarios, isotropic turbulence with Re_L0 = 900 and planar jets, they estimate that Re_\lambda \approx 100
+  - which would give flatness F \approx 6 for incompresible turbulence
+    - for instance the equation in [[id:05430AD7-562A-4CD8-AFBB-A6FB1F603454][Gylfason et al 2004]] gives 100**0.39 = 6.02
+  - but they find much larger flatness, up to 20 for M_T = 0.9 in the isotropic turbulence
+- They also find a negative skew in the the probability distribution of pressure–dilatation correlation: \Pi_D = P \partial u_i/\partial x_i, which increases as F increases
+- Their jet experiments also get to F \approx 20, but this is for a larger Reynolds number of 900 and a much smaller turbulent Mach number of M_T \approx 0.03
+  - The incompressible equation would give F = 14, although their data have about 8
+  - So this is a modest increase of about 2, even at such a low Mach number
+- They point out that the conditions of the driving seem to have an effect on the scaling of flatness with turbulent Mach number, with the deviations from the incompressible case starting at smaller M_T when the turbulence is caused by a faster flow, such as jets. 
+*** Johnson & Wilczek 2023
+:PROPERTIES:
+:ATTACH_DIR: /Users/will/Dropbox/turb-t2-paper/notes/turbulent-dissipation_att
+:END:
+Title: /Multiscale Velocity Gradients in Turbulence/
+Annual Review of Fluid Mechanics, Volume 56, pp. 463-490
+
+A great review paper all about the velocity gradient tensor (VGT), A_ij \equiv du_i/dx_j. It is focused entirely on the incompressible case, for which the VGT has two invariants: Q and R (invariants meaning scalars that are independent of the coordinate system).
+
+/In other papers, there is discussion of the first invariant P, which is the negative of the trace of the VGT, which is always zero in the incompressible case, but is the dilatation (divergence) in the compressible case, with P > 0 signifying compression/
+
+: Q expresses the balance of enstrophy and strain-rate-squared magnitude
+[[file:turbulent-dissipation_att/screenshot-20241023-084741.png]]
+: R expresses the balance between enstrophy production (vortex stretching) and dissipation production (strain self-amplification)
+
+This follows from an earlier decomposition of the VGT into symmetric part S_ij and antisymmetric part W_ij, where S_ij = 1/2 (du_i/dx_j + du_j/dx_i) and W_ij = 1/2 (du_i/dx_j - du_j/dx_i) (with implied summation over repeated indices). The antisymmetric part is related to the vorticity pseudo-vector: W_ij = -1/2 \epsilon_{ijk} \omega_k, where \epsilon_{ijk} is the Levi-Civita symbol, so the enstropy is \omega^2 = -2 W_ij W_ij.
+
+Averaged over volume of a homogeneous flow, both Q and R are zero (because can be written as divergence of a vector).
+
+: In particular, ⟨Q⟩ = 0 has the consequence that average enstrophy is equal to the average strain-rate-squared magnitude, and ⟨R⟩ = 0 means that average strain production is directly proportional to average enstrophy production. One consequence is that the net (local and nonlocal) effect of vortex stretching is to enhance the global dissipation rate (Carbone & Bragg 2020), even though it locally decreases it (as a sink in Equation 8) (Tsinober 2009).
+
+Large positive Q is means high enstrophy, occurs in localised structures, associated with slight negative R. /I had thought these might be vortex tubes, but based on Thacker et al 2023, they might be sheets/
+
+Large negative Q means high squared strain, which seems to be localised around the borders of the high-enstropy structures, associated with large positive R. This is where the dissipation is happening. It is an attractor in the phase space of the VGT. Meaning that fluid elements from a variety of initial conditions tend to evolve towards it. /Actually, this is misleading. I had been looking at streamlines of the restricted Euler system, which neglects the viscosity and non-local pressure effects. When those are included, then the phase space trajectories are loops in the Q-R plane. See Baj 2024/
+
+*** Baj 2024
+Title: /The topology-conditioned turbulence kinetic energy budget/
+
+Analyses experiments and DNS simulations with Re_\lambda of 200 to 400.
+
+Looping period in the Q-R plane is about 30 to 40 times the Kolmogorov timescale, with a slight negative dependence on the initial Q: Q_0^-0.15
+
+/I need to work out if this is approximately the eddy turnover time at the Taylor scale/
+
+
+
 
 *** Gylfason et al 2004
 :PROPERTIES:
