@@ -1,0 +1,31 @@
+Estimating the t2 and other statistics in the 512-cubed radiation-hd run
+* Different ways of estimating the t2 statistic
+** Directly from the T values in each cell
+- This would give a lower bound, since we are not resolving the cooling length in the simulation
+- But it would be interesting to see what it gives
+- Also what the relation between the plane-of-sky t2 and the volume t2 is.
+- There are high T values near the ionization/recombination fronts away from globules.
+  - These are low density, so even though they may dominate the volume-weighted variance, they probably do not contribute much to t2, which is weighted by squared density.
+- Correlations of T with other variables.
+  - We can look at the joint correlation with ...
+    - density
+    - ionization fraction
+  - In Orion, one sees a clear positive correlation between T and n on the POS
+    - And I never looked at the correlation with ionization fraction. We could do that with the MUSE data, by using [O II]/[O III] as a proxy for ionization fraction. Or maybe [S II]/[S III]?]]
+** Sub-grid shock models
+- Cooling length is shorter than cell size, so we never see the small scale temperature fluctuations from the cooling zone behind the shock
+- We can use everything I did for the Eduardo HH papers and the earlier LL Ori and WR nebula stuff in service of this.
+- A Mach 2 shock ought to increase the T  by a factor of about 4
+- Need to work out what area of shocks we need of differing strengths to get the right t2
+- 
+** Add in the stellar wind shock
+- We can use the pure obstacle approximation for now
+- Need to find out where it was that calculated the momentum balance surface. I think I used it in the video I used in Poland
+* Calculating the velocity gradient tensor
+- Decomposition into isotropic and deviatoric
+  - Decomposition of deviatoric into symmetric and antisymmetric
+  - Calculation of the invariants
+- See [[id:935028F2-A5A8-4890-8367-E49AE5AB4284][Johnson & Wilczek 2023]] paper discussion
+- Of course, this is all going to be implicitly filtered velocity gradient, since we do not have access to the small scales
+* Power spectra of the kinetic energy dissipation
+- I would imagine this has a shallower spectrum than other emission mechanisms

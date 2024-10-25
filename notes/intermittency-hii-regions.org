@@ -45,4 +45,13 @@ Observations and modelling of non-gaussian distribution functions in H II region
   - But that is therefore the second spatial derivative of the velocities, so it is the curvature of the velocity field
   - Whereas the polarization is telling us about the orientation of the first spatial derivative of the velocity field
 - Although in all cases, it is the cross terms: d v_z / d x and d v_z / d y 
+***** Relation to the invariants of the velocity gradient tensor
+- Is there any relation at all?
+- The invariants are (is this really the same as the P, Q, R from the turbulence papers?)
+  - I_1 = tr(L) = div v
+  - I_2 = 0.5 (tr(L)^2 - tr(L^2)) = 0.5 (div v)^2 - div v^2
+  - I_3 = det(L) = curl v
+- What happens if we average these over the line of sight
 ** Insights from fBM simulations
+- Need to check whether these give similar results to the real data from the two-velocity sheet model
+  - That would be a bit of a shame if they did, since that is then not telling us anything about the actual velocity fluctuations.

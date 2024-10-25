@@ -307,6 +307,7 @@ They are mainly interested in investigating whether the universality hypothesis 
 *** Johnson & Wilczek 2023
 :PROPERTIES:
 :ATTACH_DIR: /Users/will/Dropbox/turb-t2-paper/notes/turbulent-dissipation_att
+:ID:       935028F2-A5A8-4890-8367-E49AE5AB4284
 :END:
 Title: /Multiscale Velocity Gradients in Turbulence/
 Annual Review of Fluid Mechanics, Volume 56, pp. 463-490
