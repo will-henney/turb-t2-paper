@@ -114,6 +114,8 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - \Xi / U = L / Q 2 k T = (Q e_\star k T_ryd) / (f_euv Q 2 k T)
   - \Xi / U = (e_\star T_ryd) / (f_euv 2 T)
   - *\Xi / U = 15.8 (e_\star / f_euv) T_4^-1*
+    - e_* is the average energy of an ionizing photon in Rydbergs
+    - f_euv is the fraction of bolometric luminosity emitted in the EUV and shorter wavelengths
 ** Filling factor
 - Relation to coefficient of variation of density s_n = \sigma_n / \langle n \rangle
   - f = 1 / (1 + s_n^2)
@@ -184,6 +186,7 @@ This is just a summary of results that are derived in more detail elsewhere in t
 - From Pope, eq. 6.64, Taylor-scale Reynolds number is
   - R_\lambda = ((20/3) Re_L)^{1/2}
   - Re_L = 1e8 => R_\lambda = 2.6e4
+  - I need to work through all these equations again to better understand the argument
 - \lambda / L = sqrt(10) Re^(-1/2)
 - For Re = 2e12, \lambda = 2.2e-6 L
   - This means that the Reynolds number at the Taylor scale is 2e12 2.2e-6 = 4,400,000
@@ -196,11 +199,57 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - m = 2/3 : V = 0.13 km/s
 
     
+*** Detailed argument from Pope, p. 198 et seq
+1. Energy dissipation by viscosity:
+   - \epsilon = 15 \nu \langle (d u/d x)^2 \rangle
+   - This is derived in Exercise 5.28 and assumes incompressible, homogeneous, isotropic turbulence, which is maybe OK even in our case when we are down at the dissipation scales
+2. Taylor microscale is defined in terms of the curvature scale of the velocity autocorrelation function at zero separation:
+   - Longitudinal autocorrelation R_11 \equiv \langle u_1(x) u_1(x + r) \rangle = u'^2 f(r), where u' is the rms velocity fluctuations of the turbulence (what I would call \sigma_turb) and u_1 is the velocity component in the same direction as the separation vector r. 
+   - Microscale \lambda_f satisfies: 1/\lambda_f^2 = -0.5 d^2 f/dr^2 |_{r=0}
+   - So for small r, we will have f(r) \approx 1 - r^2 / \lambda_f^2
+3. The autocorrelation curvature can be related to the velocity gradients:
+   - \langle (d u_1/d x_1)^2 \rangle = -d^2 R_11/dr^2 |_{r=0} = 2 u'^2 / \lambda_f^2
+   - This is just algebra
+4. Pope then switches to the transverse autocorrelation function R_22, probably because that was what Taylor worked with:
+   - R_22 \equiv \langle u_2(x) u_2(x + r) \rangle = u'^2 g(r), where u_2 is the velocity component perpendicular to the separation vector r
+   - Then a parallel argument to (2) yields \lambda_g^2 = 0.5 \lambda_f^2
+   - Then we can rewrite (3) as \lambda_g = u' / \langle|d u_1/d x_1|\rangle_rms (/this is not in Pope, but it seems a super-simple way of expressing the Taylor microscale/)
+5. Combining (4) with (1) then gives the dissipation rate as
+   - \epsilon = 15 \nu u'^2 / \lambda_g^2
+6. Pope then introduces the kinetic energy per unit mass, k /which I am guessing must be k = 3/2 u'^2, assuming u' is the one-dimensional rms velocity fluctuation/
+   - then defines L = k^{3/2} / \epsilon as the length scale characterising the large eddies
+   - /this means that the energy transfer rate from the large eddies is \epsilon = (3/2)^{3/2} u'^3 / L which has a few more ugly constants in it than I would like/
+7. And he defines the turbulent Reynolds number to be Re_L = k^{1/2} L / \nu
+   - which from his definition of L yields Re_L = k^2 / \epsilon \nu
+8. Combining (5), (6), (7) gives
+   - \lambda_g^2 = 15 \nu u'^2 / \epsilon = 10 \nu k / \epsilon
+   - => \lambda_g^2 / L^2 = (10 \nu k / \epsilon) (\epsilon^2 / k^3) = 10 \nu \epsilon / k^2 = 10 / Re_L
+   - => \lambda_g / L = sqrt(10) / Re_L^{1/2}
+9. Pope then relates this to the Kolmogorov scale \eta, defined as (p. 185)
+   - \eta \equiv (\nu^3 / \epsilon)^{1/4} 
+   - This is the unique combination of viscosity and energy transfer rate (presumed equal to dissipation rate) that gives dimensions of length.
+   - So \eta/L = (\nu^3 / \epsilon)^{1/4} \epsilon / k^{3/2} = (\nu^3 \epsilon^3 / k^6)^{1/4} = Re_L^{-3/4}
+   - => \lambda_g = sqrt(10) \eta^{2/3} L^{1/3}
+   - which makes the point that it is an intermediate scale, at 2/3 of the way down the logarithmic interval from L to \eta.
+10. Finally, the Taylor scale Reynolds number is defines as
+    - R_\lambda \equiv u' \lambda_g / \nu
+    - => R_\lambda^2 = u'^2 \lambda_g^2 / \nu^2 = [from 5] u'^2 (15 \nu u'^2 / \epsilon) / \nu^2 = 15 u'^4 / \epsilon \nu
+      - Use (6) to substitute u'^4 = (2/3)^2 k^2
+      - And (7) to substitute k^2 / \epsilon \nu = Re_L
+      - => R_\lambda^2 = (20/3) Re_L
+    - *Final result:* R_\lambda = sqrt(20/3) Re_L^{1/2}
+    - Or Re_L = 0.15 R_\lambda^2
+11. Phew, we made it!
+    - Note that R_\lambda involves the large-scale velocity fluctuations u', even though it is at the much smaller scale \lambda_g.
+    - And that the RMS velocity gradient is given by u'/\lambda_g (see my comment on (4))
+     
 ** Kolmogorov scale, \eta
 - The scale below which viscosity dominates
 - \eta / L = Re^(-3/4) = 2e12^(-3/4) = 6e-10
   - Orion: \eta = 2600 km
   - 30 Dor: \eta = 0.001 au = 0.2 Rsun
+- [ ] What is the origin of the 3/4 power?
+  - Does this depend on the incompressibility assumption?
 
 
 

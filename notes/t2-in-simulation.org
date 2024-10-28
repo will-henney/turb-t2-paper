@@ -7,7 +7,7 @@ Estimating the t2 and other statistics in the 512-cubed radiation-hd run
 - There are high T values near the ionization/recombination fronts away from globules.
   - These are low density, so even though they may dominate the volume-weighted variance, they probably do not contribute much to t2, which is weighted by squared density.
 - Correlations of T with other variables.
-  - We can look at the joint correlation with ...
+  - We can look at the joint correlation with the following:
     - density
     - ionization fraction
   - In Orion, one sees a clear positive correlation between T and n on the POS
@@ -27,5 +27,9 @@ Estimating the t2 and other statistics in the 512-cubed radiation-hd run
   - Calculation of the invariants
 - See [[id:935028F2-A5A8-4890-8367-E49AE5AB4284][Johnson & Wilczek 2023]] paper discussion
 - Of course, this is all going to be implicitly filtered velocity gradient, since we do not have access to the small scales
-* Power spectra of the kinetic energy dissipation
+* Spatial scale of the fluctuations
+** Power spectra of the kinetic energy dissipation
 - I would imagine this has a shallower spectrum than other emission mechanisms
+- Can compare with the power spectra for T from the Sac paper
+** What can be derived from spatial scale of plane-of-sky variations?
+- Guide interpretation of the observational results from the moribund Orion project

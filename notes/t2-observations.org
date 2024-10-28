@@ -1,0 +1,59 @@
+* Survey of observational results on t2 to mention in paper
+
+** Eduardo stuff
+- Need to revisit the problematic Nature paper
+- Look at more recent papers to see what else they have done on this
+
+** [2024-10-25 Fri] Reevaluation of my 2015 Orion project
+- This was almost finished and it would be good to get it out, but I do not want to let it hold back the theoretical paper
+- I had results for hst wfc3 and also for MUSE
+- The last version of the paper seems to be [[file:../../../Work/RubinWFC3/Tsquared/will-wfc3-new-tsq.tex][will-wfc3-new-tsq.tex]] from March 2016
+  - It has a lot of stuff in it and could be finished pretty easily
+
+*** Crazy idea for how to get a sort of structure function
+- Fit the noise pdfs as gaussians, so we can subtract in quadrature the widths of two adjacent binning levels to find the function that we should convolve with the pdf at coarser binning to get pdf at finer binning if the only difference were the noise
+- Then compare this with the actual pdf at the finer binning to see shat real structure was lost in going one-level coarser
+- Not sure exactly how to quantify this, but I think it might be promising
+*** Summary of what we have in main body of the draft paper
+- The wfc3 data and the MUSE data is presented in the following forms
+  - The title is very negative:
+    - /NO EVIDENCE FOR GLOBALLY SIGNIFICANT SMALL-SCALE TEMPERATURE VARIATIONS IN THE ORION NEBULA/
+  - But I think that the figures point to a *much more positive interpretation in which there clearly is evidence for small scale variations* in the nii T at least, although they may be caused by density fluctuations rather than temperature fluctuations
+  - Fig 1 shows the derived nii temperature and sii density as a function of surface brightness
+    - With each row corresponding to different binnings
+    - Top row has large number of small pixels, so dominated by photon noise in the original images
+    - Bottom row has small number of large pixels, so dominated by sampling noise in the histogram
+    - Optimum balance is somewhere in the middle
+    - [X] I am not sure if this is from the wfc3 or the MUSE data
+      - I have checked and it is definitely from the wfc3 data
+  - Fig 2 shows brightness-conditioned t2 from these data for different binning levels
+    - Left column shows raw value and noise, right column shows noise-corrected values
+    - [ ] I think it would be best to use a linear scale for the right column to better-illustrate the variations with binning
+    - [ ] Also, we could use fewer points in surface brightness so that the lines are not so noisy at the higher binning levels
+    - [ ] And we can add uncertainty bands to the noise-corrected lines, based in the uncertainty in the noise
+    - Even as it is, it seems to definitely show that there is some real small-scale structure in the t2 nii values, at least for the highest brightness levels
+      - This seems to contradict the summary graph in Figure 9, which seems to show a noise-corrected t2 that is flat (or even rising) as binning increases
+      - It seems that we have a conflict between the ~wfc3-direct-tsq-*~ and the ~wfc3-total-tsq-*~ versions, and to a lesser extent between the robust and non-robust versions
+        - [ ] This is something I need to understand, and also what is meant by the trend contribution
+        - I guess it is the part of the variation in T that is associated with variation in brightness, but maybe this would be better characterised by a correlation coefficient between 
+  - Fig 3 shows histograms 
+
+*** Technical appendices
+- [X] Appendix A. DERIVING DIAGNOSTIC LINE RATIOS FROM WFC3 FILTER IMAGES
+  - This is completely finished
+- [-] Appendix B. CALIBRATION OF WFC3 FILTERS USING THE MUSE SPECTROSCOPIC DATASET. In this appendix we make use of the VLT-MUSE integral field spectroscopic dataset of the Orion Nebula (Weilbacher et al. 2015) to test and calibrate the filter-based technique for deriving line ratios outlined in the previous section. There are two independent checks that need to be made: (1) photometric calibration of all the relevant WFC3 filters, and (2) verification that equation (A11) can accurately recover emission line ratios, even in the face of uncontrolled for variations in the continuum color. These are each considered in turn.
+  - [X] B.1. Photometric comparison of WFC3 filter images with synthetic images derived from MUSE spectral cube
+    - Completely finished. Lots of figures showing calibrations of the different filters
+  - [-] B.2. Comparison of spectrally derived and filter-derived line ratios
+    - [X] First part on testing the procedure works within the MUSE data only is finished
+    - [-] Second part on final comparison of the ratio images derived from MUSE and WFC3 for the same regions
+      - [X] The figure is there
+      - [ ] But it needs a short description text
+  - [-] B.3. Sensitivity of derived line ratios to calibration errors and plane-of-sky spectral variations
+    - [X] The figures are all there
+    - [-] The text describes what has been done, but is missing description of how the ratios change as a function of these factors
+- [ ] C. ESTIMATION OF THE EFFECTS OF NOISE ON DERIVED TEMPERATURES AND DENSITIES
+  - Not done yet
+    : Dig out the notes that I made on the theory of fuzzing. And also use the section “Do we want to smooth before fuzzing” in wfc3-drizzle.org
+  - So I think this will be quite simple to explain
+

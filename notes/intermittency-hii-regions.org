@@ -25,7 +25,7 @@ Observations and modelling of non-gaussian distribution functions in H II region
    - To help eliminate noise and small-scale artefacts, I subtract 0.8 times the lag-1 map from the others
    - The best map is lag-4 (top right in below figure), which shows complex branching tendrils with amplitudes of 5-10 km/s
    - I then normalize each map by the stddev of the entire set of difference images at each lag
-     - stddev(1, 4, 16, 64) = (2.74, 4.16, 8.78, 15.75) km/s    
+     - stddev(1, 4, 16, 64) = (2.74, 4.16, 8.78, 15.75) km/s
    - [[file:intermittency-hii-regions_att/tendrils2.jpg]]
 *** Future extensions to the method
 **** Correlations between surface brightness and velocity variations
