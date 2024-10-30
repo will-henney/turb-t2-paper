@@ -139,15 +139,27 @@ This is just a summary of results that are derived in more detail elsewhere in t
 :END:
 - Ratio of inertial to viscous forces
 - Re = u L / \nu
-  - u is the characteristic velocity
-    - In our case, we will write it as Ma c_s, where c_s is the isothermal sound speed and Ma is the rms Mach number of turbulent velocity fluctuations (we could maybe include the ordered bulk motions too, which would put a floor of Ma \approx 1, even for the low luminosity regions)
-  - L is the characteristic length scale (e.g. the size of the region, or the integral scale of the velocity fluctuations)
-  - \nu is the kinematic viscosity
-    - \nu = \lambda_mfp u_therm
-    - for electrons u_therm \approx 550 T_4^{1/2} km/s \approx (m_p/m_e)^{1/2} c_s
-    - \lambda_mfp \approx 2.625e5 T_e^2 n_e^-1 (ln \Lambda)^-1 cm
-      - ln \Lambda = 9.452 + 1.5 ln T_e - 0.5 ln n_e \approx 19
-      - \lambda_mfp \approx 1.38e12 T_4^2 n_e^-1 cm
+- u is the characteristic velocity
+  - In our case, we will write it as Ma c_s, where c_s is the isothermal sound speed and Ma is the rms Mach number of turbulent velocity fluctuations (we could maybe include the ordered bulk motions too, which would put a floor of Ma \approx 1, even for the low luminosity regions)
+  - In Pope book, he uses a characteristic velocity of k^{1/2}, where k is the turbulent kinetic energy per unit mass: k = 0.5 \langle u . u \rangle = (3/2) u'^2, where u' is the rms turbulent velocity fluctuation in one dimension (so that would be the same as the \sigma that we used in the Javier paper).
+  - If we follow that, then we would have u = Ma c_s / sqrt(2), assuming that Ma is the three-dimensional rms mach number: Ma = sqrt(3) \sigma / c_s
+- L is the characteristic length scale (e.g. the size of the region, or the integral scale of the velocity fluctuations)
+  - Pope uses the definition L \equiv k^{3/2} / \epsilon, where \epsilon is the turbulent energy transfer rate, but that will be circular unless we have an independent way of determining \epsilon. It can also be defined as the integral of the velocity autocorrelation function, which is about two times larger than the correlation length found from our structure functions.
+- \nu is the kinematic viscosity
+  - \nu = \lambda_mfp u_therm
+  - for electrons u_therm \approx 550 T_4^{1/2} km/s \approx (m_p/m_e)^{1/2} c_s
+  - \lambda_mfp \approx 2.625e5 T_e^2 n_e^-1 (ln \Lambda)^-1 cm
+    - ln \Lambda = 9.452 + 1.5 ln T_e - 0.5 ln n_e \approx 19
+    - \lambda_mfp \approx 1.38e12 T_4^2 n_e^-1 cm
+  - Which gives \nu = 7.59e19 cm^2/s T_4^{5/2} n_e^-1
+  - *This will only be the viscosity parallel to the magnetic field* - the perpendicular viscosity will be much smaller, with the collisional mean free path replaced by the gyroradius - the ion gyroradius, since this the perpendicular ion viscosity is larger than for electrons
+- Estimate of Re_L for an hii region
+  - Put L in parsec, and n_e in cm^-3
+  - Isothermal sound speed m n c_s^2 = n k T => c_s = sqrt(k T / m)
+    - m / m_p \approx (1 + 4 y_He) / (2 + 2 y_He) \approx 0.61 if He is singly ionized with y_He = 0.08
+    - c_s = 1.16e6 T_4^{1/2} cm/s
+  - So characteristic speed is u = Ma_T c_s / sqrt(2) = 8.23e5 Ma_T T_4^{1/2} cm/s
+  - So u L / \nu = 3.3458e4 Ma_T L_pc T_4^{-2} n_e 
    
 *** Earlier incorrect calculation
 - From the calculation in [[id:FDD9A1A6-53E0-4220-AF9E-3EBB899CEF95][Knudsen number, Kn]] we find typically Re = 1e14 for H II regions
@@ -176,11 +188,136 @@ This is just a summary of results that are derived in more detail elsewhere in t
 - Non-magnetic requires \Omega_i \tau_i, \Omega_e \tau_e \ll 1 where \Omega is the gyrofrequency and \tau is the collision time
   - See https://farside.ph.utexas.edu/teaching/plasma/Plasma/node53.html
 - So this is really important. I think the condition will be easily satisfied in H II regions
-  - 
+  - No, not true: the gyrofrequency is larger than the collision frequency I think
 - But one thing I am still not clear on is what the importance of magnetic field is in H II regions if we assume that
   1. They are not very important on the large scales, assuming the v_A is roughly constant in the ISM (as suggested from David and Sundar's work for instance), since \beta = 2 c_s^2 / v_A^2. So if v_A = 3 km/s and c_s = 10 km/s, then \beta \approx 20
   2. They are not important on small scales because
      - electron Larmor radius is 10^5 cm for B = 10^-4 G
+     - *but hang on*, this is much smaller than the mean free path, which is of order 1e10 cm for n_e = 100 cm^-3 and T = 10^4 K
+** Larmor radius and gyrofrequency
+:PROPERTIES:
+:ID:       52141FF2-4C80-4C77-9288-0B8A91EF492B
+:END:
+- /All in cgs Gaussian units/
+- The Larmor radius is
+  - r_L = m v c / (q B) where v is the velocity component of the particle perpendicular to the field
+  - /note that in SI units there is no c in the numerator/
+- Gyrofrequency is
+  - \Omega = q B / m c
+  - Electrons :: 1.76e7 B rad/s
+  - Protons :: 9.58e3 B rad/s
+- Related as r_L = v / \Omega
+- We can write the B field in terms of the Alfvén speed, which we can put in terms of the plasma beta and the sound speed, since this latter at least we know
+  - \beta \equiv P_gas / P_B = \rho c_s^2 / (B^2 / 8 pi) = 2 c_s^2 / v_A^2
+  - So B = sqrt(8 \pi \rho c_s^2 / \beta) = sqrt(8 pi 1.08 m_p n c_s^2 / \beta)
+    - Put n = 100 n_100 cm^-3 and c_s = 1.16e6 T_4^{1/2} cm/s (see [[id:ED1F0BA1-549F-4117-92EA-9CCEF82DBBB5][Reynolds number, Re]])
+    - => B = (78.2 muG) n_100^{1/2} T_4^{1/2} / \beta^{1/2}
+- So for thermal particles, we can assume 0.5 m v^2 = 0.5 k T, so 
+  - Electrons :: v = sqrt(k T/m_e) =  3.89e7 T_4^{1/2} cm/s
+  - Protons :: v = sqrt(k T/m_p) = 9.1e5 T_4^{1/2} cm/s
+- Gyrofrequency  is then 
+  - Electrons :: 1.76e7 78.2 1e-6 = (1380 rad/s) n_100^{1/2} T_4^{1/2} / \beta^{1/2}
+  - Protons :: 9.58e3 78.2 1e-6 = (0.749 rad/s) n_100^{1/2} T_4^{1/2} / \beta^{1/2}
+- Finally we have for Larmor radius
+  - Electrons :: 3.89e7 / 1380 = (2.82e4 cm) \beta^{1/2} n_100^{-1/2}
+  - Protons :: 9.1e5 / 0.749 = (1.21e6 cm) \beta^{1/2} n_100^{-1/2}
+** Ion inertial length
+- d_i = c / \omega_pi
+  - where \omega_pi is the ion plasma frequency: \omega_pi = sqrt(4\pi n_i Z^2 e^2 / m_i) = (1.3e4 rad/s) n_100^{1/2} Z^2 A^{-1/2}
+- d_i = 2.27e6 cm n_100^{-1/2} for protons
+- Wikipedia says
+  : the scale at which ions decouple from electrons and the magnetic field becomes frozen into the electron fluid rather than the bulk plasma
+- Interestingly, d_i and r_L,i are of the same order of magnitude
+  - Huba says that Hall MHD corresponds to d_i \gg r_L,i, which corresponds to \beta \ll 1
+  - So we are not in that regime
+
+** Braginskii transport coefficients
+- These are the coefficients that describe the transport of heat and momentum in a plasma, parallel and perpendicular to the local magnetic field
+- Resources:
+  - https://farside.ph.utexas.edu/teaching/plasma/Plasma/node53.html
+  - [[http://www-thphys.physics.ox.ac.uk/people/FelixParra/CollisionalPlasmaPhysics/CollisionalPlasmaPhysics.html][Oxford MMathPhys Collisional Plasma Physics course]]
+    - In particular, the notes on [[http://www-thphys.physics.ox.ac.uk/people/FelixParra/CollisionalPlasmaPhysics/notes/lecIV_braginskii.pdf][Braginskii fluid equations]]
+  - S. I. Braginskii's original 1965 monograph /Transport Processes in Plasma/ Braginskii:1965a
+
+*** Braginskii viscosity
+- Along the field lines this depends on the collisional mean free path
+- Across the field lines, it depends on the Larmor radius
+- 
+
+** Two-dimensional turbulence
+- This is possibly relevant at the smallest scales (below the collisional mean free path), where the turbulence along the B-field is damped by collisions, but there is still turbulence in the plane perpendicular to the field, ridht down to the Larmor radius
+- Relevant papers
+  - Alexakis 2023 /Quasi-two-dimensional turbulence/, Reviews of Modern Plasma Physics
+    - [ ] [2024-10-29 Tue] UNAM has no subscription to this, so I can't read it. *I have emailed the author to ask for a preprint*
+  - Boffetta & Ecke 2012 /Two-Dimensional Turbulence/ Annual Review of Fluid Mechanics
+    - Good overview of the basic theory and numerical and experimental results for incompressible 2D turbulence
+    - In 2d case, enstrophy still cascades to small scales, but *energy has an inverse cascade to large scales*
+      - This can result in a condensation of energy into large-scale structures (big vortices), which is not seen in 3D turbulence
+      - The energy is then dissipated by *friction* at the large scales, which is not the same as viscosity in their equations
+    - Another difference is that the energy inverse cascade is not intermittent, unlike the direct cascade in 3D.
+      - This would be bad news for us, except that other papers suggest that this may no longer be the case once you include compressibility
+    - This paper taught me a new word, *palinstrophy*
+      - This is the curl of the vorticity
+  - Verma 2017 /Anisotropy in Quasi-Static Magnetohydrodynamic Turbulence/ Reports on Progress in Physics
+    - Abstract
+      : In this review we summarise the current status of the quasi-static magnetohydrodynamic turbulence. The energy spectrum is steeper than Kolmogorov’s k−5/3 spectrum due to the decrease of the kinetic energy flux with wavenumber k as a result of Joule dissipation.
+      : The spectral index decreases with the increase of interaction parameter. The flow is quasi two-dimensional with strong U⊥ at small k and weak U∥ at large k, where U⊥ and U∥ are the perpendicular and parallel components of velocity relative to the external magnetic field. For small k, the energy flux of U⊥ is negative, but for large k, the energy flux of U∥ is positive. Pressure mediates the energy transfer from U⊥ to U∥.
+    - In MHD turbulence we have two Reynolds numbers:
+      - The regular viscous Reynolds number, Re = L U / \nu
+      - The magnetic Reynolds number, Re_m = L U / \eta
+        - Where \eta is the magnetic diffusivity
+      - These are related by the magnetic Prandtl number, P_m = \nu / \eta
+        - This is the ratio of the viscous and magnetic Reynolds numbers
+        - In the solar wind, P_m is of order 1
+        - In the ISM, it is much larger, of order 10^6 to 10^12
+      - *How can I relate this to the Larmor radius being smaller than the collisional mean free path?*
+        - At first glance, the magnetic diffusivity \eta = c^2 / (4 \pi \sigma), where \sigma is the electrical conductivity, is not obviously related to the Larmor radius
+        - The viscosity is given by \nu = \lambda v, where \lambda is the mean free path and v is the thermal velocity
+        - The magnetic diffusivity must have the same units [cm^2/s] so that P_m is dimensionless, but I do not see how to easily how to cast it in terms of a velocity times a length
+        - [ ] Roberts & Taylor 1962 /Magnetohydrodynamic Equations for Finite Larmor Radius/ might help
+        - [ ] Huba 1996 /Finite Larmor radius magnetohydrodynamics of the Rayleigh–Taylor instability/ also maybe
+          - Actually, this suggests that *the finite Larmor radius does not give rise to magnetic diffusivity*, because it does not enter in the evolution equation for B, but only in the momentum equation.
+          - However, it does give a diffusive term to the momentum equation, so I can work out an effective viscosity from that
+            : In the regime L \ge r_L finite ion Larmor radius (FLR) effects become important. These effects are incorporated into MHD theory via an anisotropic ion stress tensor in the momentum equation
+          - The stress terms are of the form
+            - d/dx { (n k T / 2 \Omega) (dV/dx) }
+            - where \Omega is the ion gyrofrequency
+            - I have added an explicit Boltzmann constant k, since the paper seems to be working with k=1
+          - Comparing with viscosity in the Navier-Stokes momentum equation, we can identify the term in parentheses (n k T / 2 \Omega) with the /dynamic viscosity/, \mu = \nu \rho = \nu m n
+            - Therefore, the effective kinematic viscosity is \nu = k T / 2 \Omega m
+            - Where we can write n k T = \rho c_s^2 => k T = m c_s^2 
+            - Also from [[id:52141FF2-4C80-4C77-9288-0B8A91EF492B][Larmor radius and gyrofrequency]] we have r_L = v_t / \Omega
+            - If the ions are protons and the composition is mostly hydrogen, we further identify m \approx m_p and v_t \approx c_s
+            - Giving viscosity \nu = c_s^2 / 2 \Omega = r_L c_s^2 / 2 v_t = r_L c_s / 2
+          - So we finally have the result we wanted:
+            - *The effective magnetic ion viscosity is a half the Larmor radius times the thermal speed*
+            - So this exactly parallels the result for the collisional viscosity of mean free path times thermal speed.
+
+
+** Bulk viscosity versus shear viscosity
+- In the compressible Navier-Stokes equations, there are two types of viscosity:
+  - The shear viscosity, \mu or \eta, which multiplies the shear tensor
+  - The bulk viscosity, \zeta or \kappa, which multiplies the divergence of the velocity field (dilatational field \Theta). This is also called the second viscosity, \mu' or \lambda, although I have found examples where that is slightly different
+    - For instance, in Buresti (2015) we have κ = (λ + 2μ/3).
+- Note that these are in terms of dynamic viscosities. Divide by \rho to get the kinematic viscosities, \nu
+- What is a suitable value for the bulk viscosity in H II regions?
+  - On the one hand, Wikipedia says
+    : In the kinetic-molecular picture, a non-zero bulk viscosity arises in gases whenever there are non-negligible relaxational timescales governing the exchange of energy between the translational energy of molecules and their internal energy, e.g. rotational and vibrational. As such, the bulk viscosity is 0 for a monatomic ideal gas, in which the internal energy of molecules is negligible, but is nonzero for a gas like carbon dioxide, whose molecules possess both rotational and vibrational energy
+  - So this implies \zeta = 0 for protons and electrons that do not have any internal degrees of freedom (at least at the energies that we are interested in)
+  - Buresti (2015) /A note on Stokes’ hypothesis/ makes the point that even if it is not zero, we can ignore it because its effect is much smaller than the pressure, but acts in the same way:
+    : Indeed, rather than putting κ = 0, we may simply assume that the absolute value of κ div V is negligible compared to the thermodynamic pressure, i.e., that the following relation holds:
+    : |κ div V| ≪ p_e.
+    : In other words, with this assumption, we are neglecting any difference between the mechanical and the thermodynamic pressures. The rationale for this different approach and for its applicability stands upon the obvious fact that a term appearing in a relation or equation cannot be neglected just because it is small, but only if it is small compared to a qualitatively similar one, i.e., to one that has the same effect.
+  - It will only be in very particular cases, such as CO_2, which has a very large bulk viscosity, that we will need to consider it. And clearly that does not apply to us
+
+** Ion-neutral damping
+- This is mainly studied in the context of low-ionization media, such as molecular clouds
+- For instance, Hu et al (2024)
+  - Below a certain scale, the neutrals develop their own hydrodynamic turbulent cascade, unaffected by the magnetic field, and unaffected by collisions with the ions (which are too rare)
+  - While the ions are still affected by collisions with neutrals, so their MHD turbulence cascade is damped
+- But in our case, we have much more ions than neutrals, so the first thing that will happen is that the ions are liberated from the collisions with neutrals, but that was never important for them anyway, so it will make no difference
+  - The neutrals will still be feeling the effect of the ions, right down to the final scale where they completely decouple
+  - So I don't think this is going to do anything for highly ionized regions
 ** Taylor microscale, \lambda
 - Supposedly the scale below which viscosity starts to have an effect - *not true* for very high Reynolds numbers
 - From Pope, eq. 6.64, Taylor-scale Reynolds number is
@@ -378,6 +515,40 @@ Averaged over volume of a homogeneous flow, both Q and R are zero (because can b
 Large positive Q is means high enstrophy, occurs in localised structures, associated with slight negative R. /I had thought these might be vortex tubes, but based on Thacker et al 2023, they might be sheets/
 
 Large negative Q means high squared strain, which seems to be localised around the borders of the high-enstropy structures, associated with large positive R. This is where the dissipation is happening. It is an attractor in the phase space of the VGT. Meaning that fluid elements from a variety of initial conditions tend to evolve towards it. /Actually, this is misleading. I had been looking at streamlines of the restricted Euler system, which neglects the viscosity and non-local pressure effects. When those are included, then the phase space trajectories are loops in the Q-R plane. See Baj 2024/
+*** Sakurai et al 2023
+Title: /Direct numerical simulations of compressible isothermal turbulence in a periodic box: Reynolds number and resolution-level dependence/
+
+PHYSICAL REVIEW FLUIDS 8, 084606 (2023)
+
+Important quote from the Conclusions:
+: As shown in Ref. [15], the classical incompressible scaling did not hold for the total energy dissipation field in compressible turbulence. Our DNSs confirmed that, as in the case of incompressible turbulence, the normalized solenoidal energy dissipation of compressible turbulence asymptotically takes a finite nonzero value (≈0.4) at high Reynolds numbers, i.e., in a range of the solenoidal Taylor Reynolds number Rλs = 168–761. However, the normalized dilatational energy dissipation values do not approach zero, as opposed to that expected in Ref. [15]. Instead, the values asymptotically approach a finite value at high Reynolds numbers (or may approach zero too slowly to observe in the range of the Reynolds numbers up to Rλd = 453). Spectral analysis of the energy dissipation reveals that the main contribution to solenoidal and dilatational energy dissipation for the case of Mt ≈ 0.3 comes from the wave-number range at kη ≈ 0.3. Furthermore, it was shown that the energy spectra obtained from the DNSs with a resolution level higher than 2 are convergent for kη < 1 in the case of Mt ≈0.3.
+*** Donzis & Panickacheril John 2020
+Title: /Universality and scaling in homogeneous compressible turbulence/
+
+They find that the dilatational Mach number is more important than the total turbulent Mach number. They find better universa scaling relations by separating out the solenoidal and dilataional components.
+*** Panickacheril John et al 2021
+Title: /Does dissipative anomaly hold for compressible turbulence?/
+
+Dissipative anomaly is just the fact that \langle\epsilon\rangle remains finite as the viscosity goes to zero. Unfortunately they do not look at higher order statistics, such as \langle \epsilon^2 \rangle
+*** Li et a 2024
+Title: /Non-universality and dissipative anomaly in compressible magnetohydrodynamic turbulence/
+
+Like the previous paper, but for MHD turbulence.
+*** Eyink & Drivas 2018
+Title: /Cascades and Dissipative Anomalies in Compressible Fluid Turbulence/
+
+Abstract:
+: We investigate dissipative anomalies in a turbulent fluid governed by the compressible Navier-Stokes equation. We follow an exact approach pioneered by Onsager, which we explain as a nonperturbative application of the principle of renormalization-group invariance. In the limit of high Reynolds and Pe ́clet numbers, the flow realizations are found to be described as distributional or “coarse-grained” solutions of the compressible Euler equations, with standard conservation laws broken by turbulent anomalies. The anomalous dissipation of kinetic energy is shown to be due not only to local cascade but also to a distinct mechanism called pressure-work defect. Irreversible heating in stationary, planar shocks with an ideal-gas equation of state exemplifies the second mechanism. Entropy conservation anomalies are also found to occur via two mechanisms: an anomalous input of negative entropy (negentropy) by pressure work and a cascade of negentropy to small scales. We derive “4=5th-law”-type expressions for the anomalies, which allow us to characterize the singularities (structure-function scaling exponents) required to sustain the cascades. We compare our approach with alternative theories and empirical evidence. It is argued that the “Big Power Law in the Sky” observed in electron density scintillations in the interstellar medium is a manifestation of a forward negentropy cascade or an inverse cascade of usual thermodynamic entropy.
+
+This is a scary paper!
+
+From the introduction:
+: These remarks might suggest that a high level of mathematical sophistication is necessary to grasp the essentials of Onsager’s ideas on turbulent weak solutions. This is not the case. As a matter of fact, Onsager’s ideas are closely related to standard physical notions of spatial coarse graining and renormalization-group invariance
+I think they were trying to be reassuring, but it doesn't work for me!
+
+Isothermal fluctuations. They do have interesting things to say about what sort of cascade we might have in the isothermal case in Section VIII:
+
+: Within a Kovásznay-type modal picture, the slow magnetosonic mode seems the most plausible source of the observed density fluctuations. However, in our nonlinear theory, there is no cooling catastrophe in the first place. Large-scale cooling adds excess negentropy (deficiency of entropy) that feeds the cascade of negentropy to small scales. See Eq. (107). This necessitates “rough” density and temperature fields with Kolmogorov-type spectra. In our view, the cooling catastrophe is an artifact of attempting to describe nonlinear compressible MHD turbulence in terms of linear wave modes. There is no sound theoretical basis for such a decomposition and, unsurprisingly, the Kovásznay mode- mode interactions lead to empirically wrong predictions for the problem [167].
 
 *** Baj 2024
 Title: /The topology-conditioned turbulence kinetic energy budget/
