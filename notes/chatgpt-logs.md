@@ -1,13 +1,34 @@
-# Evaluation of ChatGPT on MHD and Turbulence
+---
+jupyter:
+  jupytext:
+    cell_metadata_filter: -all
+    formats: md,ipynb
+    main_language: bash
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.3'
+      jupytext_version: 1.16.1
+---
+
+# Evaluation of ChatGPT-4o on MHD Turbulence
 
 *William Henney, IRyA-UNAM*
 
-I have recently been researching this topic, which is somewhat outside of my previous expertise but is relevant to a current project I have regarding temperature fluctuations in H II regions. In the last few weeks I have read many papers and come to some understanding of the topics most relevant to my particular application. I decided to ask ChatGPT some questions about it with a view to:
+I have recently been researching this topic, which is somewhat outside of my prior expertise but is relevant to a current project I have regarding temperature fluctuations in H II regions. In the last few weeks I have read many papers and come to some understanding of the topics most relevant to my particular application. I decided to ask ChatGPT some questions about it with a view to:
 
   1. Testing its general knowledge of the field.
   2. Checking that *my* understanding is correct.
   3. Seeing if it can provide any new insights, or help with parts that I am a little unsure of.
   
+## How did it do?
+In general, it answered surprisingly well. Especially compared with the last time I tried something like this, which was over a year ago with version 3.5. At that time I was very unimpressed with its answers to MSc-level radiative transfer and stellar atmospheres questions, which were frequently wrong. Although it did perform somewhat better at general astronomy questions at the level of the Propedeútico course (still not very well though).
+
+This time, all its answers are correct as far as I can see. The only criticism I have is that it is sometimes a little vague and qualitative. However, on the occasions that I asked it to be more quantitative, it did give a good answer (see the question about the Mach and Reynolds scaling of the kurtosis). 
+
+The worst answer is the one about the relation between energy dissipation and kurtosis (epsilon versus K). This actually has a very simple numerical answer: Var(epsilon) = (7/15) K - 1, which follows from some general assumptions plus basic algebra. But all it told me is that they are positively correlated. Perhaps if I had asked it a follow up question to be more quantitative then it might have got there.
+
+One of the best answers in my opinion is the one about magnetic diffusivity and the Larmor radius. The result with the ion thermal speed is something that I had worked out for myself on dimensional grounds, but I haven't seen explicitly discussed in the literature (although perhaps this is common knowledge among plasma physicists). And in addition, chatgpt gives a second version in terms of the Alfven speed, which is not something I had thought of myself, but which seems to be correct. 
   
 # Conversation on MHD and Turbulence 2024-11-01 (chatgpt-4o)
 
@@ -366,3 +387,18 @@ In small-scale magnetic cascades below the collisional mean free path, the varia
    - Kinetic and collisionless effects, leading to **intense and rapid reconnection bursts** that enhance variance.
 
 This high variance in dissipation characterizes the unique, non-uniform energy conversion processes in collisionless and small-scale magnetic turbulence, making it essential to consider when modeling energy dissipation and heating in space and astrophysical plasmas.
+
+# Technical stuff
+
+To trick github into rendering the latex math equations we have to convert this document to a jupyter notebook. We can do this with `jupytext`. Setup bidirectional syncing between markdown and ipynb files with the following command:
+
+```bash
+jupytext --set-formats 'md,ipynb' *.md
+```
+
+Then, after editing either format, we can sync them with:
+
+```bash
+jupytext --show-changes --update --sync *.md
+```
+
