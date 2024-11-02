@@ -17,9 +17,8 @@ Notes on dissipation of energy in turbulent flows
 - For an H II region in thermal equilibrium, a small extra heating rate \epsilon in addition to the photoionization heating E will lead to a fractional temperature increase of t \equiv \delta T / T_0 = 0.36 \epsilon / E
   - The factor 0.36 is really 1/(a+b), where a = d ln \Lambda / d ln T and b = -d ln E / d ln T
   - This is assuming a = 2.3, and b = 0.5
-  - This assumes that the turbulent heating timescale is short compared with the radiative cooling timescale
-    - [ ] *need to check this* and think about what would happen in the opposite limit
-    - On reflection, I think what we really need is that the interval between heating events is *short* compared with the cooling timescale
+  - This assumes that the turbulent heating timescale (interval between heating events) is short compared with the radiative cooling timescale
+    - The opposite limit is applicable at large scales, where we will see the range of cooling temperatures spread out over the cooling length, such as behind a shock. This has to be treated separately. See [[id:9D7D03F7-1495-4092-BDDA-C1503882D1A1][Cooling length behind shocks]]
 - Therefore, there is a linear relation between \langle \epsilon^2 \rangle and t^2 as it is classically defined.
   - t^2 \equiv \langle (\delta T)^2 \rangle / T_0^2 =
   - t^2 = 0.13 \langle \epsilon^2 \rangle / E^2 = 0.13 \langle\epsilon^{2}\rangle/\langle\epsilon\rangle^2  (\langle\epsilon\rangle/E)^2
@@ -48,12 +47,32 @@ Notes on dissipation of energy in turbulent flows
 This is just a summary of results that are derived in more detail elsewhere in the notes.
 
 - Proton gyroradius
+  - (1.21e6 cm) \beta^{1/2} n_100^{-1/2}
+- Proton inertial length
+  - (2.27e6 cm) n_100^{-1/2}
+  - below this scale, the electrons and protons decouple (electron gyroradius is 42 times smaller)
 - Collisional mean free path
+  - Electron-electron: (1.38e10 cm) T_4^2 n_100^-1
 - Ion-neutral collision scale
+  - Turns out to be unimportant if more than half ionized
+- Kolmogorov viscous dissipation scale, \eta
+  - (4.8e13 cm) n_100^-1 Ma_T^-0.75 T_4^1.7 
 - Taylor microscale
+  - (2.4e15 cm) n_100^-1 Ma_T^-0.5 T_4^1.4
+- Cooling length
+  - (2.28e16 cm) n_100^-1
+- Ionization front thickness
+- Recombination length thickness
+- Injection scale (\approx integral scale of turbulence)
+  - \approx 0.1 R_S \approx (3e18) U_0.01 T_4^0.8 n_100^-1 f^-1 
+- Stromgren radius, R_S
+  - (3.46e19) U_0.01 T_4^0.8 n_100^-1 f^-1
 
 * Definitions
 ** Ionization parameter
+:PROPERTIES:
+:ID:       2227F4EC-2A33-4F3C-8645-CEC8FFD688F6
+:END:
 - Defined as U = F / c n, where F is the flux of ionizing photons and n is the number density of protons
 - Relationship to radiation parameter, \Xi = P_rad/P_gas
   - \Xi / U = 15.8 (e_\star / f_euv) T_4^-1 = global value of 20 to 30 typically for H II regions ionized by early O stars (higher for late O or B stars)
@@ -117,6 +136,9 @@ This is just a summary of results that are derived in more detail elsewhere in t
     - e_* is the average energy of an ionizing photon in Rydbergs
     - f_euv is the fraction of bolometric luminosity emitted in the EUV and shorter wavelengths
 ** Filling factor
+:PROPERTIES:
+:ID:       20000488-8351-451C-AEC8-06C4B75C1F86
+:END:
 - Relation to coefficient of variation of density s_n = \sigma_n / \langle n \rangle
   - f = 1 / (1 + s_n^2)
 - Relation to shell thickness for spherical shell model
@@ -133,6 +155,48 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - Alternatively, we can derive it from the coefficient of variation of density
     - s_n = 0.66, so f = 1 / (1 + 0.66^2) = 0.7 - not very different
   - Baldwin also find an ionization parameter for the illuminated face of U = 10**-1.48 = 0.033
+    - But the global ionization parameter is calculated at the ionization  front radius, so in spherical geometry would be smaller by a factor of  ((3.086 + 2.5)/2.5)**2 = 5.0 => U = 0.0066
+** Cooling length behind shocks
+:PROPERTIES:
+:ID:       9D7D03F7-1495-4092-BDDA-C1503882D1A1
+:END:
+- Start with shocks at the injection scale of \ell_in \equiv \lambda_in R_S \approx 0.1 R_S
+  - So this would be the first shock for a given parcel of gas after it has been ionized
+  - For most of the gas, this will be after acceleration in a photoevaporation flow
+    - [ ] compare the rate of new ionizations from convex versus concave ionization fronts - /I think convex fronts should win/
+  - For the larger neutral globules and filaments, with sizes of order \ell_in, this will be the large-scale termination shock of the photoevaporation flow with M_s \approx 2 - 3
+  - For clusters of smaller globules, this will be oblique flow-flow interaction shocks, with M_s \approx 1.5
+- In [[file:../../Orion-HH/shock-vs-shell/shock-vs-shell.org][shock-vs-shell.org in the Orion-HH project]] I calculate the cooling length, normalised to the final density
+  - Final version of this is given in will-shock-emission.tex, where I show a simple analytic estimate that is independent of Mach number in the range 1-5, so long as you express it in terms of the final cooled density, n_2 = M_s^2 n_0.
+  - Recast with the density normalization of 100 cm^-3 that we are using
+    - d_cool = (7.4 mpc) (n_2 / 100 cm^-3)^-1
+    - d_cool = (2.28e16 cm) (n_2 / 100 cm^-3)^-1
+- Argument that n_2 should be on average of order the mean density in the H II region
+  - The first shock in the photoevaporation flow will occur precisely at the point where the ram pressure equals the ambient pressure in the H II region
+    - This will approximately equal the thermal pressure in the post-cooling shocked shell at the equilibrium T, which means that n_2 \approx \langle n \rangle
+- Ratio of cooling length to Strömgren radius
+  - d_cool/R_S = 0.0074 / (n_100 R_pc)
+  - From [[id:ED1F0BA1-549F-4117-92EA-9CCEF82DBBB5][Reynolds number, Re]] we have n_100 R_pc = 11.21 U_0.01 T_4^0.8 f^-1
+  - So \lambda_cool \equiv d_cool/R_S = 0.00066 U_0.01^-1 T_4^-0.8 f
+  - So a simulation with 10,000^3 cells would be able to resolve the cooling. /This is actually feasible using adaptive mesh refinement/.
+- [ ] We can use the previous result to estimate the /fraction of the volume occupied by cooling gas/ and hence *the t^2 contribution from the first shock*
+  - Volume fraction is f_cool = d_cool A_S1 / (4/3 \pi R_S^3)
+  - Where A_shock = 𝒜_S1 4 \pi R_S^2 is the total area of the first shock fronts
+  - So f_cool = 3 𝒜_S1 \lambda_cool
+  - From the simulations, it looks like 𝒜_S1 \approx 1 for the strongest shocks
+** Magnetic Prandtl number
+- Defined as ratio of viscous to magnetic diffusivity
+- Pr_m = \nu / \eta
+- Magnetic Reynolds number is related to viscous Reynolds number by Re_m = Pr_m Re
+- I think that this should be approximately equal to the ratio of the mean free path to the Larmor radius: \lambda_mfp / r_L
+  - [ ] See arguments in [[id:F78DE959-A732-45AD-A86F-76C214EBEC4B][Two-dimensional turbulence]] section, but it would be good to find an explicit equation for the magnetic diffusivity
+- Assuming that this is right, then we have
+  - Pr_m \approx (1.38e10 cm) T_4^2 n_100^-1 / (1.21e6 cm) \beta^{1/2} n_100^{-1/2}
+  - Pr_m \approx 1.14e4 T_4^2 \beta^{-1/2} n_100^{-1/2}
+- So in general Pr_m \gg 1, but it is not so extreme as in hot gas
+  - At constant pressure it will go as T^2.5, so 1e5 times higher at 1e6 K. This is because the collisional lengths shoot up and the whole system becomes non-collisional (high Knudsen number)
+- For high-\beta and high density, it could be much lower, but it is unlikely to approach unity
+  - For instance, the proplyd ionization fronts can have n = 1e6 cm^-3 and I would expect \beta \approx 10, so Pr_m \approx 40
 ** Reynolds number, Re
 :PROPERTIES:
 :ID:       ED1F0BA1-549F-4117-92EA-9CCEF82DBBB5
@@ -159,8 +223,27 @@ This is just a summary of results that are derived in more detail elsewhere in t
     - m / m_p \approx (1 + 4 y_He) / (2 + 2 y_He) \approx 0.61 if He is singly ionized with y_He = 0.08
     - c_s = 1.16e6 T_4^{1/2} cm/s
   - So characteristic speed is u = Ma_T c_s / sqrt(2) = 8.23e5 Ma_T T_4^{1/2} cm/s
-  - So u L / \nu = 3.3458e4 Ma_T L_pc T_4^{-2} n_e 
+  - So u L / \nu = 3.3458e4 Ma_T L_pc T_4^{-2} n_e
+  - This is disappointingly smaller than what I had previously imagined, but it still gives more than 1e6 for n_100 L_pc = 1
+  - Put it in terms of the ionization parameter
+    - Assume that U = 0.01 is typical for H II regions
+    - From [[id:2227F4EC-2A33-4F3C-8645-CEC8FFD688F6][above]] we have U_0.01 = 0.0892 f n_100 R_pc T_4^-0.8
+      - => n_100 R_pc = 11.21 U_0.01 T_4^0.8 f^-1
+    - Furthermore identify L with the injection scale, which we can put as a fraction \lambda_in of the Strömgren radius, so L_pc = \lambda_in R_pc
+    - Re_L = 3.3458e6 Ma_T \lambda_in T_4^{-2} n_100 R_pc
+    - *Final form* => Re_L = 3.75e7 Ma_T \lambda_in T_4^{-1.2} U_0.01 f^-1
+    - From the Javier paper we find \lambda_in \approx 0.1 and Ma_T = 0.5 to 2.5
+    - f depends on the density fluctuations (see [[id:20000488-8351-451C-AEC8-06C4B75C1F86][Filling factor]]) but should be between 0.25 and 0.5 unless hot gas fills the volume and pushes all the photoionized gas into a very thin shell
+      - Note that it was not necessarily a good idea to filter out the brightness fluctuations on scales smaller than the velocity correlation length, since we would then be missing the thin layers produced by the turbulence
+      - Not too that if f were very small, this would also reduce the ionization parameter (for fixed density and luminosity), so that U/f is unlikely to vary very much
+    - Taking \lambda_in = 0.1, T_4 = 1, Ma_T = 1, U_0.01 = 1, and f = 0.5, we get
+      - *Typical integral scale Reynolds number:* Re_L = 7.5e6 
    
+*** Taylor scale Reynolds number R_\lambda
+- See [[id:C90FB294-372E-4E30-B5EB-4174476DA5AF][Taylor microscale, \lambda]] for details, especially [[id:8AC1C61A-72A3-47A8-ACDA-1BB8FB643846][Detailed argument from Pope, p. 198 et seq]]
+- R_\lambda \equiv u' \lambda_g / \nu = sqrt(20/3) Re_L^{1/2}
+- => R_\lambda = 15800 Ma_T^0.5 \lambda_in^0.5 T_4^{-0.6} U_0.01^0.5 f^-0.5
+- Or using the "standard" values for the minor parameters (as with Re_L), we get R_\lambda = 15800 sqrt(0.1 / 0.5) = 7100, so of order 1e4
 *** Earlier incorrect calculation
 - From the calculation in [[id:FDD9A1A6-53E0-4220-AF9E-3EBB899CEF95][Knudsen number, Kn]] we find typically Re = 1e14 for H II regions
   - Very big!
@@ -188,9 +271,10 @@ This is just a summary of results that are derived in more detail elsewhere in t
 - Non-magnetic requires \Omega_i \tau_i, \Omega_e \tau_e \ll 1 where \Omega is the gyrofrequency and \tau is the collision time
   - See https://farside.ph.utexas.edu/teaching/plasma/Plasma/node53.html
 - So this is really important. I think the condition will be easily satisfied in H II regions
-  - No, not true: the gyrofrequency is larger than the collision frequency I think
-- But one thing I am still not clear on is what the importance of magnetic field is in H II regions if we assume that
-  1. They are not very important on the large scales, assuming the v_A is roughly constant in the ISM (as suggested from David and Sundar's work for instance), since \beta = 2 c_s^2 / v_A^2. So if v_A = 3 km/s and c_s = 10 km/s, then \beta \approx 20
+  - *No, not true*: the gyrofrequency is larger than the collision frequency
+- So we have a contrast in the importance of magnetic fields
+  1. They are not very important on the for the injection-scale inside the H II region, assuming the v_A is roughly constant in the ISM (as suggested from David and Sundar's work for instance), since \beta = 2 c_s^2 / v_A^2. So if v_A = 3 km/s and c_s = 10 km/s, then \beta \approx 20
+     - [ ] Although if there is a turbulent dynamo, then we could be generating more field inside the H II region - need to look into this
   2. They are not important on small scales because
      - electron Larmor radius is 10^5 cm for B = 10^-4 G
      - *but hang on*, this is much smaller than the mean free path, which is of order 1e10 cm for n_e = 100 cm^-3 and T = 10^4 K
@@ -245,6 +329,9 @@ This is just a summary of results that are derived in more detail elsewhere in t
 - 
 
 ** Two-dimensional turbulence
+:PROPERTIES:
+:ID:       F78DE959-A732-45AD-A86F-76C214EBEC4B
+:END:
 - This is possibly relevant at the smallest scales (below the collisional mean free path), where the turbulence along the B-field is damped by collisions, but there is still turbulence in the plane perpendicular to the field, ridht down to the Larmor radius
 - Relevant papers
   - Alexakis 2023 /Quasi-two-dimensional turbulence/, Reviews of Modern Plasma Physics
@@ -319,6 +406,9 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - The neutrals will still be feeling the effect of the ions, right down to the final scale where they completely decouple
   - So I don't think this is going to do anything for highly ionized regions
 ** Taylor microscale, \lambda
+:PROPERTIES:
+:ID:       C90FB294-372E-4E30-B5EB-4174476DA5AF
+:END:
 - Supposedly the scale below which viscosity starts to have an effect - *not true* for very high Reynolds numbers
 - From Pope, eq. 6.64, Taylor-scale Reynolds number is
   - R_\lambda = ((20/3) Re_L)^{1/2}
@@ -337,6 +427,9 @@ This is just a summary of results that are derived in more detail elsewhere in t
 
     
 *** Detailed argument from Pope, p. 198 et seq
+:PROPERTIES:
+:ID:       8AC1C61A-72A3-47A8-ACDA-1BB8FB643846
+:END:
 1. Energy dissipation by viscosity:
    - \epsilon = 15 \nu \langle (d u/d x)^2 \rangle
    - This is derived in Exercise 5.28 and assumes incompressible, homogeneous, isotropic turbulence, which is maybe OK even in our case when we are down at the dissipation scales
@@ -362,7 +455,7 @@ This is just a summary of results that are derived in more detail elsewhere in t
    - \lambda_g^2 = 15 \nu u'^2 / \epsilon = 10 \nu k / \epsilon
    - => \lambda_g^2 / L^2 = (10 \nu k / \epsilon) (\epsilon^2 / k^3) = 10 \nu \epsilon / k^2 = 10 / Re_L
    - => \lambda_g / L = sqrt(10) / Re_L^{1/2}
-9. Pope then relates this to the Kolmogorov scale \eta, defined as (p. 185)
+9. Pope then relates this to the [[id:3B01716E-7C2C-4B5C-BDD8-6D1B60B8A31D][Kolmogorov scale \eta]], defined as (p. 185)
    - \eta \equiv (\nu^3 / \epsilon)^{1/4} 
    - This is the unique combination of viscosity and energy transfer rate (presumed equal to dissipation rate) that gives dimensions of length.
    - So \eta/L = (\nu^3 / \epsilon)^{1/4} \epsilon / k^{3/2} = (\nu^3 \epsilon^3 / k^6)^{1/4} = Re_L^{-3/4}
@@ -380,13 +473,40 @@ This is just a summary of results that are derived in more detail elsewhere in t
     - Note that R_\lambda involves the large-scale velocity fluctuations u', even though it is at the much smaller scale \lambda_g.
     - And that the RMS velocity gradient is given by u'/\lambda_g (see my comment on (4))
      
+*** Numerical value of \lambda_g in H II regions
+- \lambda_g = sqrt(10) \eta^{2/3} L^{1/3} from [[id:8AC1C61A-72A3-47A8-ACDA-1BB8FB643846][Detailed argument from Pope, p. 198 et seq]]
+  - \eta = (4.8e13 cm) n_100^-1 Ma_T^-0.75 T_4^1.7
+  - L = (6e18 cm) T_4^0.8 n_100^-1
+  - Both assuming f = 0.5, \lambda_in = 0.1, U_0.01 = 1
+  - => \lambda_g = (2.4e15 cm) n_100^-1 Ma_T^-0.5 T_4^1.4
+
 ** Kolmogorov scale, \eta
-- The scale below which viscosity dominates
-- \eta / L = Re^(-3/4) = 2e12^(-3/4) = 6e-10
-  - Orion: \eta = 2600 km
-  - 30 Dor: \eta = 0.001 au = 0.2 Rsun
-- [ ] What is the origin of the 3/4 power?
-  - Does this depend on the incompressibility assumption?
+:PROPERTIES:
+:ID:       3B01716E-7C2C-4B5C-BDD8-6D1B60B8A31D
+:END:
+- The scale below which viscosity dominates the dynamics
+  - The energy dissipation scales are take to be <= 6 \eta
+- Note that this is still much larger than the mean free path
+- The derivation of \eta comes from considering the combination of viscosity and energy transfer rate that gives dimensions of length
+  - \eta = (\nu^3 / \epsilon)^{1/4}
+  - \eta / L = Re_L^{-3/4}
+  - See [[id:8AC1C61A-72A3-47A8-ACDA-1BB8FB643846][Detailed argument from Pope, p. 198 et seq]] in the Taylor microscale section for more details
+- In [[id:ED1F0BA1-549F-4117-92EA-9CCEF82DBBB5][Reynolds number, Re]] we find
+  - Re_L = 3.75e7 Ma_T \lambda_in T_4^{-1.2} U_0.01 f^-1
+  - With typical value of Re_L \approx 7.5e6
+- So this would give \eta / L \approx 2e-6
+- For a fixed ionization parameter we can use
+  - U = 8.92e-4 f n_100 R_pc T_4^-0.8 from [[id:2227F4EC-2A33-4F3C-8645-CEC8FFD688F6][Ionization parameter]]
+  - => R_pc = 11.2 U_0.01 T_4^0.8 n_100^-1 f^-1
+  - Then, with L = \lambda_in R_S = 3.456e19 \lambda_in U_0.01 T_4^0.8 n_100^-1 f^-1
+  - We get \eta = (3.456e19 cm) \lambda_in U_0.01 T_4^0.8 n_100^-1 f^-1 (3.75e7 Ma_T \lambda_in T_4^{-1.2} U_0.01 f^-1)^{-3/4}
+  - => \eta = (7.2e13 cm) \lambda_in^0.25 U_0.01^0.25 T_4^1.7 n_100^-1 f^-0.25 Ma_T^-0.75
+- We can suppress weak dependence on minor parameters and put
+  - (\lambda_in U_0.01 / f)^0.25 \approx (0.1 1 / 0.5)^0.25 = 0.67
+  - => \eta = (4.8e13 cm) T_4^1.7 n_100^-1 Ma_T^-0.75
+- Remember, that this dissipation only effects motions along the field lines
+  - [ ] In principal, we can find a magnetic dissipation scale \eta_m for motions perpendicular to the field lines, which will be smaller
+
 
 
 
@@ -512,9 +632,9 @@ Averaged over volume of a homogeneous flow, both Q and R are zero (because can b
 
 : In particular, ⟨Q⟩ = 0 has the consequence that average enstrophy is equal to the average strain-rate-squared magnitude, and ⟨R⟩ = 0 means that average strain production is directly proportional to average enstrophy production. One consequence is that the net (local and nonlocal) effect of vortex stretching is to enhance the global dissipation rate (Carbone & Bragg 2020), even though it locally decreases it (as a sink in Equation 8) (Tsinober 2009).
 
-Large positive Q is means high enstrophy, occurs in localised structures, associated with slight negative R. /I had thought these might be vortex tubes, but based on Thacker et al 2023, they might be sheets/
+Large positive Q means high enstrophy, which occurs in localised structures, associated with slight negative R. /I had thought these might be vortex tubes, but based on Thacker et al 2023, they might be sheets/
 
-Large negative Q means high squared strain, which seems to be localised around the borders of the high-enstropy structures, associated with large positive R. This is where the dissipation is happening. It is an attractor in the phase space of the VGT. Meaning that fluid elements from a variety of initial conditions tend to evolve towards it. /Actually, this is misleading. I had been looking at streamlines of the restricted Euler system, which neglects the viscosity and non-local pressure effects. When those are included, then the phase space trajectories are loops in the Q-R plane. See Baj 2024/
+Large negative Q means high squared strain, which seems to be localised around the borders of the high-enstrophy structures, associated with large positive R. This is where the dissipation is happening. It is an attractor in the phase space of the VGT. Meaning that fluid elements from a variety of initial conditions tend to evolve towards it. /Actually, this is misleading. I had been looking at streamlines of the restricted Euler system, which neglects the viscosity and non-local pressure effects. When those are included, then the phase space trajectories are loops in the Q-R plane. See Baj 2024/
 *** Sakurai et al 2023
 Title: /Direct numerical simulations of compressible isothermal turbulence in a periodic box: Reynolds number and resolution-level dependence/
 
@@ -525,7 +645,7 @@ Important quote from the Conclusions:
 *** Donzis & Panickacheril John 2020
 Title: /Universality and scaling in homogeneous compressible turbulence/
 
-They find that the dilatational Mach number is more important than the total turbulent Mach number. They find better universa scaling relations by separating out the solenoidal and dilataional components.
+They find that the dilatational Mach number is more important than the total turbulent Mach number. They find better universal scaling relations by separating out the solenoidal and dilatational components.
 *** Panickacheril John et al 2021
 Title: /Does dissipative anomaly hold for compressible turbulence?/
 
