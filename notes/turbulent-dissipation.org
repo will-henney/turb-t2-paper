@@ -682,7 +682,7 @@ Looping period in the Q-R plane is about 30 to 40 times the Kolmogorov timescale
 
 
 
-*** Gylfason et al 2004
+*** Gylfason et al 2004a
 :PROPERTIES:
 :ID:       05430AD7-562A-4CD8-AFBB-A6FB1F603454
 :END:
@@ -703,6 +703,42 @@ They have an alternative way of specifying the Taylor microscale:
 : \lambda =[ U^2 ⟨u^2⟩ / ⟨(∂u/∂t)^2⟩ ]^(1/2)
 
   
+
+*** Park & Ryu 2019
+Title: /Shock Waves and Energy Dissipation in Magnetohydrodynamic Turbulence/
+
+Simulations of isothermal mhd turbulence with a variety of \beta values and Mach numbers. They include \beta_0 = 10, which is relevant to H II regions. The final \beta is lower (due to turbulent dynamo I guess), ranging from \beta \approx 5 (M_turb = 0.5) to \beta \approx 1 (M_turb = 2).
+
+From the abstract:
+: The energy dissipation at shocks, normalized to the energy injection, εshock/εinj, is estimated to be in the range of ∼ 0.1 − 0.5, except for the case of Mturb = 0.5 and β0 = 0.1 where the shock dissipation is negligible. The fraction decreases with Mturb; it is close to ∼ 0.4−0.6 for Mturb = 0.5, while it is ∼ 0.1−0.25 for Mturb = 7. The rest of the turbulent energy is expected to dissipate through the turbulent cascade.
+
+They look at the statistics of the energy dissipation in fast mode and slow mode shocks. For high beta, it is the fast mode that dominates. They find that for low Mach number turbulence that roughly half of the injected energy is dissipated in shocks, whereas the other half goes into the turbulent cascade. For high Mach number turbulence, the fraction of energy dissipated in shocks falls to lower values (which is the opposite of what ChatGPT tried to tell me). However, over the range relevant to H II regions (0.5 to 2), it does not change very much.
+
+Or M_turb = 0.5-1 the majority of the shock energy dissipation occurs in fast-mode shocks with M_s = 1 to 2. 
+
+
+*** Richard et al 2022
+Title: /Probing the nature of dissipation in compressible MHD turbulence/
+
+Looks at statistics of intense dissipation structures in decaying isothermal MHD turbulence.
+
+Classify according to type of structure: fast shock, slow shock, rotational discontinuity, Parker sheet.
+
+They distinguish three types of dissipation:
+1. Ohmic dissipation, \epsilon_\eta = 4\pi \eta J^2
+2. Compressive viscous heating, \epsilon_comp = 4/3 \rho \nu (\nabla \cdot \mathbf{u})^2
+3. Solenoidal viscous heating, \epsilon_solen = \rho \nu (\nabla \times \mathbf{u})^2
+
+They find that the compressive heating is unimportant for their simulations (I think this is just because they are looking at late times in the decay of the turbulence, at which point all the strong fast shocks have died away). Their intense dissipation structures have \epsilon from 4 to 15 sigma above the mean value. The dissipation structures are mainly sheets. 
+
+Unfortunately, their plasma parameters are pretty far from hii region case:
+- Reynolds numbers of up to 9000
+- Prandtl numbers of 1 to 16
+- Beta of about 0.1
+- M_A \approx 1, M_s \approx 4
+
+When P_m increases, they find that the Ohmic dissipation decreases relative to the viscous dissipation. This happens over all four types of dissipation structures. However, they do not cover the case of very high P_m, where there should be further magnetic-kinetic turbulent cascades within their viscous dissipation structures.
+
 
 *** Cho & Lazarian 2003
 Title: /Compressible Magnetohydrodynamic Turbulence: Mode Coupling, Scaling Relations, Anisotropy, Eddy Energetics, and Intermittency/

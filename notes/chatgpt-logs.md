@@ -24,15 +24,29 @@ I have recently been researching this topic, which is somewhat outside of my pri
 ## How did it do?
 In general, it answered surprisingly well. Especially compared with the last time I tried something like this, which was over a year ago with version 3.5. At that time I was very unimpressed with its answers to MSc-level radiative transfer and stellar atmospheres questions, which were frequently wrong. Although it did perform somewhat better at general astronomy questions at the level of the Propedeútico course (still not very well though).
 
-This time, all its answers are correct as far as I can see. The only criticism I have is that it is sometimes a little vague and qualitative. However, on the occasions that I asked it to be more quantitative, it did give a good answer (see the question about the Mach and Reynolds scaling of the kurtosis). 
+This time, all its responses are correct as far as I can see. The main criticism I have is that it is sometimes a little vague and qualitative. However, on the occasions that I asked it to be more quantitative, it did give a good answer (see the question about the Mach and Reynolds scaling of the kurtosis). It is also sometimes quite repetitive, but that is not necessarily bad.
 
-The worst answer is the one about the relation between energy dissipation and kurtosis (epsilon versus K). This actually has a very simple numerical answer: Var(epsilon) = (7/15) K - 1, which follows from some general assumptions plus basic algebra. But all it told me is that they are positively correlated. Perhaps if I had asked it a follow up question to be more quantitative then it might have got there.
+The worst response is to Question 5 about the relation between energy dissipation and velocity-gradient kurtosis (epsilon versus K). This actually has a very simple numerical answer: Var(epsilon) = (7/15) K - 1, which follows from some general assumptions plus basic algebra. But all it told me is that they are positively correlated. Perhaps if I had asked it a follow up question to be more quantitative then it might have got there.
 
-One of the best answers in my opinion is the one about magnetic diffusivity and the Larmor radius. The result with the ion thermal speed is something that I had worked out for myself on dimensional grounds, but I haven't seen explicitly discussed in the literature (although perhaps this is common knowledge among plasma physicists). And in addition, chatgpt gives a second version in terms of the Alfven speed, which is not something I had thought of myself, but which seems to be correct. 
-  
+One of the best responses in my opinion is to Question 3 about magnetic diffusivity and the Larmor radius. The result with the ion thermal speed is something that I had worked out for myself on dimensional grounds, but I haven't seen explicitly discussed in the literature (although perhaps this is common knowledge among plasma physicists). And in addition, ChatGPT gives a second version in terms of the Alfvén speed, which is not something I had thought of myself, but which seems to be correct. 
+
+With regards to accuracy, there are no obvious mistakes or misconceptions in the answers, and it doesn't seem to get confused by the variety of different notations and conventions used in the literature. For example, in Question 7 it gave me an the scaling of kurtosis with Reynolds number as $K \sim Re^a$ with $a = 0.1$–$0.25$, which is correct. In my own reading I have mostly seen his scaling expressed in terms of the Taylor microscale Reynolds number $R_\lambda $, for instance $K \sim R_\lambda^{0.39}$ from Gylfason et al 2004, so I followed up with Question 8 about which Reynolds number it was assuming, with the response that it was the integral scale Reynolds number, together with the helpful additional information that $R_\lambda \sim Re^{0.5}$. 
+
+Unless specifically prompted, the responses do not include citations to the literature. But every time I asked for references to backup a previous answer it was able to provide them, even explaining which references corresponded to each particular point. I have only checked a few of these so far, but the results are a mixed bag. Some are real papers and are relevant to the answer, but others are total inventions. For instance, from Question 9:
+
+- Yeung et al (2015) JFM, *"High-Reynolds-number simulation of turbulent mixing"* is a real paper, but it is actually from 2005 and is in Physics of Fluids, not JFM. The paper is slightly relevant to the question, but not exactly. For example, their Fig. 4 shows the variation with Taylor-scale Reynolds number of the "flatness" (another name for kurtosis) of spatial gradients of a passive scalar in direct numerical simulations of turbulent mixing. This is not the same as the kurtosis of the velocity gradients, which is what I was asking about. It is true that they do discuss the PDF of the energy dissipation (epsilon) and how it differs from the scalar dissipation and enstrophy, but they never give any explicit scaling of these with Reynolds number.
+- Craig and Haugen (2017), Physics of Fluids, *"Higher order statistics of supersonic turbulence"* does not exist, which is a shame! It sounds very interesting. 
+- McComb (1990), *"The Physics of Fluid Turbulence"* is a real book, but the year should be 1992 and author initials are W. D., not J. C. I have not read this book, but given the date I would be surprised if it contained much on intermittency, since most of the advance on this have been in the last 30 years.
+- Vassilicos (2015), Annual Review of Fluid Mechanics, *"Dissipation in Turbulent Flows"* is a real paper, but it is not relevant to the question since it is entirely concerned with the scaling of the **mean** dissipation and says nothing about the kurtosis of the velocity gradients (which is proportional to the variance of the dissipation).
+
+
+Given that it has performed well on questions that I already know the answer to, I decided to ask it something I don't know. This lead to Questions 11, 12, 13 about the relative fractions of turbulent energy dissipation that occurs at three different scales: 1. Large scale shocks. 2. Viscous dissipation at the Kolmogorov scale. 3. Magnetic dissipation below the collisional mean free path. 
+
+
+
 # Conversation on MHD and Turbulence 2024-11-01 (chatgpt-4o)
 
-In the following conversation my questions are given as 2nd-level headings. Everything else is the chatgpt response. 
+In the following conversation my questions are given as blockhquoted italics. Everything else is the chatgpt response. 
 
 ## Question 1
 
@@ -92,7 +106,7 @@ In summary, FLR MHD introduces additional non-ideal behavior through the finite 
 
 ## Question 3
 > *Is it possible to express the magnetic diffusivity (eta) in terms of the ion Larmor radius and some characteristic velocity?*
-s
+
 Yes, magnetic diffusivity ($\eta$) can be expressed in terms of the ion Larmor radius and a characteristic velocity, particularly in weakly collisional plasmas where collisions are infrequent, but magnetic diffusion still occurs due to processes like wave-particle interactions or turbulence.
 
 To understand this, let’s explore the relationship in two parts:
@@ -525,7 +539,7 @@ These estimates reflect how increasing compressibility redistributes the dissipa
 Estimating the distribution of energy dissipation in transonic, high-Reynolds-number, and high-Prandtl-number MHD turbulence, as described, is challenging, and direct citations on exact fractions for each dissipation mechanism are scarce. However, research in turbulence, MHD, and plasma physics provides guidance for these estimates. Here are some relevant studies and resources for each part of the dissipation mechanism:
 
 ### 1. **Direct Dissipation in Shocks Near the Energy Injection Scale**
-   - **Schneider & Podolak (2013)** - *"Energy Dissipation in Shocks in Transonic and Supersonic Turbulence"*  
+q   - **Schneider & Podolak (2013)** - *"Energy Dissipation in Shocks in Transonic and Supersonic Turbulence"*  
      This study provides insight into how shocks contribute to energy dissipation in compressible turbulence, showing that shock-driven dissipation can be significant, particularly in transonic and supersonic flows. While exact fractions depend on Mach number, this work supports the role of shocks in dissipating 10-30% of the total turbulent energy at transonic and supersonic scales.
    - **Zank, G.P., et al. (2017)** - *"The Turbulent Cascade and Proton Heating in the Solar Wind"*  
      Zank’s work on compressible solar wind turbulence discusses the role of shocks and compressible effects in transonic turbulence, estimating shock dissipation to contribute a moderate fraction of the total dissipation in turbulent flows. This study reinforces that shock dissipation can be significant at transonic and higher Mach numbers.
