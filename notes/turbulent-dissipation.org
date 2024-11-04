@@ -540,7 +540,7 @@ This is just a summary of results that are derived in more detail elsewhere in t
 
 ** Relevant papers
 
-*** Elsinga et al 2020
+*** Elsinga et al 2020                            :epsilon:kurtosis:scaling:
 Title: /Extreme dissipation and intermittency in turbulence at very high Reynolds numbers/
 
 : For homogeneous isotropic turbulence, the dissipation variance is directly related to the flatness factor of the longitudinal velocity gradient [19,20], which increases with Reynolds number [15,17,20].
@@ -577,7 +577,7 @@ Some of these may warrant their own dedicated sections.
 - D. A. Donzis and J. P. John, /Universality and scaling in homogeneous compressible turbulence/, Phys. Rev. Fluids 5, 084609 (2020). Cited by Chen
 - K. Yamamoto, T. Ishida, T. Watanabe, and K. Naga ta, /Experimental and numerical investigation of compressibility effects on velocity derivative flatness in turbulence/, Phys. Fluids 34, 055101 (2022). Cited by Chen. Finds that *flatness increases with Mach number*, which is just what we need to increase the temperature fluctuation. Now has its [[id:A8E809DE-57D1-4A22-ADD1-9A40A0CE25EB][own section]]
 
-*** Yamamoto et al. 2022
+*** Yamamoto et al. 2022                          :experiment:dns:kurtosis:scaling:mach:
 :PROPERTIES:
 :ID:       A8E809DE-57D1-4A22-ADD1-9A40A0CE25EB
 :END:
@@ -610,7 +610,7 @@ They are mainly interested in investigating whether the universality hypothesis 
   - The incompressible equation would give F = 14, although their data have about 8
   - So this is a modest increase of about 2, even at such a low Mach number
 - They point out that the conditions of the driving seem to have an effect on the scaling of flatness with turbulent Mach number, with the deviations from the incompressible case starting at smaller M_T when the turbulence is caused by a faster flow, such as jets. 
-*** Johnson & Wilczek 2023
+*** Johnson & Wilczek 2023                        :vgt:
 :PROPERTIES:
 :ATTACH_DIR: /Users/will/Dropbox/turb-t2-paper/notes/turbulent-dissipation_att
 :ID:       935028F2-A5A8-4890-8367-E49AE5AB4284
@@ -635,26 +635,29 @@ Averaged over volume of a homogeneous flow, both Q and R are zero (because can b
 Large positive Q means high enstrophy, which occurs in localised structures, associated with slight negative R. /I had thought these might be vortex tubes, but based on Thacker et al 2023, they might be sheets/
 
 Large negative Q means high squared strain, which seems to be localised around the borders of the high-enstrophy structures, associated with large positive R. This is where the dissipation is happening. It is an attractor in the phase space of the VGT. Meaning that fluid elements from a variety of initial conditions tend to evolve towards it. /Actually, this is misleading. I had been looking at streamlines of the restricted Euler system, which neglects the viscosity and non-local pressure effects. When those are included, then the phase space trajectories are loops in the Q-R plane. See Baj 2024/
-*** Sakurai et al 2023
+*** Sakurai et al 2023                            :dns:scaling:epsilon:mach:
 Title: /Direct numerical simulations of compressible isothermal turbulence in a periodic box: Reynolds number and resolution-level dependence/
 
 PHYSICAL REVIEW FLUIDS 8, 084606 (2023)
 
 Important quote from the Conclusions:
 : As shown in Ref. [15], the classical incompressible scaling did not hold for the total energy dissipation field in compressible turbulence. Our DNSs confirmed that, as in the case of incompressible turbulence, the normalized solenoidal energy dissipation of compressible turbulence asymptotically takes a finite nonzero value (≈0.4) at high Reynolds numbers, i.e., in a range of the solenoidal Taylor Reynolds number Rλs = 168–761. However, the normalized dilatational energy dissipation values do not approach zero, as opposed to that expected in Ref. [15]. Instead, the values asymptotically approach a finite value at high Reynolds numbers (or may approach zero too slowly to observe in the range of the Reynolds numbers up to Rλd = 453). Spectral analysis of the energy dissipation reveals that the main contribution to solenoidal and dilatational energy dissipation for the case of Mt ≈ 0.3 comes from the wave-number range at kη ≈ 0.3. Furthermore, it was shown that the energy spectra obtained from the DNSs with a resolution level higher than 2 are convergent for kη < 1 in the case of Mt ≈0.3.
-*** Donzis & Panickacheril John 2020
+*** Donzis & Panickacheril John 2020              :scaling:dilatation:mach:
 Title: /Universality and scaling in homogeneous compressible turbulence/
 
 They find that the dilatational Mach number is more important than the total turbulent Mach number. They find better universal scaling relations by separating out the solenoidal and dilatational components.
-*** Panickacheril John et al 2021
+*** Panickacheril John et al 2021                 :epsilon:mach:
 Title: /Does dissipative anomaly hold for compressible turbulence?/
 
 Dissipative anomaly is just the fact that \langle\epsilon\rangle remains finite as the viscosity goes to zero. Unfortunately they do not look at higher order statistics, such as \langle \epsilon^2 \rangle
-*** Li et a 2024
+*** Li et a 2024                                  :epsilon:mhd:mach:
 Title: /Non-universality and dissipative anomaly in compressible magnetohydrodynamic turbulence/
 
 Like the previous paper, but for MHD turbulence.
-*** Eyink & Drivas 2018
+*** Eyink & Drivas 2018                           :theory:epsilon:negentropy:cascade:mach:
+:PROPERTIES:
+:ID:       C6A088AC-363E-43A6-BCE9-BC3B20DE0753
+:END:
 Title: /Cascades and Dissipative Anomalies in Compressible Fluid Turbulence/
 
 Abstract:
@@ -670,7 +673,7 @@ Isothermal fluctuations. They do have interesting things to say about what sort 
 
 : Within a Kovásznay-type modal picture, the slow magnetosonic mode seems the most plausible source of the observed density fluctuations. However, in our nonlinear theory, there is no cooling catastrophe in the first place. Large-scale cooling adds excess negentropy (deficiency of entropy) that feeds the cascade of negentropy to small scales. See Eq. (107). This necessitates “rough” density and temperature fields with Kolmogorov-type spectra. In our view, the cooling catastrophe is an artifact of attempting to describe nonlinear compressible MHD turbulence in terms of linear wave modes. There is no sound theoretical basis for such a decomposition and, unsurprisingly, the Kovásznay mode- mode interactions lead to empirically wrong predictions for the problem [167].
 
-*** Baj 2024
+*** Baj 2024                                      :dns:vgt:
 Title: /The topology-conditioned turbulence kinetic energy budget/
 
 Analyses experiments and DNS simulations with Re_\lambda of 200 to 400.
@@ -682,7 +685,7 @@ Looping period in the Q-R plane is about 30 to 40 times the Kolmogorov timescale
 
 
 
-*** Gylfason et al 2004a
+*** Gylfason et al 2004a                          :kurtosis:experiment:scaling:
 :PROPERTIES:
 :ID:       05430AD7-562A-4CD8-AFBB-A6FB1F603454
 :END:
@@ -704,7 +707,7 @@ They have an alternative way of specifying the Taylor microscale:
 
   
 
-*** Park & Ryu 2019
+*** Park & Ryu 2019                               :shocks:mhd:epsilon:mach:
 Title: /Shock Waves and Energy Dissipation in Magnetohydrodynamic Turbulence/
 
 Simulations of isothermal mhd turbulence with a variety of \beta values and Mach numbers. They include \beta_0 = 10, which is relevant to H II regions. The final \beta is lower (due to turbulent dynamo I guess), ranging from \beta \approx 5 (M_turb = 0.5) to \beta \approx 1 (M_turb = 2).
@@ -717,7 +720,7 @@ They look at the statistics of the energy dissipation in fast mode and slow mode
 Or M_turb = 0.5-1 the majority of the shock energy dissipation occurs in fast-mode shocks with M_s = 1 to 2. 
 
 
-*** Richard et al 2022
+*** Richard et al 2022                            :dns:mhd:ohm:mach:
 Title: /Probing the nature of dissipation in compressible MHD turbulence/
 
 Looks at statistics of intense dissipation structures in decaying isothermal MHD turbulence.
@@ -740,7 +743,7 @@ Unfortunately, their plasma parameters are pretty far from hii region case:
 When P_m increases, they find that the Ohmic dissipation decreases relative to the viscous dissipation. This happens over all four types of dissipation structures. However, they do not cover the case of very high P_m, where there should be further magnetic-kinetic turbulent cascades within their viscous dissipation structures.
 
 
-*** Cho & Lazarian 2003
+*** Cho & Lazarian 2003                           :mhd:iles:cascade:intermittency:scaling:
 Title: /Compressible Magnetohydrodynamic Turbulence: Mode Coupling, Scaling Relations, Anisotropy, Eddy Energetics, and Intermittency/
 
 Has direct simulations of compressible MHD turbulence in a box, with a variety of sonic and Alfvenic Mach numbers. They include low-beta and high-beta cases (the latter are more relevant to us, since we expect the magnetic pressure to be sub-dominant in H II regions).
@@ -752,7 +755,7 @@ They mention that even in high-beta plasmas (magnetic pressure unimportant at th
 
 
 
-*** Goldreich & Sridhar 1995
+*** Goldreich & Sridhar 1995                      :theory:cascade:mhd:
 Title: /Toward a theory of interstellar turbulence. 2: Strong Alfvenic turbulence/
 
 This is still in the incompressible regime, but builds on a previous paper, which treated weak Alfven turbulence.
@@ -760,7 +763,7 @@ This is still in the incompressible regime, but builds on a previous paper, whic
 They find that "eddies" (scare quotes are theirs) are elongated along the magnetic fields lines, increasingly so at smaller scales:
 - k_z / k_\perp = (L k_\perp)^{-1/3}
 
-*** Lithwick & Goldreich 2001
+*** Lithwick & Goldreich 2001                     :mhd:cascade:theory:
 Title: /COMPRESSIBLE MAGNETOHYDRODYNAMIC TURBULENCE IN INTERSTELLAR PLASMAS/
 This paper is referred to a lot in the Cho & Lazarian paper.
 
@@ -772,11 +775,13 @@ From their abstract, their most important results:
 
 : 2. Observed density fluctuation amplitudes constrain the nature of MHD turbulence in the interstellar medium. Slow mode density fluctuations are suppressed when the magnetic pressure is less than the gas pressure. Entropy mode density fluctuations are suppressed by cooling when the cascade timescale is longer than the cooling timescale. These constraints imply either that the magnetic and gas pressures are comparable or that the outer scale of the turbulence is very small.
 
-- [ ] I need to study this argument in more detail
+- [X] I need to study this argument in more detail
   - because at the moment, the cooling part does not make sense to me.
     - I suppose that in the isothermal case there is no entropy-mode cascade?
   - And the slow mode being suppressed at high beta is also something I need to understand better
     - Which mode is it that devolves into sound waves in the non-magnetic case
+  - [2024-11-04 Mon] *[[id:C6A088AC-363E-43A6-BCE9-BC3B20DE0753][Eyink & Drivas (2018)]] claim that these arguments are not right*
+    - Instead they invoke a negentropy cascade induced by the large-scale cooling
 : 3. A high degree of ionization is required for the cascade to survive damping by neutrals and thereby to extend to small length scales. Regions that are insufficiently ionized produce density fluctuations only on length scales larger than the neutral damping scale. These regions may account for the excess of power that is found on large scales.
 
 : 4. Provided that the thermal pressure exceeds the magnetic pressure, both the entropy mode and the slow mode are damped on length scales below that at which protons can diffuse across an eddy during the eddyÏs turnover time. Consequently, eddies whose extents along the magnetic field are smaller than the proton collisional mean free path do not contribute to the density spectrum. However, in MHD turbulence eddies are highly elongated along the magnetic field. From an observational perspective, the relevant length scale is that transverse to the magnetic field. Thus, the cutoff length scale for density fluctuations is significantly smaller than the proton mean free path.
@@ -804,17 +809,17 @@ I think the answer might be given in the [[id:38E70922-87BD-4127-8A02-010B76484E
 That is interesting that the density fluctuations are proportional to M^2, and so are steeper than the velocity fluctuations. Remember that this is in the incompressible regime.
 
 I think that these "entropy fluctuations" from the dissipation of turbulent kinetic energy are different from the entropy mode mentioned above, and these would still be present in the isothermal case. 
-*** Goldreich & Sridhar 2006
+*** Goldreich & Sridhar 2006                      :mhd:density:fluctuations:
 Title: /FOLDED FIELDS AS THE SOURCE OF EXTREME RADIO-WAVE SCATTERING IN THE GALACTIC CENTER/
 
 This paper is the first to walk back the idea that pulsar scintillation requires large-amplitude density fluctuations at very small scales in the ISM. Instead the propose folded magnetic sheets, an idea that is developed much more fully by Ue-Li Pen.
 
 They talk of turbulent heating rates in terms of timescales. And compare them with the radiative cooling timescale
-*** Stanimirovic & Zweibel 2018
+*** Stanimirovic & Zweibel 2018                   :density:fluctuations:
 Title: /Atomic and Ionized Microstructures in the Diffuse Interstellar Medium/
 
 Annual Reviews paper that gives a good overview of the observational evidence for microstructures and a bit on the theory of them.
-*** Coburn et al 2022
+*** Coburn et al 2022                             :kinetic:mfp:larmor:noncollisional:
 Title: /A measurement of the effective mean free path of solar wind protons/
 
 Abstract
@@ -823,7 +828,7 @@ Abstract
 Contains a useful discussion of different regimes of collisional and non-collisional plasmas, with lots of references.
 
 This is more relevant to the shocked stellar wind bubbles in H II regions, rather than the H II region itself (which is collisional). 
-*** Beattie et al. 2024
+*** Beattie et al. 2024                           :iles:mhd:mach:dynamo:cascade:
 Title: /Magnetized compressible turbulence with a fluctuation dynamo and Reynolds numbers over a million/
 
 Has a 10080^3 supersonic MHD simulation (M = 4).
@@ -833,19 +838,19 @@ Very nice visualization in their Fig 1
 : 2.1 The world’s largest supersonic MHD turbulence simulation:
 :
 : We present the first results from an ensemble of driven, supersonic, δu/cs = 4.3 ± 0.2, magnetized turbulence simulations that have a magnetic field being self-consistently maintained by the turbulent dynamo in saturation, providing a volume integral energy ratio of Emag/Ekin = 0.242 ± 0.022. The grids vary from 2520^3 (Rm ∼ Re ∼ 105) up to 10080^3 (Rm ∼ Re ∼ 3 × 106), discretised on a triply-periodic domain with length L. Presently, these are the largest supersonic, magnetized simulations in the world, almost an order of magnitude larger in grid resolution (and Reynolds numbers) compared to previous simulations in this regime (Fielding et al., 2023; Grete et al., 2023) and are the first simulations to resolve both a supersonic and subsonic cascade with a self-consistently maintained magnetic field. The simulations utilised over 80 million CPU hours distributed across nearly 140,000 compute cores on the high-performance supercomputer, SuperMUC-NG, at the Leibniz Supercomputing Centre. We integrate the 10080^3 simulation for t ≈ 2t0, where t0 = l0/δu is the turnover time on the driving scale of the turbulence l0 = L/2 (or equivalently kL/2π = 2), allowing for time-averaging of all key statistics across ≈ 2t0, making for robust, statistically significant results. We provide details on the simulation methods in 4.
-*** Ha et al 2024
+*** Ha et al 2024                                 :kinetic:intermittency:
 Title: /MACHINE-LEARNING CHARACTERIZATION OF INTERMITTENCY IN PLASMA TURBULENCE: SINGLE AND DOUBLE SHEET STRUCTURES/
 
 This uses PIC simulations, so probably on much smaller scale than what we are interested in. And non-collisional I imagine.
 
-*** Ocker et al 2024a
+*** Ocker et al 2024a                             :density:fluctuations:
 Title: /Implications for Galactic Electron Density Structure from Pulsar Sightlines Intersecting HII Regions/
 
 Has a bizarre complicated cloudlet mode for H II regions that has 3 different density variation parameters.
 - [ ] Refers to some earlier papers, which I should check out
 - They do seem to have anticipated my f = 1 / (1 + s^2) result, where s is the coefficient of variation, stddev / mean. 
 
-*** Ocker et al 2024b
+*** Ocker et al 2024b                             :density:fluctuations:
 Title: /Pulsar scintillation through thick and thin: bow shocks, bubbles, and the broader interstellar medium/ 
 - By bow shocks, they mean pulsar bow shocks, so it is not of such interest as I had first thought.
 
