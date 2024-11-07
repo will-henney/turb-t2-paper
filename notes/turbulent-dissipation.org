@@ -1,11 +1,22 @@
 Notes on dissipation of energy in turbulent flows
 
 * Points that still are not clear
-- [ ] Can the intermittency increase the variance of the temperature fluctuations enough to explain t2?
-- [ ] What is the role of shocks at macroscopic scales in the dissipation of kinetic energy?
-  - Are we double-counting if we add this into the budget for t2?
+- [X] Can the intermittency increase the variance of the temperature fluctuations enough to explain t2?
+  - I am now more hopeful. At least, we can put bounds on the degree of Kurtosis required in order for this to work. And then it can be left to further work to determine whether particular mechanisms can fulfill that or not
+- [X] What is the role of shocks at macroscopic scales in the dissipation of kinetic energy?
+  - Are we double-counting if we add this into the budget for t2? /Answer: No/
+  - [2024-11-04 Mon] I now have a much better understanding of this point. The total energy dissipation is shared between three regimes: (1) injection-scale shocks, (2) turbulent cascade to viscosity around the Kolmogorov scale \eta, (3) collisionless magneto-turbulent cascade to ohmic dissipation or reconnection around the magnetic Kolmogorov scale \eta_m.
+    - MHD simulations suggest that (1) and (2+3) are roughly equal in terms of energy dissipation. See [[id:0A896555-5AFF-4E9E-B82D-1743C1D8EC46][Park & Ryu 2019]]
+    - [ ] Division between 2 and 3 is less clear. I still need to do more reading of Lazarian papers. On the other hand, it does not really matter so long as both have high intermittency, which we think they do.
+  - The important difference from the point of view of the temperature fluctuations is that (2) and (3) occur at scales much smaller than the cooling length, and more importantly, timescales much smaller than the cooling time.
+    - As a result, \epsilon can be considered as an additional microscopic heating term. So temperature fluctuations must come from spatial variations in \epsilon, which in turn come from the intermittency of the turbulent cascade (through kurtosis of the velocity gradients).
+    - Whereas with the large-scale shocks (1), the cooling length is small, and so it is the non-equilibrium thermal history of the cooling gas that contributes to the temperature fluctuations directly.
 - [ ] What is going on with the Taylor-scale Reynolds number Re_\lambda in the direct numerical simulations?
   - How is it that they can work with Re_\lambda = 1000 (implying Re = 1e6) and be able to numerically resolve from the integral scale down to the Kolmogorov scale?
+  - [2024-11-04 Mon] I suspect that this is because they are not trying to resolve the Kolmogorov scale.
+    - For instance, [[id:33F6C3BC-9457-4F79-9F04-073AA21752AA][Beattie et al. 2024]] claim that their grid size of 10080 cubed corresponds to Re_L = 3e6.
+    - From [[id:3B01716E-7C2C-4B5C-BDD8-6D1B60B8A31D][Kolmogorov scale, \eta]] this means \eta / L = Re_L^{-3/4} = 1.4e-5, so their cell size is 7 \eta. This is not too bad, but is clearly not enough for DNS
+    - From [[id:C90FB294-372E-4E30-B5EB-4174476DA5AF][Taylor microscale, \lambda]] we have \lambda_g / L = sqrt(10) Re^(-1/2) = 1.8e-3, so cell size is 0.055 \lambda_g, or \lambda_g = 18 cells, so *The Taylor microscale is well-resolved*. Note that the Taylor-scale Reynolds number is R_\lambda = ((20/3) Re_L)^{1/2} = 4500. 
 
 * Summary of important points
 - Turbulent energy dissipation, \varepsilon, is intermittent with extreme events dominating the dissipation
@@ -20,7 +31,7 @@ Notes on dissipation of energy in turbulent flows
   - This assumes that the turbulent heating timescale (interval between heating events) is short compared with the radiative cooling timescale
     - The opposite limit is applicable at large scales, where we will see the range of cooling temperatures spread out over the cooling length, such as behind a shock. This has to be treated separately. See [[id:9D7D03F7-1495-4092-BDDA-C1503882D1A1][Cooling length behind shocks]]
 - Therefore, there is a linear relation between \langle \epsilon^2 \rangle and t^2 as it is classically defined.
-  - t^2 \equiv \langle (\delta T)^2 \rangle / T_0^2 =
+  - t^2 \equiv \langle (\delta T)^2 \rangle / T_0^2 
   - t^2 = 0.13 \langle \epsilon^2 \rangle / E^2 = 0.13 \langle\epsilon^{2}\rangle/\langle\epsilon\rangle^2  (\langle\epsilon\rangle/E)^2
   - The first term comes from the kurtosis
     - We will normalize at Re_\lambda = 1e3, since that is where the lab measurements seem to be reliable, K = 15 and beyond which there is some doubt about the power law index
@@ -42,10 +53,11 @@ Notes on dissipation of energy in turbulent flows
     - So \langle\epsilon\rangle/E \approx 9.45e-3 Ma^3
   - So, t^2 = 0.13 7 (Re_\lambda / 1e3)^\beta (9.45e-3 Ma^3)^2 = 8.13e-5 (Re_\lambda / 1e3)^\beta Ma^6
     - We really want this to get up to about 0.003 or higher for the low Mach number regions, so we really need Re_\lambda to be high
+- For low-luminosity regions, we expect that photoevaporation flows are the principal driving agent of the turbulence, but for higher luminosity regions, stellar winds likely place an increasing role. Something is needed to produce the increasing velocity dispersion with luminosity.
+
 
 * Comparison of length and time scales
 This is just a summary of results that are derived in more detail elsewhere in the notes.
-
 - Proton gyroradius
   - (1.21e6 cm) \beta^{1/2} n_100^{-1/2}
 - Proton inertial length
@@ -59,13 +71,16 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - (4.8e13 cm) n_100^-1 Ma_T^-0.75 T_4^1.7 
 - Taylor microscale
   - (2.4e15 cm) n_100^-1 Ma_T^-0.5 T_4^1.4
+- Ionization front thickness
+  - (1.3e16 cm) n_100^-1
+  - Will be smaller, since convex ionization fronts at base of photoevaporation flows have higher than the average density by a factor of a few
 - Cooling length
   - (2.28e16 cm) n_100^-1
-- Ionization front thickness
 - Recombination length thickness
+  - (4.5e16 cm) T_4^0.9 n_100^-1
 - Injection scale (\approx integral scale of turbulence)
   - \approx 0.1 R_S \approx (3e18) U_0.01 T_4^0.8 n_100^-1 f^-1 
-- Stromgren radius, R_S
+- Strömgren radius, R_S
   - (3.46e19) U_0.01 T_4^0.8 n_100^-1 f^-1
 
 * Definitions
@@ -92,7 +107,7 @@ This is just a summary of results that are derived in more detail elsewhere in t
     - V = 4/3 \pi R_S^3 f
     - f is filling factor: fraction of volume occupied by dense gas (n = n_1), assuming the rest is effectively empty (n \ll n_1)
     - So Q = 4/3 \pi R_S^3 f \alpha_B n_1^2
-    - f = Q / 4/3 \pi R_S^3 \alpha_B n_1^2 = 3100 Q_51 / R_pc^3 n_100^2
+    - f = Q / 4/3 \pi R_S^3 \alpha_B n_1^2 = 3100 Q_51 / R_pc^3 n_100^2q
   - This gives alternative forms for U
     - U = (\alpha_B / 3 c) f n R
     - U = (1/c) (\alpha_B^2 / 36\pi)^(1/3) (f^2 Q n)^{1/3}
@@ -184,12 +199,23 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - Where A_shock = 𝒜_S1 4 \pi R_S^2 is the total area of the first shock fronts
   - So f_cool = 3 𝒜_S1 \lambda_cool
   - From the simulations, it looks like 𝒜_S1 \approx 1 for the strongest shocks
+** Ionization/recombination front thickness
+- For the i-front, we will use 8 times the mean free path in neutral gas at the Lyman limit
+  - \ell_ion \approx 8 / n \sigma = 8 / (100 cm^-3 6.3e-18 cm^2) = (1.3e16 cm) n_100^-1
+  - Note that just outside of the ionization front there is a neutral heating front that is much thinner (because densities there are about 10 times higher than in the ionization front)
+  - The factor of 8 is one factor of about 2 from the ionization fraction being about 0.5, and another factor of 4 or so from the mean energy of the photons being a bit more than the Lyman limit, so the cross section being smaller (especially important with hardening of the radiation at greater ionizing optical depths)
+- Recombination front thickness can be taken as velocity times recombination time, where the velocity will be of order the sound speed.
+  - \ell_rec = c_s / \alpha_B n = (1.16e6 T_4^{1/2} cm/s) / (2.6e-13 T_4^-0.8 cm^3/s) (100 n_100 cm^-3)
+  - => \ell_rec = (4.5e16 cm) T_4^0.9 n_100^-1
 ** Magnetic Prandtl number
 - Defined as ratio of viscous to magnetic diffusivity
 - Pr_m = \nu / \eta
 - Magnetic Reynolds number is related to viscous Reynolds number by Re_m = Pr_m Re
 - I think that this should be approximately equal to the ratio of the mean free path to the Larmor radius: \lambda_mfp / r_L
   - [ ] See arguments in [[id:F78DE959-A732-45AD-A86F-76C214EBEC4B][Two-dimensional turbulence]] section, but it would be good to find an explicit equation for the magnetic diffusivity
+    - The diffusivity can be derived from the resistivity, which is one of the transport coefficients derived in [[id:75B7F7D3-1B50-4414-9A4A-73C8E16661FD][Braginskii]] section
+    - In Gaussian cgs units, the diffusivity is \eta = c^2 / 4 \pi \sigma with units of cm^2/s, where \sigma is the conductivity in s^-1
+    - Note that it is confusing to have \eta as being both the magnetic diffusivity and the Kolmogorov length. 
 - Assuming that this is right, then we have
   - Pr_m \approx (1.38e10 cm) T_4^2 n_100^-1 / (1.21e6 cm) \beta^{1/2} n_100^{-1/2}
   - Pr_m \approx 1.14e4 T_4^2 \beta^{-1/2} n_100^{-1/2}
@@ -266,18 +292,58 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - 
 - So for transonic turbulence (Ma = 1), we have Re = 1.253/Kn
 ** Magnetized or not?
-- Although the low Kn means we are collisionally on the large scales, we still need to check whether the small scales are magnetic or non-magnetic
+- Although the low Kn means we are collisional on the large scales, we still need to check whether the small scales are magnetic or non-magnetic
 - In the first case, we will have important non-collisional gyro-viscosity effects that isotropise the velocity distribution without really thermalising it
 - Non-magnetic requires \Omega_i \tau_i, \Omega_e \tau_e \ll 1 where \Omega is the gyrofrequency and \tau is the collision time
   - See https://farside.ph.utexas.edu/teaching/plasma/Plasma/node53.html
 - So this is really important. I think the condition will be easily satisfied in H II regions
   - *No, not true*: the gyrofrequency is larger than the collision frequency
 - So we have a contrast in the importance of magnetic fields
-  1. They are not very important on the for the injection-scale inside the H II region, assuming the v_A is roughly constant in the ISM (as suggested from David and Sundar's work for instance), since \beta = 2 c_s^2 / v_A^2. So if v_A = 3 km/s and c_s = 10 km/s, then \beta \approx 20
+  1. They are not so very important for the injection-scale inside the H II region, assuming the v_A is roughly constant in the ISM (as suggested from David and Sundar's work for instance), since \beta = 2 c_s^2 / v_A^2. So if v_A = 3 km/s and c_s = 10 km/s, then \beta \approx 20
      - [ ] Although if there is a turbulent dynamo, then we could be generating more field inside the H II region - need to look into this
-  2. They are not important on small scales because
+  2. They *are very important on small scales* because
      - electron Larmor radius is 10^5 cm for B = 10^-4 G
-     - *but hang on*, this is much smaller than the mean free path, which is of order 1e10 cm for n_e = 100 cm^-3 and T = 10^4 K
+     - which is much smaller than the mean free path, which is of order 1e10 cm for n_e = 100 cm^-3 and T = 10^4 K
+     - [ ] We really should be comparing these for ions too
+** Collisional mean free path \lambda and collisional times \tau
+- These are important since the kinematic viscosity can be written as
+  - \chi_v = v \lambda
+  - \chi_v = v^2 \tau 
+  - I am using \chi_v instead of \nu to avoid confusion with the velocity v, since they look very similar with the font that I am using in Emacs:
+    | LATIN SMALL LETTER V         | v  |
+    | MATHEMATICAL ITALIC SMALL V  | 𝑣  |
+    | MATHEMATICAL SCRIPT SMALL V  | 𝓋 |
+    | MATHEMATICAL ITALIC SMALL NU | 𝜈  |
+    | GREEK SMALL LETTER NU        | ν  |
+- Or the dynamic viscosity can be written as
+  - \eta \approx n T \tau
+  - where T is the thermal energy per particle, T = (1/3) m \langle v^2 \rangle, so this is really k T (so that KE = 0.5 m \langle v^2 \rangle = 3/2 k T)
+  - In all the plasma physics texts, T is measured in eV (even when they are otherwise SI)
+- Going back to first principles. In the [[file:../../Documents/Ebooks/Misc-Physics-Astro/Fitzpatrick-Plasma_Physics_24_11_05_13_48_43.pdf][Fitzpatrick book]], Chapter 3 we have separate \tau for the four types of collisions
+  - \tau_ee for electron-electron collision time
+    : which is the mean time required for the direction of motion of an individual electron to deviate through approximately 90◦as a consequence of collisions with other electrons.
+  - \tau_ei for electron-ion collision time
+    : mean time required ... individual electron ... as a consequence of collisions with ions.
+  - \tau_ii for ion-ion collision time
+    : mean time required ... individual ion ... as a consequence of collisions with other ions.
+  - \tau_ie for ion-electron collision time
+    : mean time required ... individual ion ... as a consequence of collisions with electrons.
+- Relative sizes of these (small to large) is
+  - \tau_ee \sim  \tau_ei \sim (m_e/m_i)^0.5 \tau_ii \sim (m_e/m_i) \tau_ie
+    : electrons scatter electrons (through 90◦) at about the same rate that ions scatter electrons, but that ions scatter ions at a significantly lower rate than ions scatter electrons, and, finally, that electrons scatter ions at a significantly lower rate than ions scatter ions.
+  - The last must be because you need a larger number of interactions with electrons to significantly change the velocity of an ion, due to the disparity in the masses.
+- For mean free path, we have \lambda = v \tau, with v_i = (m_e/m_i)^0.5 v_e, so
+  - (v_e \tau_ee) \sim (v_e \tau_ei) \sim (m_e/m_i)^0.5 (v_e \tau_ii) \sim (m_e/m_i) (v_e \tau_ie)
+  - (v_e \tau_ee) \sim (v_e \tau_ei) \sim (v_i \tau_ii) \sim (m_e/m_i)^0.5 (v_i \tau_ie)
+  - \lambda_ee \sim \lambda_ei \sim \lambda_ii \sim (m_e/m_i)^0.5 \lambda_ie
+- Full equation in SI units (Fitzpatrick) is
+  - \tau_ee = 6√2 π^{3/2} ϵ_0^2 √m_e T^{3/2} / (ln Λ_c e^4 n_e)
+  - \tau_ii = (2 m_i/m_e)^0.5 \tau_ee
+- Numerical value in Gaussian units ([[https://en.wikipedia.org/wiki/Plasma_parameters][Wikipedia]]) is
+  - \tau_ee = (3.436e5 s) T^{3/2} / n_e ln Λ
+  - \tau_ii = (2.08e7 s) T^{3/2} / n_e ln Λ
+  - *Note that these have T in eV I think, so 11,605 K*
+  - [ ] Check the units of T in all the equations for mean free path
 ** Larmor radius and gyrofrequency
 :PROPERTIES:
 :ID:       52141FF2-4C80-4C77-9288-0B8A91EF492B
@@ -299,12 +365,15 @@ This is just a summary of results that are derived in more detail elsewhere in t
 - So for thermal particles, we can assume 0.5 m v^2 = 0.5 k T, so 
   - Electrons :: v = sqrt(k T/m_e) =  3.89e7 T_4^{1/2} cm/s
   - Protons :: v = sqrt(k T/m_p) = 9.1e5 T_4^{1/2} cm/s
+  - ratio :: electron speed is higher by a factor of sqrt(m_p/m_e) = 42
 - Gyrofrequency  is then 
   - Electrons :: 1.76e7 78.2 1e-6 = (1380 rad/s) n_100^{1/2} T_4^{1/2} / \beta^{1/2}
   - Protons :: 9.58e3 78.2 1e-6 = (0.749 rad/s) n_100^{1/2} T_4^{1/2} / \beta^{1/2}
+  - ratio :: electron gyrofrequency is higher by a factor of m_p/m_e = 1840
 - Finally we have for Larmor radius
   - Electrons :: 3.89e7 / 1380 = (2.82e4 cm) \beta^{1/2} n_100^{-1/2}
   - Protons :: 9.1e5 / 0.749 = (1.21e6 cm) \beta^{1/2} n_100^{-1/2}
+  - ratio  :: proton Larmor radius is larger by a factor of sqrt(m_p/m_e) = 42
 ** Ion inertial length
 - d_i = c / \omega_pi
   - where \omega_pi is the ion plasma frequency: \omega_pi = sqrt(4\pi n_i Z^2 e^2 / m_i) = (1.3e4 rad/s) n_100^{1/2} Z^2 A^{-1/2}
@@ -316,6 +385,9 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - So we are not in that regime
 
 ** Braginskii transport coefficients
+:PROPERTIES:
+:ID:       75B7F7D3-1B50-4414-9A4A-73C8E16661FD
+:END:
 - These are the coefficients that describe the transport of heat and momentum in a plasma, parallel and perpendicular to the local magnetic field
 - Resources:
   - https://farside.ph.utexas.edu/teaching/plasma/Plasma/node53.html
@@ -325,8 +397,27 @@ This is just a summary of results that are derived in more detail elsewhere in t
 
 *** Braginskii viscosity
 - Along the field lines this depends on the collisional mean free path
+  - electron viscosity coefficient \eta_e = 0.73 n \tau_e k T_e
+  - ion viscosity coefficient \eta_i = 0.96 n \tau_i k T_i
+  - It seems that we should only be considering the ions (quoting [[https://farside.ph.utexas.edu/teaching/plasma/Plasma/Plasmahtml.html][Richard Fitzpatrick]])
+    : For this reason, the viscosity of a plasma is determined essentially by the ions. This is not surprising, because viscosity is the diffusion of momentum, and the ions possess nearly all of the momentum in a plasma by virtue of their large masses.
+    - [-] *This means, we should revisit the Reynolds number calculation*
+  - These \eta should be of form where \nabla.\Pi_ij = \nabla.[\eta dV_i/dx_j]  are terms in the momentum equation, so with units of force per volume, or pressure gradient
+    - So \eta dV_i/dx_j has units of pressure, so \eta has units of pressure TIMES time, or (g/cm^3) (cm/s)^2 (s) = (g/cm^3) (cm^2/s)
+  - So what is relation to the kinematical viscosity \nu that I have been using (also called viscous diffusivity \chi_v)?
+    - [[https://farside.ph.utexas.edu/teaching/plasma/Plasma/node51.html#:~:text=Here,%20%20is%20the%20coefficient%20of%20viscosity,%20and%20%20is%20the%20coefficient%20of%20thermal%20conductivity.%20It%20is%20convenient%20to%20write%0A%09][Supposedly]] it is \eta = m n \chi_v (just the same as with the dynamic viscosity)
+    - And \chi_v has units of cm^2/s, so it is \eta / \rho
+    - /So this is now all consistent/
+      - The kinematic viscosity has the form \chi_v = \tau v^2 where \tau is the collision time and v is the particle velocity
+      - So this is the same as \chi_v = \lambda v since \tau = \lambda / v
 - Across the field lines, it depends on the Larmor radius
 - 
+
+*** Derivation of electrical conductivity/resistivity
+- From eq 2.7 in Braginskii 1965, we have
+  - \sigma_\perp = e^2 n_e \tau_e / m
+  but this just depends on the collisions - nothing to do with the magnetic field.
+- \tau_e = v_e / \lambda_e where v_e = sqrt(2 k T / m) is the electron thermal velocity and \lambda_e is the electron collisional mean free path
 
 ** Two-dimensional turbulence
 :PROPERTIES:
@@ -536,7 +627,52 @@ This is just a summary of results that are derived in more detail elsewhere in t
 
 ** Magnetic effects
 
+* Turbulence driving mechanisms
+
+** Photoevaporation flows
+
+** Stellar winds
+This will depend very much on the luminosity and age of the region
+
++ Low-luminosity single-star H II regions
+  + often show stellar wind bow shocks that are very small compared with the H II region Stromgren radius
+  + Examples
+    + sigma Orionis
+    + zeta Ophiuchus
+    + California Nebula
+  + This means that the majority of the H II region is unaffected by the stellar wind
++ High-luminosity massive clusters
+  - tend to have a relatively large central cavity, which is likely due to the stellar winds from the massive stars in the cluster
+  - Examples
+    - 30 Doradus
+    - Pismis 24
++ Small clusters, such as the Orion Nebula
+  + are an intermediate case with seemingly conflicting evidence
+  + X ray observations show large-scale (r \approx 2 pc) patches of hot gas that overlap much of the nebula (but not the brightest central parts)
+  + [C II] observations show a large-scale expanding neutral shell that has been interpreted as due to a wind-blown bubble
+  + Studies of absorption and emission line kinematics in the central region of the nebula suggest a much smaller wind-blown bubble
+  + Evidence from wind-wind interactions with proplyds implies a very small free-flowing supersonic wind region (r < 0.03 pc)
+  + Evidence from ionization shadows behind proplyds implies that the central low-density cavity has radius of around 0.1 pc
+  + *Reconciliation of evidence* /In the parts of the nebula with dense photoionized gas close to the ionizing stars, the stellar wind is only important very close th the stars. However, the fact that this dense gas does not have 100% covering fraction means that the wind can escape and interact with the more diffuse gas further out. This interaction can create the large-scale features seen in the X-ray and [C II] observations. The sound speed in the shocked stellar wind gas is very high compared with the other velocities in the nebula, so it can quickly adjust to changing conditions and fill in any low-density holes that it finds./
+
+** Radiation pressure
+- We should work out the ratio between the radiation acceleration and some acceleration that is characteristic of the turbulence.
+- It seems that the small scale structure of the acceleration is very interesting, with a kurtosis that is even higher than that of the velocity gradients, even for relatively low Reynolds numbers.
+  - See Liberzon et al 2012
+- But we really want the acceleration at the driving scale, which we can write as a_turb \approx dV/dt = V dV/dr \approx V^2 / \ell_in, where \ell_in is the driving scale.
+  - So a_turb \approx Ma^2 c_s^2 / \ell_in, where c_s is the sound speed.
+- The radiative acceleration can be written as a_rad = P_rad \sigma' / m_p, where \sigma is the effective cross section per proton and P_rad = L_* / (4 \pi r^2 c) is the radiation pressure.
+  - For the ionizing radiation pressure on hydrogen, we have \sigma' \approx (1 - x) \sigma, where x is the ionization fraction, but it is best to use ionization equilibrium to rewrite in terms of the recombination rate:
+    - \alpha_B n^2 x^2 = F (1 - x) \sigma n = Q (1 - x) \sigma n / 4\pi r^2
+    - so (1 - x) \sigma = \alpha_B n 4\pi r^2 / Q assuming x \approx 1
+    - so a_rad = L_* \alpha_B n / Q c m_p
+    - where we have severa ways of writing L_*/Q in [[id:EE3830D5-75C8-41DE-AFA1-0B9130776009][Relationship between ionization parameter U and radiation parameter \Xi]]
+** Gravity
+
 * Turbulent dissipation rate
++ The mean dissipation rate is set by the energy injection at the driving scale or scales, which means that it is unaffected by anything going on with the turbulence
++ However, for turbulent motions on timescales shorter than the cooling time, the contribution to the temperature fluctuations t^2 depends on the /variance/ of the dissipation rate Var(\epsilon) = \langle \epsilon^2 \rangle - \langle \epsilon \rangle^2, which in turn depends on the Kurtosis of the velocity gradients. And this *does* depend on details of the turbulent cascade.
++ 
 
 ** Relevant papers
 
@@ -577,7 +713,7 @@ Some of these may warrant their own dedicated sections.
 - D. A. Donzis and J. P. John, /Universality and scaling in homogeneous compressible turbulence/, Phys. Rev. Fluids 5, 084609 (2020). Cited by Chen
 - K. Yamamoto, T. Ishida, T. Watanabe, and K. Naga ta, /Experimental and numerical investigation of compressibility effects on velocity derivative flatness in turbulence/, Phys. Fluids 34, 055101 (2022). Cited by Chen. Finds that *flatness increases with Mach number*, which is just what we need to increase the temperature fluctuation. Now has its [[id:A8E809DE-57D1-4A22-ADD1-9A40A0CE25EB][own section]]
 
-*** Yamamoto et al. 2022                          :experiment:dns:kurtosis:scaling:mach:
+*** Yamamoto et al. 2022                          :experiment:DNS:kurtosis:scaling:mach:
 :PROPERTIES:
 :ID:       A8E809DE-57D1-4A22-ADD1-9A40A0CE25EB
 :END:
@@ -610,7 +746,7 @@ They are mainly interested in investigating whether the universality hypothesis 
   - The incompressible equation would give F = 14, although their data have about 8
   - So this is a modest increase of about 2, even at such a low Mach number
 - They point out that the conditions of the driving seem to have an effect on the scaling of flatness with turbulent Mach number, with the deviations from the incompressible case starting at smaller M_T when the turbulence is caused by a faster flow, such as jets. 
-*** Johnson & Wilczek 2023                        :vgt:
+*** Johnson & Wilczek 2023                        :VGT:
 :PROPERTIES:
 :ATTACH_DIR: /Users/will/Dropbox/turb-t2-paper/notes/turbulent-dissipation_att
 :ID:       935028F2-A5A8-4890-8367-E49AE5AB4284
@@ -635,7 +771,7 @@ Averaged over volume of a homogeneous flow, both Q and R are zero (because can b
 Large positive Q means high enstrophy, which occurs in localised structures, associated with slight negative R. /I had thought these might be vortex tubes, but based on Thacker et al 2023, they might be sheets/
 
 Large negative Q means high squared strain, which seems to be localised around the borders of the high-enstrophy structures, associated with large positive R. This is where the dissipation is happening. It is an attractor in the phase space of the VGT. Meaning that fluid elements from a variety of initial conditions tend to evolve towards it. /Actually, this is misleading. I had been looking at streamlines of the restricted Euler system, which neglects the viscosity and non-local pressure effects. When those are included, then the phase space trajectories are loops in the Q-R plane. See Baj 2024/
-*** Sakurai et al 2023                            :dns:scaling:epsilon:mach:
+*** Sakurai et al 2023                            :DNS:scaling:epsilon:mach:
 Title: /Direct numerical simulations of compressible isothermal turbulence in a periodic box: Reynolds number and resolution-level dependence/
 
 PHYSICAL REVIEW FLUIDS 8, 084606 (2023)
@@ -650,7 +786,7 @@ They find that the dilatational Mach number is more important than the total tur
 Title: /Does dissipative anomaly hold for compressible turbulence?/
 
 Dissipative anomaly is just the fact that \langle\epsilon\rangle remains finite as the viscosity goes to zero. Unfortunately they do not look at higher order statistics, such as \langle \epsilon^2 \rangle
-*** Li et a 2024                                  :epsilon:mhd:mach:
+*** Li et a 2024                                  :epsilon:MHD:mach:
 Title: /Non-universality and dissipative anomaly in compressible magnetohydrodynamic turbulence/
 
 Like the previous paper, but for MHD turbulence.
@@ -673,7 +809,7 @@ Isothermal fluctuations. They do have interesting things to say about what sort 
 
 : Within a Kovásznay-type modal picture, the slow magnetosonic mode seems the most plausible source of the observed density fluctuations. However, in our nonlinear theory, there is no cooling catastrophe in the first place. Large-scale cooling adds excess negentropy (deficiency of entropy) that feeds the cascade of negentropy to small scales. See Eq. (107). This necessitates “rough” density and temperature fields with Kolmogorov-type spectra. In our view, the cooling catastrophe is an artifact of attempting to describe nonlinear compressible MHD turbulence in terms of linear wave modes. There is no sound theoretical basis for such a decomposition and, unsurprisingly, the Kovásznay mode- mode interactions lead to empirically wrong predictions for the problem [167].
 
-*** Baj 2024                                      :dns:vgt:
+*** Baj 2024                                      :DNS:VGT:
 Title: /The topology-conditioned turbulence kinetic energy budget/
 
 Analyses experiments and DNS simulations with Re_\lambda of 200 to 400.
@@ -707,7 +843,10 @@ They have an alternative way of specifying the Taylor microscale:
 
   
 
-*** Park & Ryu 2019                               :shocks:mhd:epsilon:mach:
+*** Park & Ryu 2019                               :shocks:MHD:epsilon:mach:
+:PROPERTIES:
+:ID:       0A896555-5AFF-4E9E-B82D-1743C1D8EC46
+:END:
 Title: /Shock Waves and Energy Dissipation in Magnetohydrodynamic Turbulence/
 
 Simulations of isothermal mhd turbulence with a variety of \beta values and Mach numbers. They include \beta_0 = 10, which is relevant to H II regions. The final \beta is lower (due to turbulent dynamo I guess), ranging from \beta \approx 5 (M_turb = 0.5) to \beta \approx 1 (M_turb = 2).
@@ -720,7 +859,7 @@ They look at the statistics of the energy dissipation in fast mode and slow mode
 Or M_turb = 0.5-1 the majority of the shock energy dissipation occurs in fast-mode shocks with M_s = 1 to 2. 
 
 
-*** Richard et al 2022                            :dns:mhd:ohm:mach:
+*** Richard et al 2022                            :DNS:MHD:ohm:mach:
 Title: /Probing the nature of dissipation in compressible MHD turbulence/
 
 Looks at statistics of intense dissipation structures in decaying isothermal MHD turbulence.
@@ -743,7 +882,7 @@ Unfortunately, their plasma parameters are pretty far from hii region case:
 When P_m increases, they find that the Ohmic dissipation decreases relative to the viscous dissipation. This happens over all four types of dissipation structures. However, they do not cover the case of very high P_m, where there should be further magnetic-kinetic turbulent cascades within their viscous dissipation structures.
 
 
-*** Cho & Lazarian 2003                           :mhd:iles:cascade:intermittency:scaling:
+*** Cho & Lazarian 2003                           :MHD:ILES:cascade:intermittency:scaling:
 Title: /Compressible Magnetohydrodynamic Turbulence: Mode Coupling, Scaling Relations, Anisotropy, Eddy Energetics, and Intermittency/
 
 Has direct simulations of compressible MHD turbulence in a box, with a variety of sonic and Alfvenic Mach numbers. They include low-beta and high-beta cases (the latter are more relevant to us, since we expect the magnetic pressure to be sub-dominant in H II regions).
@@ -755,7 +894,7 @@ They mention that even in high-beta plasmas (magnetic pressure unimportant at th
 
 
 
-*** Goldreich & Sridhar 1995                      :theory:cascade:mhd:
+*** Goldreich & Sridhar 1995                      :theory:cascade:MHD:
 Title: /Toward a theory of interstellar turbulence. 2: Strong Alfvenic turbulence/
 
 This is still in the incompressible regime, but builds on a previous paper, which treated weak Alfven turbulence.
@@ -763,7 +902,7 @@ This is still in the incompressible regime, but builds on a previous paper, whic
 They find that "eddies" (scare quotes are theirs) are elongated along the magnetic fields lines, increasingly so at smaller scales:
 - k_z / k_\perp = (L k_\perp)^{-1/3}
 
-*** Lithwick & Goldreich 2001                     :mhd:cascade:theory:
+*** Lithwick & Goldreich 2001                     :MHD:cascade:theory:
 Title: /COMPRESSIBLE MAGNETOHYDRODYNAMIC TURBULENCE IN INTERSTELLAR PLASMAS/
 This paper is referred to a lot in the Cho & Lazarian paper.
 
@@ -809,7 +948,7 @@ I think the answer might be given in the [[id:38E70922-87BD-4127-8A02-010B76484E
 That is interesting that the density fluctuations are proportional to M^2, and so are steeper than the velocity fluctuations. Remember that this is in the incompressible regime.
 
 I think that these "entropy fluctuations" from the dissipation of turbulent kinetic energy are different from the entropy mode mentioned above, and these would still be present in the isothermal case. 
-*** Goldreich & Sridhar 2006                      :mhd:density:fluctuations:
+*** Goldreich & Sridhar 2006                      :MHD:density:fluctuations:
 Title: /FOLDED FIELDS AS THE SOURCE OF EXTREME RADIO-WAVE SCATTERING IN THE GALACTIC CENTER/
 
 This paper is the first to walk back the idea that pulsar scintillation requires large-amplitude density fluctuations at very small scales in the ISM. Instead the propose folded magnetic sheets, an idea that is developed much more fully by Ue-Li Pen.
@@ -828,7 +967,10 @@ Abstract
 Contains a useful discussion of different regimes of collisional and non-collisional plasmas, with lots of references.
 
 This is more relevant to the shocked stellar wind bubbles in H II regions, rather than the H II region itself (which is collisional). 
-*** Beattie et al. 2024                           :iles:mhd:mach:dynamo:cascade:
+*** Beattie et al. 2024                           :ILES:MHD:mach:dynamo:cascade:
+:PROPERTIES:
+:ID:       33F6C3BC-9457-4F79-9F04-073AA21752AA
+:END:
 Title: /Magnetized compressible turbulence with a fluctuation dynamo and Reynolds numbers over a million/
 
 Has a 10080^3 supersonic MHD simulation (M = 4).
