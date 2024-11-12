@@ -308,3 +308,4 @@ TSWLatexianTemp*
 /notes/.DS_Store
 /paper/figs/kb512-ke-diss-multipanel.afdesign~lock~
 /.ipynb_checkpoints/
+*.pyc
