@@ -344,6 +344,10 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - \tau_ii = (2.08e7 s) T^{3/2} / n_e ln Λ
   - *Note that these have T in eV I think, so 11,605 K*
   - [ ] Check the units of T in all the equations for mean free path
+*** Numerical values of the collisional timescales
+- For a third opinion I take Geoffrey Pert 2021 /Foundations of Plasma Physics for Physicists and Mathematicians/ ([[file:../../Documents/Ebooks/Misc-Physics-Astro/Foundations of Plasma Physics for Physicists and Mathematicians - 2021 - Pert.pdf][local PDF]])
+- 
+
 ** Larmor radius and gyrofrequency
 :PROPERTIES:
 :ID:       52141FF2-4C80-4C77-9288-0B8A91EF492B

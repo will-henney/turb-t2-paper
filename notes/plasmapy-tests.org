@@ -1,0 +1,3 @@
+* Trying out plasmapy for calculating plasma parameters
+
+
