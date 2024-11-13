@@ -291,6 +291,10 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - For isothermal Mach number, it is Kn = sqrt(pi/2) Ma/Re = 1.253 Ma/Re
   - 
 - So for transonic turbulence (Ma = 1), we have Re = 1.253/Kn
+** Hall parameter, x = \omega_c \tau
+- Product of cyclotron frequency and collision time
+- [ ] How is this related to the magnetic Prandtl number?
+- [ ] And how is it related to the ratio of parallel to perpendicular viscosity?
 ** Magnetized or not?
 - Although the low Kn means we are collisional on the large scales, we still need to check whether the small scales are magnetic or non-magnetic
 - In the first case, we will have important non-collisional gyro-viscosity effects that isotropise the velocity distribution without really thermalising it
