@@ -600,6 +600,23 @@ This is just a summary of results that are derived in more detail elsewhere in t
 - But in our case, we have much more ions than neutrals, so the first thing that will happen is that the ions are liberated from the collisions with neutrals, but that was never important for them anyway, so it will make no difference
   - The neutrals will still be feeling the effect of the ions, right down to the final scale where they completely decouple
   - So I don't think this is going to do anything for highly ionized regions
+
+** Field length
+- This is also mainly relevant to neutral media, where there is a thermal bistability
+- It expresses the effect of heat conduction in smoothing out temperature gradients, such that thermal instability is suppressed below this length scale
+- But in H II regions, we do not really have thermal instability because of the strong heating/cooling
+- Perhaps, there still might be an analogous length scale, where heat conduction would smooth out turbulent temperature fluctuations
+- The best paper on it seems to be Begelman & McKee (1990):
+  - Compare radiative heating (or cooling) per unit volume, \epsilon, with conduction per unit volume, \kappa T / r^2
+  - The critical length scale is then
+    - r \equiv \lambda_F = (\kappa T / \epsilon)^{1/2}
+  - Where they give conduction coefficient as
+    - \kappa = 5.6e-7 \phi_c T^{5/2} erg cm^{-1} s^{-1} K^{-1}
+    - with \phi_c being a correction factor for magnetic fields!!!!
+  - We could substitute the turbulent heating rate for the radiative one
+    - Background rate will be low: \langle\epsilon\rangle = Ma^3 c_s^3 / \ell_in
+    - But maximum rate will be higher, perhaps \epsilon_max = (\ell_in / \lambda_g) \langle\epsilon\rangle
+
 ** Taylor microscale, \lambda
 :PROPERTIES:
 :ID:       C90FB294-372E-4E30-B5EB-4174476DA5AF
