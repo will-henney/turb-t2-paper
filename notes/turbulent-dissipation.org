@@ -237,11 +237,13 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - Pope uses the definition L \equiv k^{3/2} / \epsilon, where \epsilon is the turbulent energy transfer rate, but that will be circular unless we have an independent way of determining \epsilon. It can also be defined as the integral of the velocity autocorrelation function, which is about two times larger than the correlation length found from our structure functions.
 - \nu is the kinematic viscosity
   - \nu = \lambda_mfp u_therm
-  - for electrons u_therm \approx 550 T_4^{1/2} km/s \approx (m_p/m_e)^{1/2} c_s
-  - \lambda_mfp \approx 2.625e5 T_e^2 n_e^-1 (ln \Lambda)^-1 cm
-    - ln \Lambda = 9.452 + 1.5 ln T_e - 0.5 ln n_e \approx 19
+  - for ions u_therm \approx 12.85 T_4^{1/2} km/s \approx c_s
+    - electrons do not contribute significantly to the viscosity
+  - \lambda_mfp \approx 5.55e9 T_4^2 n_100^-1 (20 / ln \Lambda) cm
+    - ln \Lambda = 9.452 + 1.5 ln T_e - 0.5 ln n_e \approx 20
     - \lambda_mfp \approx 1.38e12 T_4^2 n_e^-1 cm
-  - Which gives \nu = 7.59e19 cm^2/s T_4^{5/2} n_e^-1
+  - Which gives \nu = 6.4e15 cm^2/s T_4^{5/2} n_100^-1
+  - *This is the new value calculated from PlasmaPy*
   - *This will only be the viscosity parallel to the magnetic field* - the perpendicular viscosity will be much smaller, with the collisional mean free path replaced by the gyroradius - the ion gyroradius, since this the perpendicular ion viscosity is larger than for electrons
 - Estimate of Re_L for an hii region
   - Put L in parsec, and n_e in cm^-3
@@ -249,27 +251,30 @@ This is just a summary of results that are derived in more detail elsewhere in t
     - m / m_p \approx (1 + 4 y_He) / (2 + 2 y_He) \approx 0.61 if He is singly ionized with y_He = 0.08
     - c_s = 1.16e6 T_4^{1/2} cm/s
   - So characteristic speed is u = Ma_T c_s / sqrt(2) = 8.23e5 Ma_T T_4^{1/2} cm/s
-  - So u L / \nu = 3.3458e4 Ma_T L_pc T_4^{-2} n_e
-  - This is disappointingly smaller than what I had previously imagined, but it still gives more than 1e6 for n_100 L_pc = 1
+    - [ ] *where does this sqrt(2) come from?*
+  - So u L / \nu = 3.97e8 Ma_T L_pc T_4^{-2} n_100
+    - /Old version was u L / \nu = 3.3458e4 Ma_T L_pc T_4^{-2} n_e, so we are now 100 times larger/
+  - This now gives more than 1e8 for n_100 L_pc = 1
   - Put it in terms of the ionization parameter
     - Assume that U = 0.01 is typical for H II regions
     - From [[id:2227F4EC-2A33-4F3C-8645-CEC8FFD688F6][above]] we have U_0.01 = 0.0892 f n_100 R_pc T_4^-0.8
       - => n_100 R_pc = 11.21 U_0.01 T_4^0.8 f^-1
     - Furthermore identify L with the injection scale, which we can put as a fraction \lambda_in of the Strömgren radius, so L_pc = \lambda_in R_pc
-    - Re_L = 3.3458e6 Ma_T \lambda_in T_4^{-2} n_100 R_pc
-    - *Final form* => Re_L = 3.75e7 Ma_T \lambda_in T_4^{-1.2} U_0.01 f^-1
+    - Re_L = 3.97e8 Ma_T \lambda_in T_4^{-2} n_100 R_pc
+    - *Final form* => Re_L = 4.45e9 Ma_T \lambda_in T_4^{-1.2} U_0.01 f^-1
     - From the Javier paper we find \lambda_in \approx 0.1 and Ma_T = 0.5 to 2.5
     - f depends on the density fluctuations (see [[id:20000488-8351-451C-AEC8-06C4B75C1F86][Filling factor]]) but should be between 0.25 and 0.5 unless hot gas fills the volume and pushes all the photoionized gas into a very thin shell
       - Note that it was not necessarily a good idea to filter out the brightness fluctuations on scales smaller than the velocity correlation length, since we would then be missing the thin layers produced by the turbulence
       - Not too that if f were very small, this would also reduce the ionization parameter (for fixed density and luminosity), so that U/f is unlikely to vary very much
     - Taking \lambda_in = 0.1, T_4 = 1, Ma_T = 1, U_0.01 = 1, and f = 0.5, we get
-      - *Typical integral scale Reynolds number:* Re_L = 7.5e6 
+      - *Typical integral scale Reynolds number:* Re_L = 8.9e8
+      - Or in round numbers 1e9
    
 *** Taylor scale Reynolds number R_\lambda
 - See [[id:C90FB294-372E-4E30-B5EB-4174476DA5AF][Taylor microscale, \lambda]] for details, especially [[id:8AC1C61A-72A3-47A8-ACDA-1BB8FB643846][Detailed argument from Pope, p. 198 et seq]]
 - R_\lambda \equiv u' \lambda_g / \nu = sqrt(20/3) Re_L^{1/2}
-- => R_\lambda = 15800 Ma_T^0.5 \lambda_in^0.5 T_4^{-0.6} U_0.01^0.5 f^-0.5
-- Or using the "standard" values for the minor parameters (as with Re_L), we get R_\lambda = 15800 sqrt(0.1 / 0.5) = 7100, so of order 1e4
+- => R_\lambda = 172,000 Ma_T^0.5 \lambda_in^0.5 T_4^{-0.6} U_0.01^0.5 f^-0.5
+- Or using the "standard" values for the minor parameters (as with Re_L), we get R_\lambda = 172000 sqrt(0.1 / 0.5) = 7.7e4, so of order 1e5
 *** Earlier incorrect calculation
 - From the calculation in [[id:FDD9A1A6-53E0-4220-AF9E-3EBB899CEF95][Knudsen number, Kn]] we find typically Re = 1e14 for H II regions
   - Very big!
@@ -292,6 +297,9 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - 
 - So for transonic turbulence (Ma = 1), we have Re = 1.253/Kn
 ** Hall parameter, x = \omega_c \tau
+:PROPERTIES:
+:ID:       B48AD4D9-2F87-4940-970B-F9B3AAEEA081
+:END:
 - Product of cyclotron frequency and collision time
 - [ ] How is this related to the magnetic Prandtl number?
 - [ ] And how is it related to the ratio of parallel to perpendicular viscosity?
@@ -309,7 +317,11 @@ This is just a summary of results that are derived in more detail elsewhere in t
      - electron Larmor radius is 10^5 cm for B = 10^-4 G
      - which is much smaller than the mean free path, which is of order 1e10 cm for n_e = 100 cm^-3 and T = 10^4 K
      - [ ] We really should be comparing these for ions too
-** Collisional mean free path \lambda and collisional times \tau
+** TODO Collisional mean free path \lambda and collisional times \tau
+:LOGBOOK:
+- Note taken on [2024-11-19 Tue 10:46] \\
+  Trying to finish this off, so I can get back to the Reynolds number
+:END:
 - These are important since the kinematic viscosity can be written as
   - \chi_v = v \lambda
   - \chi_v = v^2 \tau 
@@ -349,9 +361,71 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - *Note that these have T in eV I think, so 11,605 K*
   - [ ] Check the units of T in all the equations for mean free path
 *** Numerical values of the collisional timescales
+- Actually, I will use plasmapy instead, since that is possibly more reliable
+  - Ion collision time is given by
+    - \tau_{ii} = (3055 s) T_4^{3/2} / n_100
+    - This is the based on the Lorentz frequency
+    - Slow variation of Coulomb logarithm is suppressed (it is about 20)
+  - Mean free path is given by
+    - \lambda_{ii} = (5.55e9 cm) T_4^2^{} / n_100
+   
 - For a third opinion I take Geoffrey Pert 2021 /Foundations of Plasma Physics for Physicists and Mathematicians/ ([[file:../../Documents/Ebooks/Misc-Physics-Astro/Foundations of Plasma Physics for Physicists and Mathematicians - 2021 - Pert.pdf][local PDF]])
-- 
+  - 
+- Interesting quote from that text (sec 2.2, p. 21)
+  #+begin_example
+    In addition to playing the dominant role limiting collisional
+    transport effects, through the particle drag force, there are several
+    other related relaxation times Eg. (2.A.8) associated with momentum
+    transfer between particles
 
+    • Electron-electron collisions determine the time taken for the
+      electron distribution to relax to a Maxwellian - \tau_ee (see Section
+      7.5).
+
+    • Electron-ion collisions are the dominant terms determining
+      electrical conductivity and other transport coefficients - \tau_ei
+
+    • Ion-ion collisions determine the time taken for the ion distribution
+      to relax to a Maxwellian - \tau_ii
+
+    • Ion-electron collisions are relatively inefficient at transferring
+      momentum for the ions to the electrons due to the large mass ratio
+      but play a role in magnetised plasma - \tau_ie
+
+    • Electron-ion energy exchange time. The time taken for an electron
+      and ion distribution at different temperatures to reach thermal
+      equilibrium - \tau_eq ~ ½ \tau_ie (Eg. (7.59)).
+  #+end_example
+** Tensor diffusivity and viscosity
+*** Version from Pert
+- Scalar Diffusion coefficient is D_0 = (1/3) \langle v^2 \tau \rangle = \tau k T / m = (1/3) \langle v \lambda(v) \rangle
+  - Section 2.2.1 /Random Walk Model for Transport Effects/
+  - Viscosity is just diffusion of momentum
+  - It is treated in a unified framework along with heat conduction and electrical conduction
+  - This requires the gradient to be small over the mean free path: \lambda |\nabla X| \ll X, where X will be velocity in the case of viscosity. This is easily satisfied for our case, since |\nabla v| \approx v / \lambda_T (Taylor microscale)
+- Tensor version multiplies this by
+  | \perp  | \wedge |  0 |
+  | -\wedge | \perp |  0 |
+  | 0   | 0  | \parallel |
+- Where \parallel is along B (z axis) and \perp is along x axis with E in the xz plane. Then \wedge is along E \wedge B (y axis)
+- The components are
+  - \parallel : 1
+  - \perp : (1 + \Omega^2 \tau^2)^-1 \approx 1 / \Omega^2 \tau^2
+  - \wedge : -\Omega \tau (1 + \Omega^2 \tau^2)^-1 \approx -1 / \Omega \tau
+- Where the last results are for \Omega \tau >> 1, which is what we have
+  - \Omega is the gyrofrequency and \tau is the collision time
+  - So this is the [[id:B48AD4D9-2F87-4940-970B-F9B3AAEEA081][Hall parameter]], which we estimate as being 1000 or so
+*** Version from Braginskii
+- As in Hunana et al. 2022, Appendix J
+- Also Ji & Held 2013
+
+  
+*** Bohm Diffusion
+- This is an anomalous diffusion perpendicular to the magnetic field lines
+  - Possibly turbulence-induced
+- [[https://en.wikipedia.org/wiki/Bohm_diffusion][Wikipedia description]]
+- Pert book says that this is of only historical interest now
+- 
 ** Larmor radius and gyrofrequency
 :PROPERTIES:
 :ID:       52141FF2-4C80-4C77-9288-0B8A91EF492B
