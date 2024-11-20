@@ -665,18 +665,18 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - \eta / L = Re_L^{-3/4}
   - See [[id:8AC1C61A-72A3-47A8-ACDA-1BB8FB643846][Detailed argument from Pope, p. 198 et seq]] in the Taylor microscale section for more details
 - In [[id:ED1F0BA1-549F-4117-92EA-9CCEF82DBBB5][Reynolds number, Re]] we find
-  - Re_L = 3.75e7 Ma_T \lambda_in T_4^{-1.2} U_0.01 f^-1
-  - With typical value of Re_L \approx 7.5e6
-- So this would give \eta / L \approx 2e-6
+  - Re_L = 4.45e9 Ma_T \lambda_in T_4^{-1.2} U_0.01 f^-1
+  - With typical value of Re_L \approx 8.9e8
+- So this would give \eta / L \approx 2e-7
 - For a fixed ionization parameter we can use
   - U = 8.92e-4 f n_100 R_pc T_4^-0.8 from [[id:2227F4EC-2A33-4F3C-8645-CEC8FFD688F6][Ionization parameter]]
   - => R_pc = 11.2 U_0.01 T_4^0.8 n_100^-1 f^-1
   - Then, with L = \lambda_in R_S = 3.456e19 \lambda_in U_0.01 T_4^0.8 n_100^-1 f^-1
-  - We get \eta = (3.456e19 cm) \lambda_in U_0.01 T_4^0.8 n_100^-1 f^-1 (3.75e7 Ma_T \lambda_in T_4^{-1.2} U_0.01 f^-1)^{-3/4}
-  - => \eta = (7.2e13 cm) \lambda_in^0.25 U_0.01^0.25 T_4^1.7 n_100^-1 f^-0.25 Ma_T^-0.75
+  - We get \eta = (3.456e19 cm) \lambda_in U_0.01 T_4^0.8 n_100^-1 f^-1 (4.45e9 Ma_T \lambda_in T_4^{-1.2} U_0.01 f^-1)^{-3/4}
+  - => \eta = (2.0e12 cm) \lambda_in^0.25 U_0.01^0.25 T_4^1.7 n_100^-1 f^-0.25 Ma_T^-0.75
 - We can suppress weak dependence on minor parameters and put
   - (\lambda_in U_0.01 / f)^0.25 \approx (0.1 1 / 0.5)^0.25 = 0.67
-  - => \eta = (4.8e13 cm) T_4^1.7 n_100^-1 Ma_T^-0.75
+  - => \eta = (1.3e12 cm) T_4^1.7 n_100^-1 Ma_T^-0.75
 - Remember, that this dissipation only effects motions along the field lines
   - [ ] In principal, we can find a magnetic dissipation scale \eta_m for motions perpendicular to the field lines, which will be smaller
 
