@@ -63,14 +63,16 @@ This is just a summary of results that are derived in more detail elsewhere in t
 - Proton inertial length
   - (2.27e6 cm) n_100^{-1/2}
   - below this scale, the electrons and protons decouple (electron gyroradius is 42 times smaller)
-- Collisional mean free path
+- [[id:9ECA85AD-1B0A-40D9-971A-72531460246D][Collisional mean free path]]
+  - Proton-proton: (5.55e9 cm) T_4^2^{} n_100^-1
+    - This is what is important for viscosity, see [[id:1CEB88E3-F198-40E4-846B-52BD0476B410][Fitzpatrick quote]]
   - Electron-electron: (1.38e10 cm) T_4^2 n_100^-1
 - Ion-neutral collision scale
   - Turns out to be unimportant if more than half ionized
-- Kolmogorov viscous dissipation scale, \eta
-  - (4.8e13 cm) n_100^-1 Ma_T^-0.75 T_4^1.7 
-- Taylor microscale
-  - (2.4e15 cm) n_100^-1 Ma_T^-0.5 T_4^1.4
+- [[id:3B01716E-7C2C-4B5C-BDD8-6D1B60B8A31D][Kolmogorov viscous dissipation scale, \eta]]
+  - (1.3e12 cm) n_100^-1 Ma_T^-0.75 T_4^1.7 
+- [[id:C43B3E7E-4CCD-44EF-BC1A-C07628CC1D86][Taylor microscale]]
+  - (2.2e14 cm) n_100^-1 Ma_T^-0.5 T_4^1.4
 - Ionization front thickness
   - (1.3e16 cm) n_100^-1
   - Will be smaller, since convex ionization fronts at base of photoevaporation flows have higher than the average density by a factor of a few
@@ -82,6 +84,14 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - \approx 0.1 R_S \approx (3e18) U_0.01 T_4^0.8 n_100^-1 f^-1 
 - Strömgren radius, R_S
   - (3.46e19) U_0.01 T_4^0.8 n_100^-1 f^-1
+
+* Dimensionless plasma parameters for H II regions
+- Knudsen number, Kn
+- Mach number, Ma
+- Reynolds number, Re
+- Plasma beta, \beta
+- Hall parameter, x
+  - Magnetic Prandtl number, Pr_m
 
 * Definitions
 ** Ionization parameter
@@ -360,7 +370,10 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - \tau_ii = (2.08e7 s) T^{3/2} / n_e ln Λ
   - *Note that these have T in eV I think, so 11,605 K*
   - [ ] Check the units of T in all the equations for mean free path
-*** Numerical values of the collisional timescales
+*** Numerical values of the collisional timescales and mean free paths
+:PROPERTIES:
+:ID:       9ECA85AD-1B0A-40D9-971A-72531460246D
+:END:
 - Actually, I will use plasmapy instead, since that is possibly more reliable
   - Ion collision time is given by
     - \tau_{ii} = (3055 s) T_4^{3/2} / n_100
@@ -425,7 +438,13 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - Possibly turbulence-induced
 - [[https://en.wikipedia.org/wiki/Bohm_diffusion][Wikipedia description]]
 - Pert book says that this is of only historical interest now
-- 
+- Possibly related to something that cosmic ray literature talks about
+  - Bohm limit is when /parallel/ mean-free-path equals Larmor radius
+  - Apparently, not satisfied according to numerical simulations (see Hussein & Shalchi 2014)
+  - Instead it should be \lambda_\parallel \approx r_L (B_0 / \delta B), where \delta B is the fluctuation in the field and B_0 is the mean field strength
+  - Note that the entire range of \delta B / B_0 = 0.01 (weak turbulence) to 100 (strong turbulence) is studied
+  - For strong turbulence,  \lambda_\perp \approx  \lambda_\parallel, but for weak turbulence it is more complicated
+  - Of course, it is unclear how any of this will relate to diffusion of much slower thermal particles, like what we are interested in
 ** Larmor radius and gyrofrequency
 :PROPERTIES:
 :ID:       52141FF2-4C80-4C77-9288-0B8A91EF492B
@@ -478,6 +497,9 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - S. I. Braginskii's original 1965 monograph /Transport Processes in Plasma/ Braginskii:1965a
 
 *** Braginskii viscosity
+:PROPERTIES:
+:ID:       1CEB88E3-F198-40E4-846B-52BD0476B410
+:END:
 - Along the field lines this depends on the collisional mean free path
   - electron viscosity coefficient \eta_e = 0.73 n \tau_e k T_e
   - ion viscosity coefficient \eta_i = 0.96 n \tau_i k T_i
@@ -647,11 +669,14 @@ This is just a summary of results that are derived in more detail elsewhere in t
     - And that the RMS velocity gradient is given by u'/\lambda_g (see my comment on (4))
      
 *** Numerical value of \lambda_g in H II regions
+:PROPERTIES:
+:ID:       C43B3E7E-4CCD-44EF-BC1A-C07628CC1D86
+:END:
 - \lambda_g = sqrt(10) \eta^{2/3} L^{1/3} from [[id:8AC1C61A-72A3-47A8-ACDA-1BB8FB643846][Detailed argument from Pope, p. 198 et seq]]
-  - \eta = (4.8e13 cm) n_100^-1 Ma_T^-0.75 T_4^1.7
+  - \eta = (1.3e12 cm) n_100^-1 Ma_T^-0.75 T_4^1.7
   - L = (6e18 cm) T_4^0.8 n_100^-1
   - Both assuming f = 0.5, \lambda_in = 0.1, U_0.01 = 1
-  - => \lambda_g = (2.4e15 cm) n_100^-1 Ma_T^-0.5 T_4^1.4
+  - => \lambda_g = (2.2e14 cm) n_100^-1 Ma_T^-0.5 T_4^1.4
 
 ** Kolmogorov scale, \eta
 :PROPERTIES:
