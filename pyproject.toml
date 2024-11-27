@@ -7,8 +7,14 @@ requires-python = ">=3.12"
 dependencies = [
     "hii-utils",
     "jupyter>=1.1.1",
+    "numpy>=2.1.3",
     "plasmapy>=2024.10.0",
+    "pyneb>=1.1.21",
+    "seaborn>=0.13.2",
 ]
+
+[tool.uv]
+no-build-isolation-package = ["pyneb"]
 
 [tool.uv.workspace]
 members = ["hii-utils"]

@@ -80,7 +80,7 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - In reality, this will be a bit smaller, since convex ionization fronts at base of photoevaporation flows have higher than the average density by a factor of a few
 - [[id:9D7D03F7-1495-4092-BDDA-C1503882D1A1][Cooling length]]
   - (2.28e16 cm) n_100^-1
-- [[id:48C81B2E-5D94-4BEB-9102-51F17EA2B6EA][Recombination length thickness]]
+- [[id:48C81B2E-5D94-4BEB-9102-51F17EA2B6EA][Recombination front thickness]]
   - (4.5e16 cm) T_4^0.9 n_100^-1
 - Injection scale (\approx integral scale of turbulence)
   - \approx 0.1 R_S \approx (3e18) U_0.01 T_4^0.8 n_100^-1 f^-1 
@@ -246,11 +246,20 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - From [[id:ED1F0BA1-549F-4117-92EA-9CCEF82DBBB5][Reynolds number, Re]] we have n_100 R_pc = 11.21 U_0.01 T_4^0.8 f^-1
   - So \lambda_cool \equiv d_cool/R_S = 0.00066 U_0.01^-1 T_4^-0.8 f
   - So a simulation with 10,000^3 cells would be able to resolve the cooling. /This is actually feasible using adaptive mesh refinement/.
-- [ ] We can use the previous result to estimate the /fraction of the volume occupied by cooling gas/ and hence *the t^2 contribution from the first shock*
-  - Volume fraction is f_cool = d_cool A_S1 / (4/3 \pi R_S^3)
+- [X] We can use the previous result to estimate the /fraction of the volume occupied by cooling gas/ and hence *the t^2 contribution from the first shock*
+  - Volume fraction is f_cool = d_cool A_S1 / (4/3 \pi R_S^3 f)
+    - Where we have a factor of f in the denominator, since we are only interested in the dense gas that is producing the emission
   - Where A_shock = 𝒜_S1 4 \pi R_S^2 is the total area of the first shock fronts
-  - So f_cool = 3 𝒜_S1 \lambda_cool
+  - So f_cool = 3 𝒜_S1 \lambda_cool / f = 0.00198 𝒜_S1 U_0.01^-1 T_4^-0.8
   - From the simulations, it looks like 𝒜_S1 \approx 1 for the strongest shocks
+- There is potentially another loophole, which is that we want the fraction of the VEM rather than the volume, so we are ignoring density variations within the H II region,
+  - This is probably fine for stagnation shocks, which should have post-cooling densities similar to the H II average density
+  - But for travelling shocks, the post-cooling density will be larger, which puts up VEM by factor of n (not n squared because the cooling length is proportional to 1/n, which cancels out one factor)
+  - Peimbert & Peimbert (2013) find modest over-pressure ratios between the collisional and recombination lines of 1 to 3. However, this itself is subject to dilution, so if it were due to shocked shells, then the overpressure of the shells would have to be much larger
+- We can use the results from the Eduardo project
+  - I already worked out some results there, but it was for the particular case of the HH 529 shocks
+  - I think those results were underestimating the t^2 because I was using the [O III] 5007 temperature from the cooling zone, which maxes out at about 16000 K for M >= 3, and is always much less than the post-shock temperature
+  - It would be better to use the [O III] 4363 temperature, which I assume would be higher. Or better, calculate everything ourselves. 
 ** Ionization/recombination front thickness
 :PROPERTIES:
 :ID:       48C81B2E-5D94-4BEB-9102-51F17EA2B6EA
