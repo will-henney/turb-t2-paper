@@ -51,7 +51,7 @@ def oii_multiplet_sum_emissivity(tem, den, multiplet=V1_mult):
     return result
 
 
-def normalize(tem, em, T0=8000.0):
+def normalize(tem, em, T0=10_000.0):
     # Normalize to T = T0
     em0 = np.interp(T0, tem, em)
     return em / em0
@@ -64,24 +64,25 @@ V3d_4f = "4303.82", "4609.44", "4087.15", "4089.29"
 
 oii_multiplet_sum_emissivity([1000, 3000, 5000, 8000, 1e4], 1e4, multiplet=V15_mult)
 
-sns.set_context("poster")
-sns.set_color_codes("bright")
+sns.set_context("talk")
+sns.set_color_codes("deep")
 
 # +
-fig, ax = plt.subplots(figsize=(8, 8))
-density = 1e4
+fig, ax = plt.subplots(figsize=(7, 7))
+density = 1e2
+T0 = 10_000.0
 
 em = oii_multiplet_sum_emissivity(temperatures, density)
 em = normalize(temperatures, em)
-ax.plot(temperatures, em, label="O II V1", ls="-", lw=6)
+ax.plot(temperatures, em, label="O II V1", ls="-", lw=4)
 
 em = oii_multiplet_sum_emissivity(temperatures, density, multiplet=V15_mult)
 em = normalize(temperatures, em)
-ax.plot(temperatures, em, label="O II V15", ls="--", lw=6)
+ax.plot(temperatures, em, label="O II V15", ls="--", lw=4)
 
 em = oii_multiplet_sum_emissivity(temperatures, density, multiplet=V3d_4f)
 em = normalize(temperatures, em)
-ax.plot(temperatures, em, label="O II 3d-4f", ls=":", lw=6)
+ax.plot(temperatures, em, label="O II 3d-4f", ls=":", lw=4)
 
 em = oiiic.getEmissivity(tem=temperatures, den=density, wave=5007)
 em = normalize(temperatures, em)
@@ -91,11 +92,18 @@ em = oiiic.getEmissivity(tem=temperatures, den=density, wave=4363)
 em = normalize(temperatures, em)
 ax.plot(temperatures, em, label="[O III] 4363", ls="-.", lw=2.5)
 
-ax.legend(fontsize="x-small")
+for slope in [-1, 0, 1, 2, 3, 4, 5, 6, 7]:
+    ax.plot(temperatures, (temperatures / T0)**slope, label=None, lw=1, alpha=0.2, color="k")
+
+annotate_kws = dict(fontsize="small", horizontalalignment="center", verticalalignment="center_baseline")
+ax.annotate("$T^{-1}$", (4e4, (4e4/T0)**-1), **annotate_kws)
+ax.annotate("$T^{2}$", (4e4, (4e4/T0)**2), **annotate_kws)
+ax.annotate("$T^{7}$", (2e4, (2e4/T0)**7), **annotate_kws)
+ax.legend(fontsize="small")
 ax.set(
     xscale="log",
     yscale="log",
-    ylim=[1e-2, None],
+    ylim=[1e-2, 1e3],
     xlim=[None, None],
     xlabel="Temperature, K",
     ylabel="Relative emissivity",
