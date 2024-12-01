@@ -1,7 +1,14 @@
 
+* Formal t2 from shocks
+- Currently [2024-11-29 Fri] I am writing about this in the [[file:../../shock-cloudy/shock-cloudy.org][shock-cloudy project]]
+
 * Peimbert t2 formalism
 
 ** Emissivity versus T of the diagnostic lines
+:LOGBOOK:
+- Note taken on [2024-11-29 Fri 11:54] \\
+  I vastly expanded the notebook and calculated the log-log slopes q for each emission line, and thus the bias factors Q for each ratio
+:END:
 - This is done using PyNeb in the following notebook
   - [[file:../notebooks/oxygen-emissivities.ipynb]]
 - With corresponding python version

@@ -8,6 +8,7 @@ dependencies = [
     "astropy>=6.1.6",
     "hii-utils",
     "jupyter>=1.1.1",
+    "marimo[recommended]>=0.9.27",
     "numpy>=2.1.3",
     "plasmapy>=2024.10.0",
     "polars>=1.15.0",
