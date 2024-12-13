@@ -53,11 +53,34 @@
   \ensuremath{\mathrm{#1\,\scriptstyle\Roman{ionstage}}}}
 \newcommand\hii{\ion{H}{2}}
 
+% Stars in Orion, e.g., \th1C, \th2A
+\def\th#1#2{\ensuremath{\theta^{#1}\,\text{Ori~#2}}}
+% Wavenumbers
+\newcommand\wn{\ensuremath{\tilde{\nu}}}
+\newcommand\snrj{SNR~J\num{0059.4}\num{-7210}}
+
+% Chemical formulae
+\newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}
+% Atomic term symbols
+\newcommand\Config[1]{\ensuremath{\mathrm{#1}}}
+\newcommand\Term[3]{\ensuremath{\mathrm{#1\ ^{#2}#3}}}
+\newcommand\Level[4]{\ensuremath{\mathrm{#1\ ^{#2}#3_{#4}}}}
+
+% Emission lines
+\newcommand\ha{\ensuremath{\text{H}\alpha}}
+\newcommand\hb{\ensuremath{\text{H}\beta}}
+\newcommand\lya{\ensuremath{\text{Ly}\alpha}}
+\newcommand\lyb{\ensuremath{\text{Ly}\beta}}
+
+\newcommand\wav[1]{\ensuremath{\lambda #1}}
+\newcommand\wavv[1]{\ensuremath{\lambda\lambda #1}}
+
+
 % Alternative title: Scaling laws for turbulent H II regions
-\title[Scaling laws for turbulent H II regions]
+\title[Temperature fluctuations in turbulent H II regions I.]
 {
-  % Turbulence-driven temperature fluctuations in H II regions
-  Scaling laws for turbulent H II regions
+  Temperature fluctuations in turbulent H II regions\\
+  I. Large-scale radiative shocks
 }
 
 \author[Henney et al.]{
@@ -116,7 +139,10 @@ HII regions -- ISM: kinematics and dynamics -- turbulence
     (a) Plane \(xy\) cut through the fields of gas density (red), squared ionized density (green), and gas temperature (blue).
     (b) Vector velocity field for the same cut: red, green, blue show \(u_x\), \(u_y\), \(u_z\),
     with dark colors indicating negative values and light colors positive values. Mid gray indicates zero.
-    (c) Simulated surface brightness image of the simulation cube in 3 different optical emission lines:      
+    (c) Simulated surface brightness image of the simulation cube in 3 different optical emission lines: [\ion{N}{2}] \wav{6584} (red), \ha{} \wav{6563} (green), and [\ion{O}{3}] \wav{5007} (blue).
+    (d) Same cut plane as (a), but showing the kinetic energy dissipation rate \(\epsilon\) for ionized gas (red) and neutral gas (green), together with the thermal gas pressure (blue).
+    (e) Zoom of central portion of panel~(e), with labeling of different features (see test for details).
+    (f) Projection along the line of sight of the ionized emission measure \(\int n_i^2 \, dz\) (green) and the integrated kinetic energy dissipation rate \(\int \epsilon_i \, dz\) (purple).
 }
   \label{fig:kb512-mosaic}
 \end{figure*}

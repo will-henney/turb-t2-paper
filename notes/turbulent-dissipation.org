@@ -148,6 +148,7 @@ This is just a summary of results that are derived in more detail elsewhere in t
   - This is true for both the center of Orion Nebula and also for giant regions like 30 Dor
   - The Luminosities are 100 times larger in the latter, but the densities are 100 times smaller, so the ionization parameters are similar
   - For low-brightness regions, such as the EON, the densities are much lower (by a factor of about 100), so U is lower by factor of 5 or so
+  - [ ] Look into the supposed upper limit on U of 0.1 from Yeh & Matzner (2012)
 - We are interested in this here because we can calculate the Knudsen number and therefore the Reynolds number in terms of it
 - Global value for an H II region
   - Although the density and (especially) flux will vary in the region, we can calculate a characteristic value using
