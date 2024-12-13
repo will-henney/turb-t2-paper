@@ -1,6 +1,8 @@
 
 * Formal t2 from shocks
 - Currently [2024-11-29 Fri] I am writing about this in the [[file:../../shock-cloudy/shock-cloudy.org][shock-cloudy project]]
+- Other workings are in the Apple Note "[[file:Cooling zone behind shock.pdf][Cooling zone behind shock]]"
+- And I am trying to bring everything together in the Freeform document "Post-shock cooling dynamics"
 
 * Peimbert t2 formalism
 
@@ -75,7 +77,7 @@
     - density
     - ionization fraction
   - In Orion, one sees a clear positive correlation between T and n on the POS
-    - And I never looked at the correlation with ionization fraction. We could do that with the MUSE data, by using [O II]/[O III] as a proxy for ionization fraction. Or maybe [S II]/[S III]?]]
+    - And I never looked at the correlation with ionization fraction. We could do that with the MUSE data, by using [O II]/[O III] as a proxy for ionization fraction. Or maybe [S II]/[S III]?
 *** Sub-grid shock models
 - Cooling length is shorter than cell size, so we never see the small scale temperature fluctuations from the cooling zone behind the shock
 - We can use everything I did for the Eduardo HH papers and the earlier LL Ori and WR nebula stuff in service of this.
